@@ -5,6 +5,7 @@
 <title>PROCLIMME</title>
 <link href="lib/css/reset.css" rel="stylesheet" type="text/css" />
 <link href="lib/css/diseno.css" rel="stylesheet" type="text/css" />
+<link href="lib/css/tinybox/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div class="top">
@@ -146,7 +147,7 @@
         </div>
         <div class="links">
         <div class="monitor">
-        	<div class="pantalla"></div>
+        	<div class="pantalla" onclick="TINY.box.show({iframe:'video.html',animate:true,close:true,boxid:'frameless',width:505,height:400,fixed:true})"></div>
         </div>
         <!-- <a href="media/video/intro_proclimme.flv"
    style="display:block;width:405px;height:300px;"
@@ -162,7 +163,7 @@
 </body>
 <script type="text/javascript" language="javascript" src="lib/js/jquery-1.5.2.min.js"></script>
 <script type="text/javascript" language="javascript" src="lib/js/jquery.cycle.all.js"></script>
-<script type="text/javascript" language="javascript" src="lib/js/flowplayer/flowplayer-3.2.10.min.js"></script>
+<script type="text/javascript" language="javascript" src="lib/js/tinybox2/tinybox.js"></script>
 <script>
 	$(function(){
 		$('.productos').cycle({ 
@@ -184,8 +185,5 @@
 			alert("En desarrollo");							
 		});						   
 	});
-</script>
-<script language="javascript">
-	flowplayer("player", "lib/js/flowplayer/flowplayer-3.2.11.swf");
 </script>
 </html>
