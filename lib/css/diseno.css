@@ -270,3 +270,25 @@ body{
 	width:405px;
 	padding:20px 20px 20px 20px;
 }
+
+
+.marco > .links > .monitor{
+	background-image:url(../../image/mac.png);
+	background-position:center center;
+	background-repeat:no-repeat;
+	width:405px;
+	height:300px;
+	padding-top:1px;
+}
+
+.marco > .links > .monitor > .pantalla{
+	cursor:pointer;
+	width:260px;
+	height:165px;
+	margin:40px auto 0 auto;
+}
+
+.marco > .links > .monitor > .pantalla:hover{
+	background-image:url(../../image/mac_play.png);
+	background-position:center;
+}

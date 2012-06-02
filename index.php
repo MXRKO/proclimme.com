@@ -144,11 +144,14 @@
                 <div class="limpiar"> </div>
             </div>
         </div>
-        <div class="links"><p><!-- <img src="image/mac.png" width="305" height="251" />dffdsfsdfds</p> -->
-        <a href="media/video/intro_proclimme.flv"
+        <div class="links">
+        <div class="monitor">
+        	<div class="pantalla"></div>
+        </div>
+        <!-- <a href="media/video/intro_proclimme.flv"
    style="display:block;width:405px;height:300px;"
    id="player">
-</a>
+</a> -->
         </div>
     	<div class="limpiar"></div>
     </div>
