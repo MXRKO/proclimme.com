@@ -49,7 +49,7 @@
         <div class="productos">
             <div class="item">
             	<div class="imgItem">
-                	<img src="media/productos/item3.png" height="399" width="606" />
+                	<img src="media/productos/Redim_3.gif" height="399" width="606" />
                 </div>
                 <div class="datosItem">
                 	<h1>Pronóstico meteorológico a 3 días</h1>
@@ -59,7 +59,7 @@
             </div>
             <div class="item">
             	<div class="imgItem">
-                	<img src="media/productos/item5.png" height="399" width="606" />
+                	<img src="media/productos/Redim_5.gif" height="399" width="606" />
                 </div>
                 <div class="datosItem">
                     <h1>Pronóstico climatológico estacional</h1>
@@ -69,7 +69,7 @@
             </div>
             <div class="item">
             	<div class="imgItem">
-                	<img src="media/productos/item6.png" height="399" width="606" />
+                	<img src="media/productos/Redim_6.gif" height="399" width="606" />
                 </div>
                 <div class="datosItem">
                     <h1>Pronóstico climatológico estacional</h1>
@@ -79,7 +79,7 @@
             </div>
             <div class="item">
             	<div class="imgItem">
-                	<img src="media/productos/item7.png" height="399" width="606" />
+                	<img src="media/productos/Redim_7.gif" height="399" width="606" />
                 </div>
                 <div class="datosItem">
                     <h1>Pronóstico climatológico estacional</h1>
@@ -89,7 +89,7 @@
             </div>
             <div class="item">
             	<div class="imgItem">
-                	<img src="media/productos/item9.png" height="399" width="606" />
+                	<img src="media/productos/Redim_9.gif" height="399" width="606" />
                 </div>
                 <div class="datosItem">
                     <h1>Pronóstico climatológico estacional</h1>
@@ -99,7 +99,7 @@
             </div>
             <div class="item">
             	<div class="imgItem">
-                	<img src="media/productos/item4.png" height="399" width="606" />
+                	<img src="media/productos/Redim_4.gif" height="399" width="606" />
                 </div>
                 <div class="datosItem">
                     <h1>Pronóstico climatológico estacional</h1>
@@ -109,7 +109,7 @@
             </div>
             <div class="item">
             	<div class="imgItem">
-                	<img src="media/productos/item8.png" height="399" width="606" />
+                	<img src="media/productos/Redim_8.gif" height="399" width="606" />
                 </div>
                 <div class="datosItem">
                     <h1>Pronóstico climatológico estacional</h1>
