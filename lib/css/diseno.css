@@ -1,0 +1,272 @@
+@charset "utf-8";
+/* CSS Document */
+
+html{
+	background-color:#DCDCDCS;
+	min-height:100%;
+}
+
+body{
+	min-height:100%;
+}
+
+.limpiar{
+	clear:both;
+}
+
+.centrar{
+	width:900px;
+	margin:0 auto 0 auto;
+}
+.top{	
+	background-image:url(../../image/bgMenu.png);
+	background-repeat:repeat-x;
+	height:68px;
+}
+
+	.logo{
+		float:left;
+		width:200px;
+		background-image:url(../../image/logo.png);
+		background-repeat:no-repeat;
+		background-position:left bottom;
+		width:250px;
+		height:39px;
+		margin-top:15px;
+	}
+	
+	.dMenu{
+		float:left;
+		width:370px;
+		margin-left:280px;
+
+	}
+	
+		ul.menu{
+			margin-top:35px;
+			list-style:none;
+		}
+		ul.menu li{
+			display:inline;
+			padding-right:10px;
+		}
+		
+		ul.menu li a{
+			color:#000;
+			font-size:14px;
+			font-weight:normal;
+			font-family:Arial, Helvetica, sans-serif;
+			text-decoration:none;
+		}
+		
+		ul.menu li a:hover{
+			color:#E10404;
+		}
+.imgCentral{
+	background-image:url(../../image/bgImg.png);
+	background-repeat:no-repeat;
+	background-position:center top;
+	height:287px;
+}
+
+	.bannerImgs{
+		width:900px;
+		height:220px;
+		margin:0 auto 0 auto;
+		padding-top:25px;
+	}
+	
+	.bannerItem{
+		width:900px;
+		height:220px;
+	}
+	
+		.bannerItem > p.subtitulo{
+			color:#FFCC00;
+			font-family:Verdana, Geneva, sans-serif;
+			font-size:24px;
+			font-weight:normal;
+			width:350px;
+			padding-top:40px;
+			padding-left:20px;
+			line-height:28px;
+		}
+		
+		.bannerItem > p.slogan{
+			font-family:Verdana, Geneva, sans-serif;
+			font-style:italic;
+			font-size:15px;
+			font-weight:normal;
+			color:#FFF;
+			padding-top:15px;
+			padding-left:20px;
+		}
+		
+		.bannerItem > #sesion{
+			padding-top:15px;
+			padding-left:20px;
+		}
+		
+	.uno{
+		background-image:url(../../image/imgPrincipal.png);
+		background-position:center center;
+		background-repeat:no-repeat;
+	}
+
+.centro{
+	background-image:url(../../image/bgBannerImgs.png);
+	background-position:center top;
+	padding-bottom:10px;
+}
+
+.bannerPrincipal{
+	width:900px;
+	margin:20px auto 0 auto;
+	padding-bottom:20px;
+}
+	
+	.miniaturas{
+		width:900px;
+		margin:0 auto 0 auto;
+		padding-top:20px;
+		padding-bottom:20px;
+	}
+	ul.min{
+		list-style:none;
+	}
+	
+	ul.min li{
+		float:left;
+		margin-right:32px;
+		border:2px #CCC solid;
+	}
+	
+	ul.min li a{
+		display:block;
+	}
+	
+	ul.min li.activeSlide{
+		border:2px #F60 solid;
+	}
+	
+	.productos{
+		width:900px;
+		height:300px;
+		overflow:hidden;
+	}
+	
+	.item{
+		width:900px;
+	}
+	
+	.imgItem{
+		float:left;
+		width:606px;
+	}
+	
+	.datosItem{
+		float:left;
+		width:264px;
+		background-color:#DDA217;
+		height:300px;
+		padding:15px;
+	}
+	
+	.datosItem h1{
+		color:#630;
+		font-size:17px;
+		font-family:Arial, Helvetica, sans-serif;
+		line-height:20px;
+		margin-bottom:10px;
+	}
+	
+	.datosItem p{
+		font-size:14px;
+		line-height:16px;
+		font-style:italic;
+		color:#441F15;
+	}
+.contenido{
+	background-image:url(../../image/bgFondoTexto.png);
+	background-position:center top;
+	background-repeat:no-repeat;
+	background-color:#03719E;
+	padding-top:40px;
+	min-height:400px;
+}
+
+.contenido > .marco{
+	margin:0 auto 0 auto;
+	width:900px;
+	background-color:#EDEDED;
+}
+
+.marco > .noticias{
+	float:left;
+	width:405px;
+	margin:20px 20px 10px 20px;
+	background-color:#FFF;
+	border:1px #EEEEEE solid;
+}
+
+.marco > .noticias > .marco:hover{
+	background-color:#FBFBFB;
+}
+
+	.marco > .noticias > .encabezado{
+		background-color:#F8F8F8;
+		border-bottom:1px #EEEEEE solid;
+		padding:10px;
+	}
+	
+	.marco > .noticias > .encabezado > h2{
+		font-size:16px;
+		color:#000;
+		font-family:Arial, Helvetica, sans-serif;
+		font-weight:bold;
+	}
+
+	.marco > .noticias > .marco{
+		padding:10px;
+		padding-bottom:15px;
+		border-bottom:1px #CCC solid;
+		min-height:120px;
+	}
+	
+	.marco > .noticias > .marco > .imgNoticia{
+		float:right;
+		width:100px;
+		height:80px;
+		background-color:#999;
+		border:1px #666 solid;
+		margin:10px 0 15px 10px;
+	}
+	
+	.marco > .noticias > .marco > p.titulo{
+		font-weight:bold;
+		font-size:15px;
+		line-height:17px;
+		font-family:Verdana, Geneva, sans-serif;
+		margin-bottom:5px;
+		color:#F60;
+	}
+	
+	.marco > .noticias > .marco > p.fecha{
+		font-size:12px;
+		font-style:italic;
+		color:#666;
+		margin-bottom:10px;
+	}
+	
+	.marco > .noticias > .marco > p.descripcion{
+		font-family:Arial, Helvetica, sans-serif;
+		font-size:13px;
+		color:#000;
+		line-height:17px;
+		margin-bottom:10px;
+	}
+.marco > .links{
+	float:left;
+	width:405px;
+	padding:20px 20px 20px 20px;
+}
