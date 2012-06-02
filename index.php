@@ -144,7 +144,12 @@
                 <div class="limpiar"> </div>
             </div>
         </div>
-        <div class="links"><p><img src="image/mac.png" width="305" height="251" />dffdsfsdfds</p></div>
+        <div class="links"><p><!-- <img src="image/mac.png" width="305" height="251" />dffdsfsdfds</p> -->
+        <a href="media/video/intro_proclimme.flv"
+   style="display:block;width:405px;height:300px;"
+   id="player">
+</a>
+        </div>
     	<div class="limpiar"></div>
     </div>
 </div>
@@ -154,6 +159,7 @@
 </body>
 <script type="text/javascript" language="javascript" src="lib/js/jquery-1.5.2.min.js"></script>
 <script type="text/javascript" language="javascript" src="lib/js/jquery.cycle.all.js"></script>
+<script type="text/javascript" language="javascript" src="lib/js/flowplayer/flowplayer-3.2.10.min.js"></script>
 <script>
 	$(function(){
 		$('.productos').cycle({ 
@@ -175,5 +181,8 @@
 			alert("En desarrollo");							
 		});						   
 	});
+</script>
+<script language="javascript">
+	flowplayer("player", "lib/js/flowplayer/flowplayer-3.2.11.swf");
 </script>
 </html>
