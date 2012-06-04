@@ -158,7 +158,9 @@
     </div>
 </div>
 <div class="footer">
-	<p>PROCLIMME, Xalapa, Veracruz, México, 2012</p>
+	<div class="marco">
+    	<p>PROCLIMME, Xalapa, Veracruz, México, 2012</p>
+    </div>
 </div>
 </body>
 <script type="text/javascript" language="javascript" src="lib/js/jquery-1.5.2.min.js"></script>

@@ -192,6 +192,7 @@ body{
 	background-repeat:no-repeat;
 	background-color:#03719E;
 	padding-top:40px;
+	padding-bottom:60px;
 	min-height:400px;
 }
 
@@ -291,4 +292,24 @@ body{
 .marco > .links > .monitor > .pantalla:hover{
 	background-image:url(../../image/mac_play.png);
 	background-position:center;
+}
+
+.footer{
+	background-image:url(../../image/bgFooter.png);
+	background-repeat:repeat-x;
+	min-height:130px;
+	padding-top:20px;
+	border-top:1px #488BB3 solid;
+	border-bottom:30px solid #03719E;
+}
+
+.footer > .marco{
+	color:#FFF;
+	width:900px;
+	margin:0 auto 0 auto;
+}
+
+.footer > .marco > p{
+	color:#FFF;
+	font-family:Arial, Helvetica, sans-serif;
 }
