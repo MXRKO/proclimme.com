@@ -149,6 +149,7 @@
         <div class="monitor">
         	<div class="pantalla" onclick="TINY.box.show({iframe:'video.html',animate:true,close:true,boxid:'frameless',width:505,height:400,fixed:true})"></div>
         </div>
+        <img src="image/pruebalogos.png" />
         <!-- <a href="media/video/intro_proclimme.flv"
    style="display:block;width:405px;height:300px;"
    id="player">
