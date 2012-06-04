@@ -159,7 +159,19 @@
 </div>
 <div class="footer">
 	<div class="marco">
-    	<p>PROCLIMME, Xalapa, Veracruz, México, 2012</p>
+    	<div class="logo_footer">
+        	<p><img src="image/logo_footer.png" height="33" width="172"/></p>
+    	</div>
+        <div class="menufooter">
+        	<ul>
+            	<li><a href="#">Inicio</a></li>
+                <li><a href="#">Productos</a></li>
+                <li><a href="#">Costos</a></li>
+                <li><a href="#">Quienes somos</a></li>
+                <li><a href="#">Contctanos</a></li>
+            </ul>
+        </div>
+        <div class="limpiar"></div>
     </div>
 </div>
 </body>
