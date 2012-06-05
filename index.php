@@ -36,13 +36,13 @@
 <div class="centro">
 	<div class="miniaturas">
     	<ul class="min">
-        	<li><a href="#"><img src="media/productos/miniatura3.png" width="89" height="64" /></a></li>
+        	<li><a href="#"><img src="media/productos/miniatura1.png" width="89" height="64" /></a></li>
+            <li><a href="#"><img src="media/productos/miniatura2.png" width="89" height="64" /></a></li>
+            <li><a href="#"><img src="media/productos/miniatura3.png" width="89" height="64" /></a></li>
+            <li><a href="#"><img src="media/productos/miniatura4.png" width="89" height="64" /></a></li>
             <li><a href="#"><img src="media/productos/miniatura5.png" width="89" height="64" /></a></li>
             <li><a href="#"><img src="media/productos/miniatura6.png" width="89" height="64" /></a></li>
             <li><a href="#"><img src="media/productos/miniatura7.png" width="89" height="64" /></a></li>
-            <li><a href="#"><img src="media/productos/miniatura9.png" width="89" height="64" /></a></li>
-            <li><a href="#"><img src="media/productos/miniatura4.png" width="89" height="64" /></a></li>
-            <li><a href="#"><img src="media/productos/miniatura8.png" width="89" height="64" /></a></li>
         </ul>
         <div class="limpiar"></div>
     </div>
@@ -50,70 +50,70 @@
         <div class="productos">
             <div class="item">
             	<div class="imgItem">
-                	<img src="media/productos/Redim_3.gif" height="399" width="606" />
+                	<img src="media/productos/item1.png" height="399" width="606" />
                 </div>
                 <div class="datosItem">
-                	<h1>Pronóstico meteorológico a 3 días</h1>
+                	<h1>Pronóstico meteorológico a 3 días</h1><!-- 1 -->
                     <p>Pronostico de variables y eventos meteorológicos significativos que puedan presentarse dentro de las próximas 72 horas.</p>
                 </div>	
                 <div class="limpiar"></div>
             </div>
             <div class="item">
             	<div class="imgItem">
-                	<img src="media/productos/Redim_5.gif" height="399" width="606" />
+                	<img src="media/productos/item2.png" height="399" width="606" />
                 </div>
                 <div class="datosItem">
-                    <h1>Pronóstico climatológico estacional</h1>
-                    <p>Pronóstico probabilístico de precipitación, temperatura y otras variables climatológicas para 6 o más meses, enfocadas a determinar las condiciones esperadas con respecto a valores normales.</p>
+                    <h1>Pronóstico de Fenómenos meteorológicos significativos</h1><!-- 2 -->
+                    <p>Determinación de valores mínimos de temperatura como sistema de prevención para actividades productivas, pronóstico de lluvias intensas, pronóstico de precipitaciones  que puedan resultar en afectaciones significativas para regiones del territorio mexicano, pronósticos de ondas gélidas y de calor, entre otros.</p>
                 </div>	
                 <div class="limpiar"></div>
             </div>
             <div class="item">
             	<div class="imgItem">
-                	<img src="media/productos/Redim_6.gif" height="399" width="606" />
+                	<img src="media/productos/item3.png" height="399" width="606" />
                 </div>
                 <div class="datosItem">
-                    <h1>Pronóstico climatológico estacional</h1>
-                    <p>Pronóstico probabilístico de precipitación, temperatura y otras variables climatológicas para 6 o más meses, enfocadas a determinar las condiciones esperadas con respecto a valores normales.</p>
+                    <h1>Pronóstico meteorológico a 7 días</h1><!-- 3 -->
+                    <p>Pronostico de variables y eventos meteorológicos significativos que puedan presentarse dentro de las próximas 168 horas, con alta probabilidad de ocurrencia.</p>
                 </div>	
                 <div class="limpiar"></div>
             </div>
             <div class="item">
             	<div class="imgItem">
-                	<img src="media/productos/Redim_7.gif" height="399" width="606" />
+                	<img src="media/productos/item4.png" height="399" width="606" />
                 </div>
                 <div class="datosItem">
-                    <h1>Pronóstico climatológico estacional</h1>
-                    <p>Pronóstico probabilístico de precipitación, temperatura y otras variables climatológicas para 6 o más meses, enfocadas a determinar las condiciones esperadas con respecto a valores normales.</p>
+                    <h1>Trayectoria y efectos por ciclones tropicales</h1><!-- 4 -->
+                    <p>Pronóstico de trayectoria, vientos, rachas y zonas de alertamiento de acuerdo con modelos de pronóstico numérico e información emitida por el Centro Nacional de Huracanes de Miami, EU.</p>
                 </div>	
                 <div class="limpiar"></div>
             </div>
             <div class="item">
             	<div class="imgItem">
-                	<img src="media/productos/Redim_9.gif" height="399" width="606" />
+                	<img src="media/productos/item5.png" height="399" width="606" />
                 </div>
                 <div class="datosItem">
-                    <h1>Pronóstico climatológico estacional</h1>
-                    <p>Pronóstico probabilístico de precipitación, temperatura y otras variables climatológicas para 6 o más meses, enfocadas a determinar las condiciones esperadas con respecto a valores normales.</p>
+                    <h1>Pronóstico de Marea tormenta</h1><!-- 5 -->
+                    <p>Pronóstico de altura de marea asociado con el paso de un ciclón tropical sobre aguas oceánicas que delimitan el territorio mexicano.</p>
                 </div>	
                 <div class="limpiar"></div>
             </div>
             <div class="item">
             	<div class="imgItem">
-                	<img src="media/productos/Redim_4.gif" height="399" width="606" />
+                	<img src="media/productos/item6.png" height="399" width="606" />
                 </div>
                 <div class="datosItem">
-                    <h1>Pronóstico climatológico estacional</h1>
-                    <p>Pronóstico probabilístico de precipitación, temperatura y otras variables climatológicas para 6 o más meses, enfocadas a determinar las condiciones esperadas con respecto a valores normales.</p>
+                    <h1>Pronóstico climatológico mensual</h1><!-- 6 -->
+                    <p>Pronóstico de precipitación, temperatura y otras variables climatológicas para los próximos meses enfocadas a determinar las condiciones esperadas con respecto a valores normales.</p>
                 </div>	
                 <div class="limpiar"></div>
             </div>
             <div class="item">
             	<div class="imgItem">
-                	<img src="media/productos/Redim_8.gif" height="399" width="606" />
+                	<img src="media/productos/item7.png" height="399" width="606" />
                 </div>
                 <div class="datosItem">
-                    <h1>Pronóstico climatológico estacional</h1>
+                    <h1>Pronóstico climatológico estacional</h1><!-- 7 -->
                     <p>Pronóstico probabilístico de precipitación, temperatura y otras variables climatológicas para 6 o más meses, enfocadas a determinar las condiciones esperadas con respecto a valores normales.</p>
                 </div>	
                 <div class="limpiar"></div>
