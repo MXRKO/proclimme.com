@@ -294,6 +294,44 @@ body{
 	background-position:center;
 }
 
+.marco > .links > .iconos{
+	background-image:url(../../image/bgLogos.png);
+	background-repeat:no-repeat;
+	min-height:350px;
+	width:410px;
+	padding:20px;
+}
+
+.marco > .links > .iconos > h3{
+	color:#333;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	margin-bottom:10px;
+}
+
+.marco > .links > .iconos > .colIzq{
+	float:left;
+	width:200px;
+	padding-right:5px;
+}
+
+.marco > .links > .iconos > .colDer{
+	float:left;
+	width:200px;
+	padding-left:5px;
+}
+
+.marco > .links > .iconos > .colIzq > a, .marco > .links > .iconos > .colDer > a{
+	margin-bottom:20px;
+	margin-top:10px;
+	display:block;
+}
+
+.marco > .links > .iconos > .colDer > a.middle{
+	float:left; width:70px;
+	margin-right:10px;
+}
+
 .footer{
 	background-image:url(../../image/bgFooter.png);
 	background-repeat:repeat-x;

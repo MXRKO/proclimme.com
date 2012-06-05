@@ -149,7 +149,23 @@
         <div class="monitor">
         	<div class="pantalla" onclick="TINY.box.show({iframe:'video.html',animate:true,close:true,boxid:'frameless',width:505,height:400,fixed:true})"></div>
         </div>
-        <img src="image/pruebalogos.png" />
+        <div class="iconos">
+        <h3>Link de interes</h3>
+        	<div class="colIzq">
+            	<a target="_blank" href="http://www.climate.org"><img src="image/logo_climate_institute.png" height="77" width="160"/></a>
+            	<a target="_blank" href="http://galileo.imta.mx/"><img src="image/logo_galileo.png" height="47" width="160"/></a>
+                <a target="_blank" href="http://www.conagua.gob.mx"><img src="image/logo_conagua.png" height="52" width="160"/></a>	
+                <a target="_blank" href="http://www.hpc.ncep.noaa.gov"><img src="image/logo_hydrometeorological.png" height="29" width="160"/></a>
+            </div>
+        	<div class="colDer">
+            	<a target="_blank" href="http://www.nhc.noaa.gov"><img src="image/logo_national_hurricane_center.png" width="160" height="65" /></a>
+            	<a target="_blank" href="http://www.atmosfera.unam.mx" class="middle"><img src="image/logo_centro_ciencias.png" width="70" height="70" /></a>
+                <a target="_blank" href="http://www.proteccioncivil.gob.mx" class="middle"><img src="image/logo_sistema_proteccion_civil.png" height="71" width="70" /></a>
+                <a target="_blank" href="http://smn.cna.gob.mx" class="middle"><img src="image/logo_smn.png" width="70" height="82" /></a>
+                 <div class="limpiar"></div>
+                </div>
+            <div class="limpiar"></div>
+        </div>
         <!-- <a href="media/video/intro_proclimme.flv"
    style="display:block;width:405px;height:300px;"
    id="player">
