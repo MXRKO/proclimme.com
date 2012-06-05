@@ -81,7 +81,7 @@ body{
 		height:220px;
 	}
 	
-		.bannerItem > p.subtitulo{
+		.uno > p.subtitulo{
 			color:#FFCC00;
 			font-family:Verdana, Geneva, sans-serif;
 			font-size:24px;
@@ -92,7 +92,7 @@ body{
 			line-height:28px;
 		}
 		
-		.bannerItem > p.slogan{
+		.uno > p.slogan{
 			font-family:Verdana, Geneva, sans-serif;
 			font-style:italic;
 			font-size:15px;
@@ -102,7 +102,7 @@ body{
 			padding-left:20px;
 		}
 		
-		.bannerItem > #sesion{
+		.uno > #sesion{
 			padding-top:15px;
 			padding-left:20px;
 		}
@@ -112,6 +112,23 @@ body{
 		background-position:center center;
 		background-repeat:no-repeat;
 	}
+	
+	.quienes{
+		background-image:url(../../image/imgQuienes.png);
+		background-position:center center;
+		background-repeat:no-repeat;
+	}
+
+.subbarra{
+	background-color:#273138;
+	width:100%;
+}
+
+.subbarra > .marco{
+	width:900px;
+	margin:0 auto 0 auto;
+	padding:20px;
+}
 
 .centro{
 	background-image:url(../../image/bgBannerImgs.png);
@@ -338,7 +355,7 @@ body{
 	min-height:130px;
 	padding-top:20px;
 	border-top:1px #488BB3 solid;
-	border-bottom:30px solid #03719E;
+	/*border-bottom:30px solid #03719E;*/
 }
 
 .footer > .marco{
