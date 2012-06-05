@@ -50,7 +50,7 @@
         <div class="productos">
             <div class="item">
             	<div class="imgItem">
-                	<img src="media/productos/item1.png" height="399" width="606" />
+                	<img src="media/productos/item1.png" height="300" width="606" />
                 </div>
                 <div class="datosItem">
                 	<h1>Pronóstico meteorológico a 3 días</h1><!-- 1 -->
@@ -60,7 +60,7 @@
             </div>
             <div class="item">
             	<div class="imgItem">
-                	<img src="media/productos/item2.png" height="399" width="606" />
+                	<img src="media/productos/item2.png" height="300" width="606" />
                 </div>
                 <div class="datosItem">
                     <h1>Pronóstico de Fenómenos meteorológicos significativos</h1><!-- 2 -->
@@ -70,7 +70,7 @@
             </div>
             <div class="item">
             	<div class="imgItem">
-                	<img src="media/productos/item3.png" height="399" width="606" />
+                	<img src="media/productos/item3.png" height="300" width="606" />
                 </div>
                 <div class="datosItem">
                     <h1>Pronóstico meteorológico a 7 días</h1><!-- 3 -->
@@ -80,7 +80,7 @@
             </div>
             <div class="item">
             	<div class="imgItem">
-                	<img src="media/productos/item4.png" height="399" width="606" />
+                	<img src="media/productos/item4.png" height="300" width="606" />
                 </div>
                 <div class="datosItem">
                     <h1>Trayectoria y efectos por ciclones tropicales</h1><!-- 4 -->
@@ -90,7 +90,7 @@
             </div>
             <div class="item">
             	<div class="imgItem">
-                	<img src="media/productos/item5.png" height="399" width="606" />
+                	<img src="media/productos/item5.png" height="300" width="606" />
                 </div>
                 <div class="datosItem">
                     <h1>Pronóstico de Marea tormenta</h1><!-- 5 -->
@@ -100,7 +100,7 @@
             </div>
             <div class="item">
             	<div class="imgItem">
-                	<img src="media/productos/item6.png" height="399" width="606" />
+                	<img src="media/productos/item6.png" height="300" width="606" />
                 </div>
                 <div class="datosItem">
                     <h1>Pronóstico climatológico mensual</h1><!-- 6 -->
@@ -110,7 +110,7 @@
             </div>
             <div class="item">
             	<div class="imgItem">
-                	<img src="media/productos/item7.png" height="399" width="606" />
+                	<img src="media/productos/item7.png" height="300" width="606" />
                 </div>
                 <div class="datosItem">
                     <h1>Pronóstico climatológico estacional</h1><!-- 7 -->
