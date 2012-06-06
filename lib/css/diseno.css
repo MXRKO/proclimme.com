@@ -219,6 +219,11 @@ body{
 	background-color:#EDEDED;
 }
 
+.texto > .marco{
+	width:820px;
+	padding:40px;
+}
+
 .marco > .noticias{
 	float:left;
 	width:405px;

@@ -1,3 +1,6 @@
+<?
+	include("lib/php/settings.php");
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -15,10 +18,10 @@
         <div class="dMenu">
             <ul class="menu">
                 <li><a href="#">Inicio</a></li>
-                <li><a href="#">Productos</a></li>
-                <li><a href="#">Costos</a></li>
-                <li><a href="#">Quienes somos</a></li>
-                <li><a href="#">Contacto</a></li>
+                <li><a href="<?=$menu["productos"]?>">Productos</a></li>
+                <li><a href="<?=$menu["costos"]?>">Costos</a></li>
+                <li><a href="<?=$menu["quienes"]?>">Quienes somos</a></li>
+                <li><a href="<?=$menu["contacto"]?>">Contacto</a></li>
             </ul>    
         </div>
         <div class="limpiar"></div>    
