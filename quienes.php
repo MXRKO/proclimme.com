@@ -99,7 +99,7 @@
                 <li><a href="<?=$menu["productos"]?>">Productos</a></li>
                 <li><a href="<?=$menu["costos"]?>">Costos</a></li>
                 <li><a href="#">Quienes somos</a></li>
-                <li><a href="<?=$menu["contacto"]?>">Contactanos</a></li>
+                <li><a href="<?=$menu["contacto"]?>">Contacto</a></li>
             </ul>
         </div>
         <div class="limpiar"></div>

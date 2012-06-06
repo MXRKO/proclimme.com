@@ -3,5 +3,5 @@
 				"productos"=>"#",
 				"costos"=>"#",
 				"quienes"=>"quienes.php",
-				"contacto"=>"#");
+				"contacto"=>"contacto.php");
 ?>

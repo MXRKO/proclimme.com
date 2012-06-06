@@ -21,8 +21,8 @@
                 <li><a href="<?=$menu["inicio"]?>">Inicio</a></li>
                 <li><a href="<?=$menu["productos"]?>">Productos</a></li>
                 <li><a href="<?=$menu["costos"]?>">Costos</a></li>
-                <li><a href="#">Quienes somos</a></li>
-                <li><a href="<?=$menu["contacto"]?>">Contacto</a></li>
+                <li><a href="<?=$menu["quienes"]?>">Quienes somos</a></li>
+                <li><a href="#">Contacto</a></li>
             </ul>    
         </div>
         <div class="limpiar"></div>    
@@ -30,7 +30,7 @@
 </div>
 <div class="imgCentral">
     <div class="bannerImgs">
-        <div class="bannerItem quienes">
+        <div class="bannerItem contacto">
         </div>
     </div>
 </div>
@@ -42,21 +42,17 @@
 <div class="contenido texto">
 	<div class="marco">
         <div class="marcoTitulo">
-        	<h1 class="tituloQuienes">Quienes somos</h1>
+        	<h1 class="tituloContacto">Información de Contacto</h1>
         </div>
-        <p>Somos un grupo de trabajo especializado en Climatología e Hidrometeorología que ofrece productos enfocados al análisis, estudio, monitoreo y previsión de fenómenos atmosféricos y climáticos, así como sus repercusiones, con el fin de reducir los impactos negativos que puedan ocasionar, mejorar las capacidades de planeación ante su ocurrencia y constituir un apoyo en la toma de decisiones importantes para distintos rubros en la sociedad.</p>
-        <p>Nuestros productos son el resultado de análisis estadísticos y modelación numérica de la atmósfera que permiten acceder a información climática y meteorológica de manera actualizada con el fin de proveer condiciones climatológicas futuras, considerando fenómenos y eventos a distintas escalas espaciales y temporales como sistemas convectivos de mesoescala, ciclones tropicales, oscilaciones planetarias y multidecadales, el fenómeno de “El Niño” entre otros.</p>
-        <div class="mvision">
-        	<div class="mision">
-            	<h1>Misión</h1>
-                <p>Desarrollar y generar productos de previsión climatológica e Hidrometeorológica confiables, con calidad, eficiencia y operatividad, de una manera clara y continua para usuarios que no necesariamente cuenten con experiencia en la materia, apoyando la toma de decisiones y planeación de actividades en México</p>
-            </div>
-            <div class="vision">
-            	<h1>Visión</h1>
-                <p>crecer de manera integral y consolidarse como un grupo de trabajo de excelencia en México, que en conjunto con organismos públicos y privados, disminuyan las afectaciones económicas y de vidas humanas ocasionadas por fenómenos climatológicos e hidrometeorológicos, mejorando además los planes de respuesta y contingencia ante estos.</p>
-            </div>
-            <div class="limpiar"></div>
-        </div>
+        <h3>M. en C. Roberto Ramírez Villa</h3>
+		<p>Especialista en Hidrometeorología y Meteorología Operativa</p>
+		<p>Cel.:  044 2281 876880</p>
+		<p>Correo:  robertovilla@proclimme.com</p>
+ 		<div class="separador"></div>
+        <h3>M. en C. Ildefonso Hernández Alcaide</h3>
+		<p>Especialista en Hidrometeorología y Meteorología Operativa</p>
+		<p>Cel.:  044 5533 789747</p>
+		<p>Correo:  ildealcaide@proclimme.com</p>
     </div>
 </div>
 <div class="footer">
@@ -69,8 +65,8 @@
             	<li><a href="<?=$menu["inicio"]?>">Inicio</a></li>
                 <li><a href="<?=$menu["productos"]?>">Productos</a></li>
                 <li><a href="<?=$menu["costos"]?>">Costos</a></li>
-                <li><a href="#">Quienes somos</a></li>
-                <li><a href="<?=$menu["contacto"]?>">Contactanos</a></li>
+                <li><a href="<?=$menu["quienes"]?>">Quienes somos</a></li>
+                <li><a href="#">Contacto</a></li>
             </ul>
         </div>
         <div class="limpiar"></div>
