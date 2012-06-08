@@ -412,3 +412,10 @@ body{
 	text-decoration:underline;
 }
 
+.social{
+	background-image:url(../../image/bgSocial.png);
+	background-repeat:no-repeat;
+	background-position:right center;
+	padding:4px 5px 4px 2px;
+	text-align:right;
+}

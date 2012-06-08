@@ -53,6 +53,9 @@
 		<p>Especialista en Hidrometeorología y Meteorología Operativa</p>
 		<p>Cel.:  044 5533 789747</p>
 		<p>Correo:  ildealcaide@proclimme.com</p>
+        <div class="social">
+        	<input type="image" src="image/btnFace.png" onclick="window.location.href='https://www.facebook.com/Proclimme'" /><input type="image" src="image/btnYouTube.png" />
+        </div>
     </div>
 </div>
 <div class="footer">

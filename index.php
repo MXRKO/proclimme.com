@@ -169,6 +169,9 @@
                 </div>
             <div class="limpiar"></div>
         </div>
+        <div class="social">
+        	<input type="image" src="image/btnFace.png" onclick="window.location.href='https://www.facebook.com/Proclimme'" /><input type="image" src="image/btnYouTube.png" />
+        </div>
         <!-- <a href="media/video/intro_proclimme.flv"
    style="display:block;width:405px;height:300px;"
    id="player">
