@@ -57,9 +57,9 @@
             </div>
             <div class="limpiar"></div>
         </div>
-        <div class="social">
-        	<input type="image" src="image/btnFace.png" onclick="window.location.href='https://www.facebook.com/Proclimme'" /><input type="image" src="image/btnYouTube.png" />
-        </div>
+       <div class="social">
+        	<input type="image" src="image/btnFace.png" onclick="window.location.href='https://www.facebook.com/Proclimme'" /><input type="image" src="image/btnYouTube.png" onclick="window.location.href='http://www.youtube.com/channel/UCISegxqV_mwSbUSPw0DrGzw?feature=results_main'" />
+        </div>    
         <!--
         <div class="marcoTitulo">
         	<h1 class="tituloQuienes">Importancia del análisis climatológico</h1> 

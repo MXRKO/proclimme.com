@@ -147,6 +147,9 @@
                 <p class="descripcion">Tres árboles cayeron por los fuertes vientos y la ligera llovizna, dejando dos vehículos dañados y toda una colonia sin luz en la Gustavo A. Madero</p>
                 <div class="limpiar"> </div>
             </div>
+        <div class="social">
+        	<input type="image" src="image/btnFace.png" onclick="window.location.href='https://www.facebook.com/Proclimme'" /><input type="image" src="image/btnYouTube.png" onclick="window.location.href='http://www.youtube.com/channel/UCISegxqV_mwSbUSPw0DrGzw?feature=results_main'" />
+        </div>    
         </div>
         <div class="links">
         <div class="monitor">
@@ -168,9 +171,6 @@
                  <div class="limpiar"></div>
                 </div>
             <div class="limpiar"></div>
-        </div>
-        <div class="social">
-        	<input type="image" src="image/btnFace.png" onclick="window.location.href='https://www.facebook.com/Proclimme'" /><input type="image" src="image/btnYouTube.png" />
         </div>
         <!-- <a href="media/video/intro_proclimme.flv"
    style="display:block;width:405px;height:300px;"

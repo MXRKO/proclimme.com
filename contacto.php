@@ -54,8 +54,8 @@
 		<p>Cel.:  044 5533 789747</p>
 		<p>Correo:  ildealcaide@proclimme.com</p>
         <div class="social">
-        	<input type="image" src="image/btnFace.png" onclick="window.location.href='https://www.facebook.com/Proclimme'" /><input type="image" src="image/btnYouTube.png" />
-        </div>
+        	<input type="image" src="image/btnFace.png" onclick="window.location.href='https://www.facebook.com/Proclimme'" /><input type="image" src="image/btnYouTube.png" onclick="window.location.href='http://www.youtube.com/channel/UCISegxqV_mwSbUSPw0DrGzw?feature=results_main'" />
+        </div>    
     </div>
 </div>
 <div class="footer">

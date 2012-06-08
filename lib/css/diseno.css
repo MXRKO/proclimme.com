@@ -228,7 +228,6 @@ body{
 	float:left;
 	width:405px;
 	margin:20px 20px 10px 20px;
-	background-color:#FFF;
 	border:1px #EEEEEE solid;
 }
 
@@ -254,6 +253,7 @@ body{
 		padding-bottom:15px;
 		border-bottom:1px #CCC solid;
 		min-height:120px;
+		background-color:#FFF;
 	}
 	
 	.marco > .noticias > .marco > .imgNoticia{
@@ -415,7 +415,10 @@ body{
 .social{
 	background-image:url(../../image/bgSocial.png);
 	background-repeat:no-repeat;
-	background-position:right center;
-	padding:4px 5px 4px 2px;
-	text-align:right;
+	background-position:left center;
+	padding-top:4px;
+	padding-left:112px;
+	padding-bottom:4px;
+	text-align:left;
+	margin-top:30px;
 }
