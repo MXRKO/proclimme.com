@@ -52,7 +52,12 @@
         <div class="datosDer">
         	<h1>Nombre del producto de este apartado</h1>
             <p><strong>Datos básicos: </strong>Nunc nunc amet, dis quis, non est mus urna! Eros, pulvinar quis elementum nascetur dis? Sed diam elementum. In? Turpis mattis habitasse magna porta mattis lorem odio! Tortor aliquam placerat eros placerat arcu, phasellus nunc, dolor a montes! Tincidunt.</p>
+        	<div class="compra">
+              <input name="textfield" type="text" id="textfield" size="10" />
+              <input type="image" src="image/btnSesion.png" />
+      		</div>
         </div>
+        <div class="limpiar"></div>
     </div>
 	<div class="descripcionProducto">
         <h1>Descripción detallada del producto</h1>
