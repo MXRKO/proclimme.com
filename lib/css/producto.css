@@ -8,27 +8,55 @@
 	height:311px;
 	width:900px;
 	margin:0 auto 0 auto;
-	border-bottom:1px #999 solid;
 }
 
 	.encabezado > .datosIzq{
-		width:505px;
+		width:445px;
 		float:left;
 	}
 	
+	.encabezado > .datosIzq > img{
+		padding:48px 0 0 48px;
+	}
+	
 	.encabezado > .datosDer{
-		width:355px;
+		width:395px;
 		float:left;
-		padding:50px 20px 20px 20px;
+		padding:50px 40px 20px 20px;
 	}
 	
 	.encabezado > .datosDer > h1{
 		color:#FFF;
 		font-family:Arial, Helvetica, sans-serif;
-		font-size:16px;
+		font-size:18px;
 		line-height:26px;
 		margin-bottom:15px;
 	}
+	
+	.encabezado > .datosDer > p{
+		color:#FFF;
+		font-family:Arial, Helvetica, sans-serif;
+		font-size:14px;
+		line-height:19px;
+	}
+.compra{
+	line-height:33px;
+	height:33px;
+	margin-top:15px;
+}
+
+.compra > input[type=image]{
+	vertical-align:middle;
+}
+
+.compra > input.cantidad{
+	padding:5px;
+	vertical-align:middle;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:15px;
+	margin-left:5px;
+	margin-right:5px;
+}
 
 .descripcionProducto{
 	width:820px;

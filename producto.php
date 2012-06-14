@@ -13,16 +13,22 @@
 <link href="lib/css/tinybox/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+<?
+	if($_SESSION["idUser"]=="demo"){
+?>
 <div class="misesion">
 	<div class="opciones">
     	<ul class="ulUser">
-        	<li class="ultimo"><a class="ultimo" href="#">Salir</a></li>
-            <li><a class="carrito" href="#">Mi pedido (0)</a></li>
-            <li class="primero"><a class="primero" href="#">Mi perfil</a></li>
+        	<li class="ultimo"><a class="ultimo" href="<?=$menu_sesion["salir"]?>">Salir</a></li>
+            <li><a class="carrito" href="<?=$menu_sesion["pedido"]?>">Mi pedido (0)</a></li>
+            <li class="primero"><a class="primero" href="<?=$menu_sesion["perfil"]?>">Mi perfil</a></li>
         </ul>
     </div>
 </div>
-<div class="top sesionactiva">
+<?
+	}
+?>
+<div class="top <? if($_SESSION["idUser"]=="demo"){ echo "sesionactiva"; } ?>">
   <div class="centrar">
         <div class="logo">
         </div>
@@ -47,14 +53,26 @@
 <div class="contenido">
 	<div class="encabezado">
     	<div class="datosIzq">
-        	<p>Prueba</p>
+        	<img src="media/productos/producto1.png" width="369" height="210" />
         </div>
         <div class="datosDer">
         	<h1>Nombre del producto de este apartado</h1>
             <p><strong>Datos básicos: </strong>Nunc nunc amet, dis quis, non est mus urna! Eros, pulvinar quis elementum nascetur dis? Sed diam elementum. In? Turpis mattis habitasse magna porta mattis lorem odio! Tortor aliquam placerat eros placerat arcu, phasellus nunc, dolor a montes! Tincidunt.</p>
         	<div class="compra">
-              <input name="textfield" type="text" id="textfield" size="10" />
-              <input type="image" src="image/btnSesion.png" />
+              <input class="cantidad" name="txtCantidad" type="text" id="txtCantidad" size="7" value="1" />
+              <?
+              if($_SESSION["idUser"]!=""){
+			  	?>
+				<input type="image" src="image/btnPedido.png" />
+				<?  
+			  }
+			  else{
+				?>
+				<input id="btSesion" type="image" src="image/btnSesion2.png" />
+				<?  
+		      }
+			  ?>
+			  
       		</div>
         </div>
         <div class="limpiar"></div>
@@ -90,4 +108,15 @@
 <script type="text/javascript" language="javascript" src="lib/js/jquery-1.5.2.min.js"></script>
 <script type="text/javascript" language="javascript" src="lib/js/jquery.cycle.all.js"></script>
 <script type="text/javascript" language="javascript" src="lib/js/tinybox2/tinybox.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#btSesion").click(function(){
+			window.location.href="login.php";							  
+		});
+		
+		$("#btPedido").click(function(){
+			alert("En desarrollo");
+		});
+	});
+</script>
 </html>

@@ -10,6 +10,7 @@ body{
 	min-height:100%;
 }
 
+
 .limpiar{
 	clear:both;
 }
@@ -25,7 +26,7 @@ body{
 	min-width:900px;
 	top:0;
 	text-align:right;
-	border-bottom:1px #849CAA solid;
+	border-bottom:1px #000 solid;
 }
 
 	.misesion > .opciones{
