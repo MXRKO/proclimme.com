@@ -1,6 +1,7 @@
 <?
 	session_start();
 	include("lib/php/settings.php");
+	include("lib/php/conexion.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -55,35 +56,56 @@
 <div class="centro">
 	<div class="miniaturas">
     	<ul class="min">
-        	<li><a href="#"><img src="media/productos/miniatura1.png" width="89" height="64" /></a></li>
-            <li><a href="#"><img src="media/productos/miniatura2.png" width="89" height="64" /></a></li>
+        	<?
+            $min_producto="SELECT*FROM productos WHERE estatus='1' ORDER BY id ASC";
+			$ej_producto=mysql_query($min_producto);
+			if(mysql_num_rows($ej_producto)>0){
+				while($min=mysql_fetch_array($ej_producto)){
+				?>
+				<li><a href="#"><img src="media/productos/miniatura<?=$min["id"]?>.png" width="89" height="64" /></a></li>
+				<?	
+				}
+			}
+			?>
+            <!--<li><a href="#"><img src="media/productos/miniatura2.png" width="89" height="64" /></a></li>
             <li><a href="#"><img src="media/productos/miniatura3.png" width="89" height="64" /></a></li>
             <li><a href="#"><img src="media/productos/miniatura4.png" width="89" height="64" /></a></li>
             <li><a href="#"><img src="media/productos/miniatura5.png" width="89" height="64" /></a></li>
             <li><a href="#"><img src="media/productos/miniatura6.png" width="89" height="64" /></a></li>
-            <li><a href="#"><img src="media/productos/miniatura7.png" width="89" height="64" /></a></li>
+            <li><a href="#"><img src="media/productos/miniatura7.png" width="89" height="64" /></a></li> -->
         </ul>
         <div class="limpiar"></div>
     </div>
 	<div class="bannerPrincipal">	
         <div class="productos">
-            <div class="item">
-            	<div class="imgItem">
-                	<img src="media/productos/item1.png" height="300" width="606" />
-                </div>
-                <div class="datosItem">
-                	<h1>Pronóstico meteorológico a 3 días</h1><!-- 1 -->
-                    <p>Pronostico de variables y eventos meteorológicos significativos que puedan presentarse dentro de las próximas 72 horas.</p>
-                    <input class="imgVer" type="image" data-valor="1" src="image/btnVerMas.png" width="129" height="33" /> 
-                </div>	
-                <div class="limpiar"></div>
-            </div>
-            <div class="item">
+            <?
+            	$sq_productos="SELECT*FROM productos WHERE estatus='1' ORDER BY id ASC";
+				$ej_productos=mysql_query($sq_productos);
+				if(mysql_num_rows($ej_productos)>0){
+					while($producto=mysql_fetch_array($ej_productos)){
+					?>	
+                    <div class="item">
+                        <div class="imgItem">
+                            <img src="media/productos/item<?=$producto["id"]?>.png" height="300" width="606" />
+                        </div>
+                        <div class="datosItem">
+                            <h1><?=utf8_encode($producto["nombre"])?></h1><!-- 1 -->
+                            <p><?=utf8_encode($producto["descripcion_corta"])?></p>
+                            <input class="imgVer" type="image" data-valor="<?=$producto["id"]?>" src="image/btnVerMas.png" width="129" height="33" /> 
+                        </div>	
+                        <div class="limpiar"></div>
+                    </div>
+            <?
+            		}// TERMINA WHILE
+			    }//TERMINA IF
+				
+			?>
+            <!-- <div class="item">
             	<div class="imgItem">
                 	<img src="media/productos/item2.png" height="300" width="606" />
                 </div>
                 <div class="datosItem">
-                    <h1>Pronóstico de Fenómenos meteorológicos significativos</h1><!-- 2 -->
+                    <h1>Pronóstico de Fenómenos meteorológicos significativos</h1>
                     <p>Determinación de valores mínimos de temperatura como sistema de prevención para actividades productivas, pronóstico de lluvias intensas, pronóstico de precipitaciones  que puedan resultar en afectaciones significativas para regiones del territorio mexicano, pronósticos de ondas gélidas y de calor, entre otros.</p>
                     <input class="imgVer" type="image" data-valor="2" src="image/btnVerMas.png" width="129" height="33" /> 
                 </div>	
@@ -94,7 +116,7 @@
                 	<img src="media/productos/item3.png" height="300" width="606" />
                 </div>
                 <div class="datosItem">
-                    <h1>Pronóstico meteorológico a 7 días</h1><!-- 3 -->
+                    <h1>Pronóstico meteorológico a 7 días</h1>
                     <p>Pronostico de variables y eventos meteorológicos significativos que puedan presentarse dentro de las próximas 168 horas, con alta probabilidad de ocurrencia.</p>
                 	<input class="imgVer" type="image" data-valor="3" src="image/btnVerMas.png" width="129" height="33" /> 
                 </div>	
@@ -105,7 +127,7 @@
                 	<img src="media/productos/item4.png" height="300" width="606" />
                 </div>
                 <div class="datosItem">
-                    <h1>Trayectoria y efectos por ciclones tropicales</h1><!-- 4 -->
+                    <h1>Trayectoria y efectos por ciclones tropicales</h1>
                     <p>Pronóstico de trayectoria, vientos, rachas y zonas de alertamiento de acuerdo con modelos de pronóstico numérico e información emitida por el Centro Nacional de Huracanes de Miami, EU.</p>
                		<input class="imgVer" type="image" data-valor="4" src="image/btnVerMas.png" width="129" height="33" /> 
                 </div>	
@@ -116,7 +138,7 @@
                 	<img src="media/productos/item5.png" height="300" width="606" />
                 </div>
                 <div class="datosItem">
-                    <h1>Pronóstico de Marea tormenta</h1><!-- 5 -->
+                    <h1>Pronóstico de Marea tormenta</h1>
                     <p>Pronóstico de altura de marea asociado con el paso de un ciclón tropical sobre aguas oceánicas que delimitan el territorio mexicano.</p>
                 	<input class="imgVer" type="image" data-valor="5" src="image/btnVerMas.png" width="129" height="33" /> 
                 </div>	
@@ -127,7 +149,7 @@
                 	<img src="media/productos/item6.png" height="300" width="606" />
                 </div>
                 <div class="datosItem">
-                    <h1>Pronóstico climatológico mensual</h1><!-- 6 -->
+                    <h1>Pronóstico climatológico mensual</h1>
                     <p>Pronóstico de precipitación, temperatura y otras variables climatológicas para los próximos meses enfocadas a determinar las condiciones esperadas con respecto a valores normales.</p>
                 	<input class="imgVer" type="image" data-valor="6" src="image/btnVerMas.png" width="129" height="33" /> 
                 </div>	
@@ -138,12 +160,12 @@
                 	<img src="media/productos/item7.png" height="300" width="606" />
                 </div>
                 <div class="datosItem">
-                    <h1>Pronóstico climatológico estacional</h1><!-- 7 -->
+                    <h1>Pronóstico climatológico estacional</h1>
                     <p>Pronóstico probabilístico de precipitación, temperatura y otras variables climatológicas para 6 o más meses, enfocadas a determinar las condiciones esperadas con respecto a valores normales.</p>
                		<input class="imgVer" type="image" data-valor="7" src="image/btnVerMas.png" width="129" height="33" /> 
                 </div>	
                 <div class="limpiar"></div>
-            </div>
+            </div> -->
         </div>        
 	</div>
 </div>
