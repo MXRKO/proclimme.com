@@ -44,16 +44,11 @@
         <div class="limpiar"></div>    
      </div>
 </div>
-<!-- <div class="subbarra">
-	<div class="marco">
-    	<p>breve descripción</p>
-    </div>
-</div> -->
-
 <div class="contenido">
 	<div class="encabezado">
     	<div class="datosIzq">
-        	<img src="media/productos/producto1.png" width="369" height="210" />
+        	<div class="zoom"></div>
+            <a class="aProducto" href="#"><img src="media/productos/producto1.png" data-with="606" data-height="300" data-url="media/productos/item1.png" width="369" height="210" /></a>
         </div>
         <div class="datosDer">
         	<h1>Nombre del producto de este apartado</h1>
@@ -81,8 +76,7 @@
         <h1>Descripción detallada del producto</h1>
         <p>Somos un grupo de trabajo especializado en Climatología e Hidrometeorología que ofrece productos enfocados al análisis, estudio, monitoreo y previsión de fenómenos atmosféricos y climáticos, así como sus repercusiones, con el fin de reducir los impactos negativos que puedan ocasionar, mejorar las capacidades de planeación ante su ocurrencia y constituir un apoyo en la toma de decisiones importantes para distintos rubros en la sociedad.</p>
         <p>Nuestros productos son el resultado de análisis estadísticos y modelación numérica de la atmósfera que permiten acceder a información climática y meteorológica de manera actualizada con el fin de proveer condiciones climatológicas futuras, considerando fenómenos y eventos a distintas escalas espaciales y temporales como sistemas convectivos de mesoescala, ciclones tropicales, oscilaciones planetarias y multidecadales, el fenómeno de “El Niño” entre otros.</p>
-        
-        <div class="social">
+        <div class="social separadorDescripcion">
         	<input type="image" src="image/btnFace.png" onclick="window.location.href='https://www.facebook.com/Proclimme'" /><input type="image" src="image/btnYouTube.png" onclick="window.location.href='http://www.youtube.com/channel/UCISegxqV_mwSbUSPw0DrGzw?feature=results_main'" />
         </div>    
     </div>
@@ -112,6 +106,11 @@
 	$(document).ready(function(){
 		$("#btSesion").click(function(){
 			window.location.href="login.php";							  
+		});
+		
+		$(".aProducto").click(function(){
+			/*TINY.box.show({iframe:'video.html',animate:true,close:true,boxid:'frameless',width:505,height:400,fixed:true});*/
+			TINY.box.show({image:$("a.aProducto img").attr("data-url"),boxid:'frameless',animate:true,width:$("a.aProducto img").attr("data-width"),height:$("a.aProducto img").attr("data-height"),fixed:true});
 		});
 		
 		$("#btPedido").click(function(){

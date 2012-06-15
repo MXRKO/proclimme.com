@@ -282,6 +282,11 @@ body{
 		font-style:italic;
 		color:#441F15;
 	}
+	
+	input.imgVer{
+		margin-top:20px;
+	}
+	
 .contenido{
 	background-image:url(../../image/bgFondoTexto.png);
 	background-position:center top;

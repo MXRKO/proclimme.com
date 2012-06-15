@@ -74,6 +74,7 @@
                 <div class="datosItem">
                 	<h1>Pronóstico meteorológico a 3 días</h1><!-- 1 -->
                     <p>Pronostico de variables y eventos meteorológicos significativos que puedan presentarse dentro de las próximas 72 horas.</p>
+                    <input class="imgVer" type="image" data-valor="1" src="image/btnVerMas.png" width="129" height="33" /> 
                 </div>	
                 <div class="limpiar"></div>
             </div>
@@ -84,6 +85,7 @@
                 <div class="datosItem">
                     <h1>Pronóstico de Fenómenos meteorológicos significativos</h1><!-- 2 -->
                     <p>Determinación de valores mínimos de temperatura como sistema de prevención para actividades productivas, pronóstico de lluvias intensas, pronóstico de precipitaciones  que puedan resultar en afectaciones significativas para regiones del territorio mexicano, pronósticos de ondas gélidas y de calor, entre otros.</p>
+                    <input class="imgVer" type="image" data-valor="2" src="image/btnVerMas.png" width="129" height="33" /> 
                 </div>	
                 <div class="limpiar"></div>
             </div>
@@ -94,6 +96,7 @@
                 <div class="datosItem">
                     <h1>Pronóstico meteorológico a 7 días</h1><!-- 3 -->
                     <p>Pronostico de variables y eventos meteorológicos significativos que puedan presentarse dentro de las próximas 168 horas, con alta probabilidad de ocurrencia.</p>
+                	<input class="imgVer" type="image" data-valor="3" src="image/btnVerMas.png" width="129" height="33" /> 
                 </div>	
                 <div class="limpiar"></div>
             </div>
@@ -104,6 +107,7 @@
                 <div class="datosItem">
                     <h1>Trayectoria y efectos por ciclones tropicales</h1><!-- 4 -->
                     <p>Pronóstico de trayectoria, vientos, rachas y zonas de alertamiento de acuerdo con modelos de pronóstico numérico e información emitida por el Centro Nacional de Huracanes de Miami, EU.</p>
+               		<input class="imgVer" type="image" data-valor="4" src="image/btnVerMas.png" width="129" height="33" /> 
                 </div>	
                 <div class="limpiar"></div>
             </div>
@@ -114,6 +118,7 @@
                 <div class="datosItem">
                     <h1>Pronóstico de Marea tormenta</h1><!-- 5 -->
                     <p>Pronóstico de altura de marea asociado con el paso de un ciclón tropical sobre aguas oceánicas que delimitan el territorio mexicano.</p>
+                	<input class="imgVer" type="image" data-valor="5" src="image/btnVerMas.png" width="129" height="33" /> 
                 </div>	
                 <div class="limpiar"></div>
             </div>
@@ -124,6 +129,7 @@
                 <div class="datosItem">
                     <h1>Pronóstico climatológico mensual</h1><!-- 6 -->
                     <p>Pronóstico de precipitación, temperatura y otras variables climatológicas para los próximos meses enfocadas a determinar las condiciones esperadas con respecto a valores normales.</p>
+                	<input class="imgVer" type="image" data-valor="6" src="image/btnVerMas.png" width="129" height="33" /> 
                 </div>	
                 <div class="limpiar"></div>
             </div>
@@ -134,6 +140,7 @@
                 <div class="datosItem">
                     <h1>Pronóstico climatológico estacional</h1><!-- 7 -->
                     <p>Pronóstico probabilístico de precipitación, temperatura y otras variables climatológicas para 6 o más meses, enfocadas a determinar las condiciones esperadas con respecto a valores normales.</p>
+               		<input class="imgVer" type="image" data-valor="7" src="image/btnVerMas.png" width="129" height="33" /> 
                 </div>	
                 <div class="limpiar"></div>
             </div>
@@ -236,7 +243,15 @@
 	$(document).ready(function(){
 		$("#sesion").click(function(){
 			window.location.href="login.php";
-		});						   
+		});			
+		
+		$(".productos .item .datosItem input[type=image]").each(function(){
+			$(this).click(function(){
+				window.location.href="producto.php?id="+$(this).attr("data-valor");
+				/*alert("valor: "+$(this).attr("data-valor"));*/					   
+			});				  
+		});
+		
 	});
 </script>
 </html>
