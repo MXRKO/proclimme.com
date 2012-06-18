@@ -1,0 +1,13 @@
+Servidor de base datos:
+	proclimmesql.db.9243612.hostedresource.com
+
+Base de datos: 
+	proclimmesql
+
+usuario Lectura/Escritura:
+	proclimmeSQL
+	pRCLMMSQL_2012
+
+usuario Lectura:
+	proclimmeSQLread
+	readSQL_2012
