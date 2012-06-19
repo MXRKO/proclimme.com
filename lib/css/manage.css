@@ -1,0 +1,45 @@
+@charset "utf-8";
+/* CSS Document */
+fieldset{
+	border:1px #999 solid;
+	padding:10px;
+	margin-bottom:15px;
+}
+
+fieldset legend{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#333;
+	text-align:center;
+	padding:5px 10px 0 10px;
+}
+
+table.formulario tr td{
+	padding:2px;
+}
+
+table.formulario{
+}
+
+table.formulario tr td input[type=text], table.formulario tr td input[type=password]{
+	padding:3px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+	color:#666;
+	border:1px #999 solid;
+	outline:none;
+}
+
+table.formulario tr td input[type=text]:focus{
+	color:#000;
+	background-color:#FFFEF4;
+}
+
+.contenido, .cabeza, .fondo{
+	width:900px;
+	margin:0 auto 0 auto;
+}
+
+.novisible{
+	display:none;
+}
