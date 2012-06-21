@@ -15,16 +15,20 @@
 <link href="../lib/css/clientes.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 <body>
-<form action="">
-	<input type="hidden" name="" />
+<form id="Datos" method="post">
+	<input type="hidden" name="idu" id="idu" />
+    <input type="hidden" name="idc" id="idc" />
+    <input type="hidden" name="Accion" id="Accion" />
 </form>
+<div class="cabeza"></div>
+<div class="contenido">
 <table class="tClientes" width="100%" border="0">
   <tr>
-    <td>Nombre</td>
-    <td>Apellidos</td>
-    <td>RFC</td>
-    <td>Ciudad</td>
-    <td>&nbsp;</td>
+    <td class="cabeza">Nombre</td>
+    <td class="cabeza">Apellidos</td>
+    <td class="cabeza">RFC</td>
+    <td class="cabeza">Ciudad</td>
+    <td class="cabeza">&nbsp;</td>
   </tr>
   <?
   $clientes="SELECT*FROM clientes";
@@ -40,13 +44,15 @@
 				<td><?=$clientes["apellidos"]?></td>
 				<td><?=$clientes["rfc"]?></td>
 				<td><?=$clientes["ciudad"]?></td>
-				<td><input data-usuario="<?=$data_usuario["id"]?>" type="button" id="btModificar" value="Modificar"  /></td>
+				<td><input data-cliente="<?=$clientes["id"]?>" data-usuario="<?=$data_usuario["id"]?>" type="button" class="btModificar" value="Modificar"  /></td>
 			  </tr>
 			  <?
 		}
   }
   ?>
 </table>
-  <input type="submit" name="btNuevo" id="btNuevo" value="Nuevo" />
+<input type="submit" name="btNuevo" id="btNuevo" value="Nuevo" />
+</div>
+<div class="fondo"></div>
 </body>
 </html>

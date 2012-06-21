@@ -1,0 +1,20 @@
+@charset "utf-8";
+/* CSS Document */
+table.tClientes{
+	border:1px #999 solid;
+	margin:0;
+}
+
+table.tClientes tr td.cabeza{
+	background-color:#999;
+	color:#000;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+	padding:8px 5px 8px 5px;
+}
+
+table.tClientes tr td{
+	padding:3px;
+	border-bottom:1px #333 solid;
+	padding:4px;
+}
