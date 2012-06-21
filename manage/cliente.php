@@ -3,11 +3,12 @@
 	include("../lib/php/settings.php");
 	switch($_POST["Accion"]){
 		case 'GUARDAR':
-			$sql="INSERT INTO usuarios(user,pass,tipo) VALUES('".$_POST['txtUsuario']."',md5('".$_POST['txtContrasena']."'),'C')";
+			echo $sql="INSERT INTO usuarios(user,pass,tipo) VALUES('".$_POST['txtUsuario']."',md5('".$_POST['txtContrasena']."'),'C')";
 			$r1=mysql_query($sql);
 			$idu=mysql_insert_id();
 			$sql2="INSERT INTO clientes(id_usuario, nombre, apellidos, direccion, cp, ciudad, empresa, rfc, telefono_casa, telefono_celular, telefono_trabajo, email, fax, no_cuenta)";
 			$sql2=$sql2."VALUES('".$idu."','".$_POST["txtNombre"]."', '".$_POST["txtApellidos"]."','".$_POST["txtDireccion"]."','".$_POST["txtCP"]."','".$_POST["txtCiudad"]."','".$_POST["txtEmpresa"]."','".$_POST["txtRFC"]."','".$_POST["txtCasa"]."','".$_POST["txtCelular"]."','".$_POST["txtTrabajo"]."','".$_POST["txtEmail"]."','".$_POST["txtFax"]."','".$_POST["txtNoCuenta"]."')";
+			echo $sql2;
 			$r2=mysql_query($sql2);
 			$idc=mysql_insert_id();
 			if($r1==1 && $r2==1){
@@ -45,6 +46,7 @@
 <link href="../lib/css/reset.css" rel="stylesheet" type="text/css" media="all" />
 <link href="../lib/css/manage.css" rel="stylesheet" type="text/css" media="all" />
 <script language="javascript" type="text/javascript" src="../lib/js/jquery-1.7.min.js"></script>
+<script language="javascript" type="text/javascript" src="../lib/js/jquery.sisyphus.js"></script>
 <script language="javascript" type="text/javascript" src="cliente.js"></script>
 </head>
 <body>
