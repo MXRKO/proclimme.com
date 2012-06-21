@@ -1,4 +1,5 @@
 <?
+	session_start();
 	include("../lib/php/conexion.php");
 	include("../lib/php/settings.php");
 	switch($_POST["Accion"]){
@@ -19,15 +20,18 @@
 		break;
 		case 'MODIFICAR':
 			if($_POST["txtContrasena"]==$_POST["txtReContrasena"] && $_POST["txtContrasena"]!=""){
-				$mod1="UPDATE usuarios SET pass=md5('".$_POST["txtContrasena"]."'), estatus='".$_POST["estatus"]."' WHERE id='".$_POST["idu"]."'";
+				$mod1="UPDATE usuarios SET pass=md5('".$_POST["txtContrasena"]."') WHERE id='".$_POST["idu"]."'";
 				$exito_mod_1=mysql_query($mod1);
 			}
 			else{
-				$exito_mod_1=3;	
+				$exito_mod_1=2;	
 			}
+			$mod_estatus="UPDATE usuarios SET estatus='".$_POST["estatus"]."' WHERE id='".$_POST["idu"]."'";
+			$ejestatus=mysql_query($mod_estatus);
+			
 			$mod="UPDATE clientes SET nombre='".$_POST["txtNombre"]."', apellidos='".$_POST["txtApellidos"]."', direccion='".$_POST["txtDireccion"]."', cp='".$_POST["txtCP"]."', ciudad='".$_POST["txtCiudad"]."', empresa='".$_POST["txtEmpresa"]."', rfc='".$_POST["txtRFC"]."', telefono_casa='".$_POST["txtCasa"]."', telefono_celular='".$_POST["txtCelular"]."', telefono_trabajo='".$_POST["txtTrabajo"]."', email='".$_POST["txtEmail"]."', fax='".$_POST["txtFax"]."', no_cuenta='".$_POST["txtNoCuenta"]."' WHERE id='".$_POST["idc"]."'";
 			$exito_mod_2=mysql_query($mod);
-			if(($exito_mod_1==1 || $exito_mod_1==3)&& $exito_mod_2==1){
+			if(($exito_mod_1==1 || $exito_mod_1==2)&& $exito_mod_2==1 && $ejestatus==1){
 				$resultado="MODIFICO";	
 			}
 			else{
@@ -70,9 +74,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Usuarios</title>
+<title>Cliente</title>
 <link href="../lib/css/reset.css" rel="stylesheet" type="text/css" media="all" />
 <link href="../lib/css/manage.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../lib/css/clientes.css" rel="stylesheet" type="text/css" media="all" />
 <link href="../lib/css/tinybox2.css" rel="stylesheet" type="text/css" media="all" />
 <script language="javascript" type="text/javascript" src="../lib/js/jquery-1.7.min.js"></script>
 <script language="javascript" type="text/javascript" src="../lib/js/jquery.sisyphus.js"></script>
@@ -80,9 +85,22 @@
 <script language="javascript" type="text/javascript" src="cliente.js"></script>
 </head>
 <body>
+<input type="hidden" name="data-estatus" id="data-estatus" value="<?=$usuario["estatus"]?>" /><!-- ESTE CAMPO DEBE QUEDAR FUERA DEL FORMULARIO UNICAMENE SE USA PARA RECIBIR LA VARIABLE Y PODER LEERLA -->
 <form id="Datos" action="<?=$_SERVER["PHP_SELF"]?>" method="post">
 <input type="hidden" name="Respuesta" id="Respuesta" value="<?=$resultado?>" />
-<div class="cabeza"></div>
+<div class="cabeza">
+<div class="menu">
+    <ul class="menu_cliente">
+        <li><a href="<?=$menu_cliente["pedidos"]?>">Pedidos</a></li>
+        <li><a href="<?=$menu_cliente["productos"]?>">Productos</a></li>
+        <li><a class="seleccionado" href="<?=$menu_cliente["clientes"]?>">Clientes</a></li>
+        <li><a href="<?=$menu_cliente["usuarios"]?>">Usuarios</a></li>
+        <li><a href="<?=$menu_cliente["sitio"]?>">Ir al sitio</a></li>
+        <li><a href="<?=$menu_cliente["salir"]?>">Salir</a></li>
+    </ul>
+    <div class="limpiar"></div>
+</div>
+</div>
 <div class="contenido">
 <fieldset>
 <legend>Datos de acceso al sistema</legend>
@@ -106,10 +124,14 @@
   <tr>
     <td>*</td>
     <td>Estatus</td>
-    <td width="17%"><input type="radio" name="estatus" id="estatus" value="1" />
-      <label for="radio">Activo</label></td>
-    <td width="65%"><input type="radio" name="estatus" id="estatus" value="0" />
-      <label for="radio2">Inactivo</label></td>
+    <td width="17%">
+    <label>
+    <input type="radio" name="estatus" id="estatus" value="1" />
+      Habilitado</label></td>
+    <td width="65%">
+    <label>
+    <input type="radio" name="estatus" id="estatus" value="0" />
+      Deshabilitado</label></td>
   </tr>
 </table>
 </fieldset>

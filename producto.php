@@ -19,24 +19,29 @@
 <link href="lib/css/diseno.css" rel="stylesheet" type="text/css" />
 <link href="lib/css/producto.css" rel="stylesheet" type="text/css" />
 <link href="lib/css/tinybox/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" language="javascript" src="lib/js/jquery-1.5.2.min.js"></script>
+<script type="text/javascript" language="javascript" src="lib/js/jquery.cycle.all.js"></script>
+<script type="text/javascript" language="javascript" src="lib/js/tinybox2/tinybox.js"></script>
+<script type="text/javascript" language="javascript" src="producto.js"></script>
 </head>
 <body>
+<input type="hidden" name="idc" id="idc" value="<?=$_SESSION["idclient"]?>"/>
 <?
-	if($_SESSION["idUser"]=="demo"){
+	if(isset($_SESSION["iduser"])){
 ?>
 <div class="misesion">
 	<div class="opciones">
     	<ul class="ulUser">
         	<li class="ultimo"><a class="ultimo" href="<?=$menu_sesion["salir"]?>">Salir</a></li>
-            <li><a class="carrito" href="<?=$menu_sesion["pedido"]?>">Mi pedido (0)</a></li>
-            <li class="primero"><a class="primero" href="<?=$menu_sesion["perfil"]?>">Mi perfil</a></li>
+            <li><a class="carrito" href="clientes/<?=$menu_sesion["pedido"]?>">Mi pedido (0)</a></li>
+            <li class="primero"><a class="primero" href="clientes/<?=$menu_sesion["perfil"]?>">Mi perfil</a></li>
         </ul>
     </div>
 </div>
 <?
 	}
 ?>
-<div class="top <? if($_SESSION["idUser"]=="demo"){ echo "sesionactiva"; } ?>">
+<div class="top <? if(isset($_SESSION["iduser"])){ echo "sesionactiva"; } ?>">
   <div class="centrar">
         <div class="logo">
         </div>
@@ -69,9 +74,9 @@
             <div class="compra">
               <input class="cantidad" name="txtCantidad" type="text" id="txtCantidad" size="7" value="1" />
               <?
-              if($_SESSION["idUser"]!=""){
+              if(isset($_SESSION["iduser"])){
 			  	?>
-				<input type="image" src="image/btnPedido.png" />
+				<input id="btSolicitar" name="btSolicitar" type="image" src="image/btnPedido.png" />
 				<?  
 			  }
 			  else{
@@ -112,23 +117,4 @@
     </div>
 </div>
 </body>
-<script type="text/javascript" language="javascript" src="lib/js/jquery-1.5.2.min.js"></script>
-<script type="text/javascript" language="javascript" src="lib/js/jquery.cycle.all.js"></script>
-<script type="text/javascript" language="javascript" src="lib/js/tinybox2/tinybox.js"></script>
-<script>
-	$(document).ready(function(){
-		$("#btSesion").click(function(){
-			window.location.href="login.php";							  
-		});
-		
-		$(".aProducto").click(function(){
-			/*TINY.box.show({iframe:'video.html',animate:true,close:true,boxid:'frameless',width:505,height:400,fixed:true});*/
-			TINY.box.show({image:$("a.aProducto img").attr("data-url"),boxid:'frameless',animate:true,width:$("a.aProducto img").attr("data-width"),height:$("a.aProducto img").attr("data-height"),fixed:true});
-		});
-		
-		$("#btPedido").click(function(){
-			alert("En desarrollo");
-		});
-	});
-</script>
 </html>

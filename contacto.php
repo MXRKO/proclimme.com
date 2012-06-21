@@ -1,4 +1,5 @@
 <?
+	session_start();
 	include("lib/php/settings.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -12,7 +13,22 @@
 <link href="lib/css/tinybox/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<div class="top">
+<?
+	if(isset($_SESSION["iduser"])){
+?>
+<div class="misesion">
+	<div class="opciones">
+    	<ul class="ulUser">
+        	<li class="ultimo"><a class="ultimo" href="<?=$menu_sesion["salir"]?>">Salir</a></li>
+            <li><a class="carrito" href="<?=$menu_sesion["pedido"]?>">Mi pedido (0)</a></li>
+            <li class="primero"><a class="primero" href="<?=$menu_sesion["perfil"]?>">Mi perfil</a></li>
+        </ul>
+    </div>
+</div>
+<?
+	}
+?>
+<div class="top <? if(isset($_SESSION["iduser"])){ echo "sesionactiva"; } ?>">
      <div class="centrar">
         <div class="logo">
         </div>

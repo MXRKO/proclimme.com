@@ -1,7 +1,5 @@
-// JavaScript Document
 $(document).ready(function(){
-	$("#Datos").sisyphus();
-	
+	//$("#Datos").sisyphus();
 	if($("#data-estatus").val()=='0'){
 		$("input:radio[name=estatus]:nth(1)").attr("checked",true);	
 		//ESTO ES LO MISMO $('input:radio[name=estatus]')[0].checked = true;
@@ -10,7 +8,6 @@ $(document).ready(function(){
 	else{
 		$("input:radio[name=estatus]:nth(0)").attr("checked",true);	
 	}
-	
 	switch($("#Respuesta").val()){
 		case 'GUARDO':
 			TINY.box.show({html:'Se han guardado los datos correctamente',animate:false,close:true,mask:false,boxid:'success',top:3, width:480})
@@ -19,7 +16,10 @@ $(document).ready(function(){
 			TINY.box.show({html:'No guardo, intentelo de nuevo!',animate:false,close:true,mask:false,boxid:'error',top:3, width:480})
 		break;
 		case 'ELIMINO':
-			TINY.box.show({html:'Elimino!',animate:false,close:true,mask:false,boxid:'success',top:3, width:480})
+			TINY.box.show({html:'El usuario ha sido eliminado exitosamente!',animate:false,close:true,mask:false,boxid:'success',top:3, width:480})
+		break;
+		case 'NOEXISTE':
+			TINY.box.show({html:'No se encontro el usuario!',animate:false,close:true,mask:false,boxid:'error',top:3, width:480})
 		break;
 		case 'NOEXISTENOELIMINO':
 			TINY.box.show({html:'No se encontro el cliente que deseaba eliminar!',animate:false,close:true,mask:false,boxid:'error',top:3, width:480})
@@ -31,7 +31,6 @@ $(document).ready(function(){
 			TINY.box.show({html:'No se ha podido actualizar los datos, intenlo mas tarde',animate:false,close:true,mask:false,boxid:'success',top:3, width:480})
 		break;
 	}	
-
 	if($("#idu").val()===""){
 		$("#btModificar").addClass("novisible");
 	}
@@ -40,13 +39,12 @@ $(document).ready(function(){
 	}
 	
 	$("#btGuardar").click(function(){
-		if(($("#txtContrasena").val()===$("#txtReContrasena").val()) && $.trim($("#txtContrasena").val())!=""){
-			//alert('radio='+$("#estatus:checked").val())
+		if( ($("#txtContrasena").val()===$("#txtReContrasena").val()) && $.trim($("#txtContrasena").val())!="" ){
 			$("#Accion").val("GUARDAR");
 			$("#Datos").submit();								   
 		}
 		else{
-			alert("Las contrase�as especificadas, no coinciden");	
+			TINY.box.show({html:'"Las contraseñas especificadas, no coinciden y/o están vacias"',animate:false,close:true,mask:false,boxid:'error',top:3, width:480})
 		}
 	});
 	

@@ -1,0 +1,71 @@
+@charset "utf-8";
+/* CSS Document */
+.marcoTitulo{
+	background-color:#F5F7F8;
+	padding:20px 10px 20px 10px;
+	display:block;
+	margin-bottom:25px;
+}
+
+h1{
+	font-size:22px;
+	line-height:30px;
+	color:#4B5C66;
+	font-weight:bold;
+	margin-bottom:20px;
+}
+
+.texto > .marco > p{
+	font-size:13px;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#333;
+	line-height:21px;
+}
+
+.imgDer{
+	width:281px;
+	padding:0 0 20px 20px;
+	float:right;
+}
+
+.imgDer > img{
+	border:1px #999 solid;
+}
+
+.imgDer > p.pie{
+	font-style:italic;
+	font-size:12px;
+	color:#666;
+	line-height:20px;
+}
+
+.separadorParrafo{
+	height:20px;
+}
+
+fieldset{
+	border:1px #666 solid;
+	padding:10px 20px 20px 20px;
+	width:550px;
+	margin-bottom:20px;
+}
+
+fieldset legend{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	line-height:19px;
+	padding:5px 5px 1px 5px;
+	color:#999;
+	font-weight:bold;
+}
+
+fieldset p{
+	font-size:14px;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#333;
+	line-height:21px;
+}
+
+fieldset p span.carac{
+	font-weight:bold;
+}

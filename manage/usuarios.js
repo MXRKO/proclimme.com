@@ -1,6 +1,5 @@
-// JavaScript Document
 $(document).ready(function(){
-	$("#tClientes").dataTable({
+	$("#tUsuarios").dataTable({
 		"bJQueryUI": true,
 		"sPaginationType": "full_numbers",
 		"oLanguage": {
@@ -19,21 +18,25 @@ $(document).ready(function(){
 			}
         },
 		"aoColumnDefs": [
-            { "bSortable": false, "aTargets": [ 5 ] }
+            { "bSortable": false, "aTargets": [ 3 ] }
         ],
-	});
-	
-	$("#btNuevo").click(function(){
-		window.location.href="cliente.php";
-	});	
+	});		
 	
 	$(".btModificar").each(function(){
 		$(this).click(function(){
-			$("#Datos").attr("action","cliente.php");							 
+			if($(this).attr("data-tipo")=="C"){				   
+				$("#Datos").attr("action","cliente.php");
+				$("#idc").val($(this).attr("data-cliente"));
+			}
+			else
+				$("#Datos").attr("action","usuario.php");
 			$("#idu").val($(this).attr("data-usuario"));
-			$("#idc").val($(this).attr("data-cliente"));
 			$("#Accion").val("BUSCAR");
 			$("#Datos").submit();				   
 		});								
+	});
+	
+	$("#btNuevo").click(function(){
+		window.location.href="usuario.php";
 	});
 });
