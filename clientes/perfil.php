@@ -2,7 +2,7 @@
 	session_start();
 	include("../lib/php/conexion.php");
 	include("../lib/php/settings.php");
-	$sql="SELECT*FROM clientes WHERE id='".$_SESSION["iduser"]."'";
+	$sql="SELECT*FROM clientes WHERE id='".$_SESSION["idclient"]."'";
 	$ejsql=mysql_query($sql);
 	if(mysql_num_rows($ejsql)>0){
 		$cliente=mysql_fetch_array($ejsql);
@@ -20,12 +20,12 @@
 </head>
 <body>
 <?
-	if(isset($_SESSION["iduser"])){
+	if(isset($_SESSION["idclient"])){
 ?>
 <div class="misesion">
 	<div class="opciones">
     	<ul class="ulUser">
-        	<li class="ultimo"><a class="ultimo" href="<?=$menu_sesion["salir"]?>">Salir</a></li>
+        	<li class="ultimo"><a class="ultimo" href="../<?=$menu_sesion["salir"]?>">Salir</a></li>
             <li><a class="carrito" href="<?=$menu_sesion["pedido"]?>">Mi pedido (0)</a></li>
             <li class="primero"><a class="primero" href="<?=$menu_sesion["perfil"]?>">Mi perfil</a></li>
         </ul>

@@ -25,7 +25,9 @@
 <script type="text/javascript" language="javascript" src="producto.js"></script>
 </head>
 <body>
-<input type="hidden" name="idc" id="idc" value="<?=$_SESSION["idclient"]?>"/>
+<input type="hidden" name="xdp" id="xdp" value="<?=$producto["id"]?>"/>
+<input type="hidden" name="xdc" id="xdc" value="<?=$_SESSION["idclient"]?>"/>
+<input type="hidden" name="xdu" id="xdu" value="<?=$_SESSION["iduser"]?>"/>
 <?
 	if(isset($_SESSION["iduser"])){
 ?>

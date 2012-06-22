@@ -106,3 +106,49 @@
 .separadorDescripcion{
 	margin-top:50px;
 }
+
+table.confirmacion{
+	color:#333333;
+}
+
+table.confirmacion tr td{
+	padding:9px 7px 9px 7px;
+}
+
+.pedido{
+	background-color:#EDEDED;
+	width:450px;
+	padding:15px 15px 0 15px;
+	min-height:390px;
+	height:100%;
+}
+
+table.confirmacion tr td{
+	border-bottom:1px #999 solid;
+}
+
+table.confirmacion tr td p{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	line-height:20px;
+}
+
+table.confirmacion tr td p.listado{
+	font-weight:bold;
+	font-size:13px;
+}
+
+.opciones{
+	margin:40px 0 20px 80px;
+}
+
+.novisible{
+	display:none;
+}
+
+.exito{
+	background-color:#E2E8A4;
+	border:1px #690 solid;
+	margin:30px 10px 10px 10px;
+	padding:10px;
+}

@@ -41,7 +41,7 @@
               <td width="55%"><input type="text" name="txtUser" id="txtUser" /></td>
             </tr>
             <tr>
-              <td class="texto"><label for="txtPass">fffContraseña</label></td>
+              <td class="texto"><label for="txtPass">Contraseña</label></td>
               <td><input type="password" name="txtPass" id="txtPass" /></td>
             </tr>
             <tr>

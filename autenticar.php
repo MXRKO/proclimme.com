@@ -1,9 +1,6 @@
 <?
 session_start();
-session_register("user_name");
-session_register("iduser");
 include("lib/php/conexion.php");
-
 function quitar($mensaje)
 {
 	$mensaje = str_replace("<","<",$mensaje);
@@ -28,7 +25,7 @@ if(trim($_POST["txtUser"]) != "" && trim($_POST["txtPass"]) != "")
 		if(mysql_num_rows($busca)>0){
 			$liga="index.php";
 			$client=mysql_fetch_array($busca);
-			$_SESSION["idclient"]=$client;
+			$_SESSION["idclient"]=$client["id"];
 		}
 		else{
 			$liga="manage/clientes.php";	
