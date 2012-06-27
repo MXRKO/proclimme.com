@@ -23,7 +23,7 @@
 <title>PROCLIMME</title>
 <link href="../lib/css/reset.css" rel="stylesheet" type="text/css" />
 <link href="../lib/css/diseno.css" rel="stylesheet" type="text/css" />
-<link href="../lib/css/perfil.css" rel="stylesheet" type="text/css" />
+<link href="../lib/css/micarrito.css" rel="stylesheet" type="text/css" />
 <link href="../lib/css/tinybox/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -60,26 +60,49 @@
 </div>
 <div class="contenido texto">
 	<div class="marco">
-        <!-- <div class="marcoTitulo">
-        	<h1 class="tituloQuienes">Mi Perfil</h1>
-        </div>-->
+        
         <h1 class="tituloQuienes">Bienvenido <?=$cliente["nombre"]." ".$cliente["apellidos"]?></h1>
-        <fieldset>
-        	<legend>Datos generales</legend>
-            <p><span class="carac">Empresa:</span> <?=$cliente["empresa"]?></p>
-            <p><span class="carac">RFC:</span> <?=$cliente["rfc"]?></p>
-            <p><span class="carac">Dirección:</span> <?=$cliente["direccions"]?></p>
-            <p><span class="carac">Ciudad:</span> <?=$cliente["ciudad"]?></p>
-            <p><span class="carac">Código Postal:</span> <?=$cliente["cp"]?></p>
-		</fieldset>
-        <fieldset>
-        	<legend>Datos de contacto</legend>
-            <p><span class="carac">Telefono de Oficina:</span> <?=$cliente["telefono_oficina"]?></p>
-            <p><span class="carac">Telefono de Casa:</span> <?=$cliente["telefono_casa"]?></p>
-            <p><span class="carac">Telefono de Celular:</span> <?=$cliente["telefono_celular"]?></p>
-        	<p><span class="carac">Fax:</span> <?=$cliente["fax"]?></p>
-        	<p><span class="carac">Email:</span> <?=$cliente["email"]?></p>
+        <div class="pedido">
+		<fieldset>
+        	<legend>Mi Carro de Compra</legend>
+            <?
+			$busca="SELECT*FROM pedidos WHERE id_usuario='".$_SESSION["iduser"]."' AND estado='C'";
+			$ejbusca=@mysql_query($busca);
+			while($pedido=@mysql_fetch_array($ejbusca)){
+				$prod="SELECT*FROM productos WHERE id='".$pedido["id_producto"]."'";
+				$ejprod=@mysql_query($prod);
+				$datos=@mysql_fetch_array($ejprod);
+				?>			
+					<table class="confirmacion" width="100%" border="0" cellpadding="0" cellspacing="0">
+					  <tr>
+						<td width="44%"><p class="listado">Nombre del producto</p></td>
+						<td width="56%"><p><?=utf8_encode($datos["nombre"])?></p></td>
+					  </tr>
+					  <tr>
+						<td><p class="listado">Precio</p></td>
+						<td><p>$ <?=$datos["precio"]?> MXN</p></td>
+					  </tr>
+					  <tr>
+						<td><p class="listado">Cantidad</p></td>
+						<td><p><?=$pedido["cantidad"]?></p></td>
+					  </tr>
+					  <tr>
+						<td><p class="listado">Fecha tentativa de entrega</p></td>
+						<td><p>En <?=$datos["entrega_aprox"]?> días (aprox.) a partir de hoy</p>
+                        	<input class="mTop15 btnEliminar" type="image" src="../image/btnEliminar.png" />
+                        </td>
+					  </tr>
+                    </table>
+                <?
+			    }
+				?>
         </fieldset>
+        </div><!-- TEMRINA PEDIDO --->
+        <div class="detalle">
+        	<p><span class="item">Total:</span> <span class="item_data">$ <?=$total?> MXN</span></p>
+            <input class="mTop15" type="image" src="../image/btnConfirmar.png" />
+        </div>
+        <div class="limpiar"></div>
     </div>
 </div>
 <div class="footer">

@@ -6,7 +6,7 @@
 				"contacto"=>"contacto.php");
 	
 	$menu_sesion=array("perfil"=>"perfil.php",
-				"pedido"=>"#",
+				"pedido"=>"micarrito.php",
 				"salir"=>"salir.php");
 	
 	$menu_cliente=array("pedidos"=>"#",

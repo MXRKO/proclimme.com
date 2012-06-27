@@ -2,6 +2,16 @@
 	session_start();
 	include("lib/php/settings.php");
 	include("lib/php/conexion.php");
+	if(isset($_SESSION["iduser"])){
+		$busca_carrito="SELECT pedidos.cantidad, productos.id, pedidos.id_usuario, pedidos.id_producto, productos.precio FROM pedidos, productos WHERE id_usuario='".$_SESSION["iduser"]."' AND productos.id = pedidos.id_producto";
+		$ejcarrito=mysql_query($busca_carrito);
+		$items_pedido=0;
+		$total=0;
+		while($carrito=mysql_fetch_array($ejcarrito)){
+			$items_pedido=$carrito["cantidad"]+$items_pedido;
+			$total=$carrito["precio"]+$total;
+		}	
+	}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -20,7 +30,7 @@
 	<div class="opciones">
     	<ul class="ulUser">
         	<li class="ultimo"><a class="ultimo" href="<?=$menu_sesion["salir"]?>">Salir</a></li>
-            <li><a class="carrito" href="<?=$menu_sesion["pedido"]?>">Mi pedido (0)</a></li>
+            <li><a class="carrito" href="clientes/<?=$menu_sesion["pedido"]?>">Mi pedido (<?=$items_pedido?>)</a></li>
             <li class="primero"><a class="primero" href="clientes/<?=$menu_sesion["perfil"]?>">Mi perfil</a></li>
         </ul>
     </div>

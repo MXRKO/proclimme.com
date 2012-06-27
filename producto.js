@@ -19,12 +19,13 @@ $(document).ready(function(){
 	}
 	else{
 		$("#btSolicitar").click(function(){
-			TINY.box.show({url:'pedido.php',post:'xdp='+$("#xdp").val()+'&xdc='+$("#xdc").val()+'&cant='+$("#txtCantidad").val(),animate:true,close:false,mask:true,boxid:'frameless', height:390, width:480, fixed:true});	
+			agregar();
+			//TINY.box.show({url:'pedido.php',post:'xdp='+$("#xdp").val()+'&xdc='+$("#xdc").val()+'&cant='+$("#txtCantidad").val(),animate:true,close:false,mask:true,boxid:'frameless', height:390, width:480, fixed:true});	
 		});
 	}
 });
 
-function confirmar(){
+function agregar(){
 	//alert("Funcionalidad en desarrollo..."); 
 	$.ajax({
 		data: "xdu="+$("#xdu").val()+"&xdp="+$("#xdp").val()+"&cant="+$("#txtCantidad").val()+"&Accion=PEDIDO", 
@@ -32,18 +33,22 @@ function confirmar(){
 		dataType: "html", 
 		url: "pedido.php", 
 		beforeSend: function(objeto){
-			$("#btConfirmar #btCancelar").attr("disabled",true);			
+			$("#btSolicitar").attr("disabled",true);			
 		},
 		error: function(objeto, quepaso, otroobj){
-			$("#btConfirmar #btCancelar").removeAttr("disabled");			
+			$("#btSolicitar").removeAttr("disabled");			
 			alert("Ha ocurrido un error, por favor intentelo más tarde.");
 		},
 		success: function(data){ 
 			if(data=="REALIZOPEDIDO"){
-				$("#btAceptar").removeClass("novisible");
-				$("#btConfirmar").hide("slow");
-				$("#btCancelar").hide("slow");
-				$(".respuesta").hide().show("slow").addClass("exito").html("Se ha realizado con exito el pedido, pronto uno de nuestro colaboradores se pondra en contacto con usted!.");
+				//$("#btAceptar").removeClass("novisible");
+				$("#btSolicitar").hide("slow");
+				$("#txtCantidad").hide("slow");
+				$("#btModificar").removeClass("novisible").show("slow");
+				var total=parseInt($("#cant_items").html())+parseInt($("#txtCantidad").val());
+				$("#cant_items").html(total);
+				TINY.box.show({html:'Su pedido ha sido agregado al carrito',animate:false,close:true,mask:false,boxid:'success',top:3, width:480});
+				//$(".respuesta").hide().show("slow").addClass("exito").html("Se ha realizado con exito el pedido, pronto uno de nuestro colaboradores se pondra en contacto con usted!.");
 			}
 		} 
 	});

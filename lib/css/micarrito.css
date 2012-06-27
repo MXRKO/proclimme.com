@@ -80,3 +80,39 @@ fieldset p{
 fieldset p span.carac{
 	font-weight:bold;
 }
+
+
+table.confirmacion tr td{
+	padding:9px 7px 9px 7px;
+}
+
+table.confirmacion tr td{
+	border-bottom:1px #B7B7B7 solid;
+}
+
+table.confirmacion{
+	border-bottom:1px #333 solid;
+}
+
+.detalle p span.item, .detalle p span.item_data{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	font-weight:bold;
+}
+
+.detalle p span.item{
+	color:#000;
+}
+
+.detalle p span.item_data{
+	color:#007BD6;
+}
+
+.mTop15{
+	margin-top:15px;
+}
+
+.btnEliminar{
+	float:right;
+	margin-right:7px;
+}

@@ -39,7 +39,7 @@
 <?
 	}
 	else if($_POST["Accion"]=="PEDIDO"){
-		$inserta="INSERT INTO pedidos(id_producto, id_usuario, fecha_pedido, cantidad) VALUES('".$_POST["xdp"]."','".$_POST["xdu"]."', NOW(), '".$_POST["cant"]."')";	
+		$inserta="INSERT INTO pedidos(id_producto, id_usuario, fecha_carrito, cantidad) VALUES('".$_POST["xdp"]."','".$_POST["xdu"]."', NOW(), '".$_POST["cant"]."')";	
 		$res=@mysql_query($inserta);
 		if($res=='1'){
 			echo "REALIZOPEDIDO";	

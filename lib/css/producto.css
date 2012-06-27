@@ -111,16 +111,16 @@ table.confirmacion{
 	color:#333333;
 }
 
-table.confirmacion tr td{
-	padding:9px 7px 9px 7px;
-}
-
 .pedido{
 	background-color:#EDEDED;
 	width:450px;
 	padding:15px 15px 0 15px;
 	min-height:390px;
 	height:100%;
+}
+
+table.confirmacion tr td{
+	padding:9px 7px 9px 7px;
 }
 
 table.confirmacion tr td{
