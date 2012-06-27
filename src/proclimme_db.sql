@@ -1,6 +1,6 @@
 /*
 SQLyog Enterprise - MySQL GUI v7.13 
-MySQL - 5.0.67-community : Database - proclimme_db
+MySQL - 5.0.92-log : Database - proclimmesql
 *********************************************************************
 */
 
@@ -11,30 +11,36 @@ MySQL - 5.0.67-community : Database - proclimme_db
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`proclimme_db` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`proclimmesql` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
-USE `proclimme_db`;
+USE `proclimmesql`;
 
 /*Table structure for table `clientes` */
 
 DROP TABLE IF EXISTS `clientes`;
 
 CREATE TABLE `clientes` (
-  `id` int(12) default NULL,
+  `id` int(12) NOT NULL auto_increment,
   `id_usuario` int(12) default NULL,
   `nombre` varchar(255) collate utf8_spanish_ci default NULL,
   `apellidos` varchar(255) collate utf8_spanish_ci default NULL,
   `direccion` varchar(450) collate utf8_spanish_ci default NULL,
+  `cp` varchar(5) collate utf8_spanish_ci default NULL,
+  `ciudad` varchar(450) collate utf8_spanish_ci default NULL,
+  `empresa` varchar(450) collate utf8_spanish_ci default NULL,
   `rfc` varchar(21) collate utf8_spanish_ci default NULL,
   `telefono_casa` varchar(25) collate utf8_spanish_ci default NULL,
   `telefono_celular` varchar(25) collate utf8_spanish_ci default NULL,
   `telefono_trabajo` varchar(25) collate utf8_spanish_ci default NULL,
   `email` varchar(55) collate utf8_spanish_ci default NULL,
   `fax` varchar(25) collate utf8_spanish_ci default NULL,
-  `no_cuenta` varchar(25) collate utf8_spanish_ci default NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `no_cuenta` varchar(25) collate utf8_spanish_ci default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 /*Data for the table `clientes` */
+
+insert  into `clientes`(`id`,`id_usuario`,`nombre`,`apellidos`,`direccion`,`cp`,`ciudad`,`empresa`,`rfc`,`telefono_casa`,`telefono_celular`,`telefono_trabajo`,`email`,`fax`,`no_cuenta`) values (2,5,'Pepe','Pecas','','','','','12345ABCD','','','','pepe@pepe.com','','');
 
 /*Table structure for table `imagenes` */
 
@@ -61,17 +67,21 @@ CREATE TABLE `pedidos` (
   `id` int(12) NOT NULL auto_increment,
   `id_producto` int(12) default NULL,
   `id_usuario` int(12) default NULL,
-  `fecha_pedido` date default NULL,
+  `fecha_carrito` date default NULL COMMENT 'Fecha en que se agrego al carrito',
+  `fecha_pedido` date default NULL COMMENT 'Fecha en que se confirmo el carrito y se hizo el pedido',
   `fecha_pago` date default NULL,
   `fecha_envio` date default NULL,
   `fecha_entrega` date default NULL,
   `cantidad` int(3) default NULL,
   `pagado` tinyint(1) default NULL,
   `confirmacion` tinyint(1) NOT NULL default '0' COMMENT '0 - Indica que se agrego al carrito, pero no se confirmado la compra y 1 - Que esta en el carrito y ya fue confirmada',
+  `estado` char(1) collate utf8_spanish_ci default 'C' COMMENT 'C - Agregado al carrito, P - ya esta en pedido',
   PRIMARY KEY  (`id`,`confirmacion`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 /*Data for the table `pedidos` */
+
+insert  into `pedidos`(`id`,`id_producto`,`id_usuario`,`fecha_carrito`,`fecha_pedido`,`fecha_pago`,`fecha_envio`,`fecha_entrega`,`cantidad`,`pagado`,`confirmacion`,`estado`) values (1,1,5,NULL,'2012-06-22',NULL,NULL,NULL,1,NULL,0,'C'),(2,1,5,NULL,'2012-06-25',NULL,NULL,NULL,1,NULL,0,'C');
 
 /*Table structure for table `productos` */
 
@@ -101,10 +111,13 @@ CREATE TABLE `usuarios` (
   `user` varchar(45) collate utf8_spanish_ci default NULL,
   `pass` varchar(450) collate utf8_spanish_ci default NULL,
   `tipo` char(1) collate utf8_spanish_ci default 'C',
+  `estatus` tinyint(1) default '1',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 /*Data for the table `usuarios` */
+
+insert  into `usuarios`(`id`,`user`,`pass`,`tipo`,`estatus`) values (5,'PEPE','86266ee937d97f812a8e57d22b62ee29','C',1),(2,'ROBERTO','827ccb0eea8a706c4c34a16891f84e7b','A',1),(3,'ILDEFONSO','aretes2012','A',1),(4,'marco','86266ee937d97f812a8e57d22b62ee29','C',1);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

@@ -12,7 +12,7 @@
 		$total=0;
 		while($carrito=mysql_fetch_array($ejcarrito)){
 			$items_pedido=$carrito["cantidad"]+$items_pedido;
-			$total=$carrito["precio"]+$total;
+			$total=($carrito["precio"]*$carrito["cantidad"])+$total;
 		}
 	}
 ?>
@@ -25,8 +25,13 @@
 <link href="../lib/css/diseno.css" rel="stylesheet" type="text/css" />
 <link href="../lib/css/micarrito.css" rel="stylesheet" type="text/css" />
 <link href="../lib/css/tinybox/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" language="javascript" src="../lib/js/jquery-1.5.2.min.js"></script>
+<script type="text/javascript" language="javascript" src="../lib/js/jquery.cycle.all.js"></script>
+<script type="text/javascript" language="javascript" src="../lib/js/tinybox2/tinybox.js"></script>
+<script type="text/javascript" language="javascript" src="micarrito.js"></script>
 </head>
 <body>
+<input type="hidden" name="xdu" id="xdu" value="<?=$_SESSION["iduser"]?>" />
 <?
 	if(isset($_SESSION["idclient"])){
 ?>
@@ -73,7 +78,7 @@
 				$ejprod=@mysql_query($prod);
 				$datos=@mysql_fetch_array($ejprod);
 				?>			
-					<table class="confirmacion" width="100%" border="0" cellpadding="0" cellspacing="0">
+					<table class="confirmacion idTabla_<?=$pedido["id"]?>" width="100%" border="0" cellpadding="0" cellspacing="0">
 					  <tr>
 						<td width="44%"><p class="listado">Nombre del producto</p></td>
 						<td width="56%"><p><?=utf8_encode($datos["nombre"])?></p></td>
@@ -84,12 +89,13 @@
 					  </tr>
 					  <tr>
 						<td><p class="listado">Cantidad</p></td>
-						<td><p><?=$pedido["cantidad"]?></p></td>
+						<td><input id="txtCant_<?=$pedido["id"]?>" type="text" value="<?=$pedido["cantidad"]?>" size="7" /></td>
 					  </tr>
 					  <tr>
 						<td><p class="listado">Fecha tentativa de entrega</p></td>
 						<td><p>En <?=$datos["entrega_aprox"]?> días (aprox.) a partir de hoy</p>
-                        	<input class="mTop15 btnEliminar" type="image" src="../image/btnEliminar.png" />
+                        	<input data-idp="<?=$pedido["id"]?>" class="mTop15 btActualizar" type="image" src="../image/btnActualizar.png" />
+                            <input data-idp="<?=$pedido["id"]?>" type="image" src="../image/btnEliminar.png" class="mTop15 btEliminar" />
                         </td>
 					  </tr>
                     </table>
@@ -123,7 +129,4 @@
     </div>
 </div>
 </body>
-<script type="text/javascript" language="javascript" src="../lib/js/jquery-1.5.2.min.js"></script>
-<script type="text/javascript" language="javascript" src="../lib/js/jquery.cycle.all.js"></script>
-<script type="text/javascript" language="javascript" src="../lib/js/tinybox2/tinybox.js"></script>
 </html>

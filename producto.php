@@ -45,7 +45,7 @@
 	<div class="opciones">
     	<ul class="ulUser">
         	<li class="ultimo"><a class="ultimo" href="<?=$menu_sesion["salir"]?>">Salir</a></li>
-            <li><a class="carrito" href="clientes/<?=$menu_sesion["pedido"]?>">Mi pedido (<?=$items_pedido?>)</a></li>
+            <li><a class="carrito" href="clientes/<?=$menu_sesion["pedido"]?>">Mi pedido (<span id="cant_items"><?=$items_pedido?></span>)</a></li>
             <li class="primero"><a class="primero" href="clientes/<?=$menu_sesion["perfil"]?>">Mi perfil</a></li>
         </ul>
     </div>
