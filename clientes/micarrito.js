@@ -34,6 +34,7 @@ $(document).ready(function(){
 	
 	$(".btEliminar").each(function(){
 		$(this).click(function(){
+			var xdp=$(this).attr("data-idp");				   
 			if(confirm("Está a punto de eliminar este producto del carrito")){
 				$.ajax({
 					data: "xdp="+$(this).attr("data-idp")+"&Accion=ELIMINA", 
@@ -44,7 +45,7 @@ $(document).ready(function(){
 						$(this).attr("disabled",true);			
 					},
 					error: function(objeto, quepaso, otroobj){
-						//$("#btSolicitar").removeAttr("disabled");			
+						$(this).removeAttr("disabled");			
 						//alert("Ha ocurrido un error, por favor intentelo más tarde.");
 						TINY.box.show({html:'Ha ocurrido un error, por favor intentelo más tarde',animate:true,close:true,mask:false,boxid:'error',top:12, width:480});
 					},
@@ -53,7 +54,7 @@ $(document).ready(function(){
 							TINY.box.show({html:'Se ha eliminado sus orden con exito del carrito!',animate:true,close:true,mask:false,boxid:'success',top:12, width:480});
 							actualizaTotal();
 							actualizaItems();
-							$(".idTabla_"+$(this).attr("data-idp")).hide("slow").remove();
+							$(".idTabla_"+xdp).hide("slow");
 						}
 						else{
 							TINY.box.show({html:'Ha ocurrido un error, por favor contacte al administrador',animate:true,close:true,mask:false,boxid:'error',top:12, width:480});
