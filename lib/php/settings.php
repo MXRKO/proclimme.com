@@ -9,8 +9,8 @@
 				"pedido"=>"micarrito.php",
 				"salir"=>"salir.php");
 	
-	$menu_cliente=array("pedidos"=>"#",
-						"productos"=>"#",
+	$menu_cliente=array("pedidos"=>"pedidos.php",
+						"productos"=>"productos.php",
 						"clientes"=>"clientes.php",
 						"usuarios"=>"usuarios.php",
 						"sitio"=>"../index.php",
