@@ -106,7 +106,7 @@
         </div><!-- TEMRINA PEDIDO --->
         <div class="detalle">
         	<p><span class="item">Total:</span> <span class="item_data">$ <?=$total?> MXN</span></p>
-            <input class="mTop15" type="image" src="../image/btnConfirmar.png" />
+            <input id="btConfirmar" class="mTop15" type="image" src="../image/btnConfirmar.png" />
         </div>
         <div class="limpiar"></div>
     </div>

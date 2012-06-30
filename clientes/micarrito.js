@@ -1,5 +1,9 @@
 // JavaScript Document
 $(document).ready(function(){
+	$("#btConfirmar").click(function(){
+					   
+	});
+	
 	$(".btActualizar").each(function(){
 		$(this).click(function(){
 			$.ajax({
