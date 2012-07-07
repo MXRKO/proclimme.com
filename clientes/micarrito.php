@@ -65,7 +65,6 @@
 </div>
 <div class="contenido texto">
 	<div class="marco">
-        
         <h1 class="tituloQuienes">Bienvenido <?=$cliente["nombre"]." ".$cliente["apellidos"]?></h1>
         <div class="pedido">
 		<fieldset>

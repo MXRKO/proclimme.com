@@ -37,5 +37,22 @@
 				echo "NOELIMINO";	
 			}
 		break;
+		case 'CONFIRMAR':
+			$i=1;
+			$ids=explode("|",$_POST["pds"]);
+			$sqlConfirmar="UPDATE pedidos SET estado='P' WHERE";
+			foreach($ids as $id){
+				$sqlConfirmar=$sqlConfirmar." id='".$id."'";
+				if($i<count($ids)){
+					$sqlConfirmar=$sqlConfirmar." OR";
+				}
+				$i++;
+			}
+			$res=mysql_query($sqlConfirmar);
+			if($res)
+				echo "CONFIRMO";
+			else
+				echo "NOCONFIRMO";
+		break;
 	}
 ?>
