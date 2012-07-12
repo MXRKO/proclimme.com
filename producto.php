@@ -45,7 +45,7 @@
 	<div class="opciones">
     	<ul class="ulUser">
         	<li class="ultimo"><a class="ultimo" href="<?=$menu_sesion["salir"]?>">Salir</a></li>
-            <li><a class="carrito" href="clientes/<?=$menu_sesion["pedido"]?>">Mi pedido (<span id="cant_items"><?=$items_pedido?></span>)</a></li>
+            <li><a class="carrito" href="clientes/<?=$menu_sesion["pedido"]?>">Mis cotizaciones (<span id="cant_items"><?=$items_pedido?></span>)</a></li>
             <li class="primero"><a class="primero" href="clientes/<?=$menu_sesion["perfil"]?>">Mi perfil</a></li>
         </ul>
     </div>
@@ -79,10 +79,8 @@
         </div>
         <div class="datosDer">
         	<p><strong>Descripción breve: </strong><?=nl2br(utf8_encode($producto["descripcion_corta"]))?></p>
-            <p><strong>Tiempo estimado de entrega: </strong><span class="tiempo"><?=$producto["entrega_aprox"]?> días</span></p>
             <p><strong>Formato de entrega: </strong><span>PDF, GIF, JPG</span></p>
             <p><strong>Medio de entrega: </strong><span>Email, CD</span></p>
-            <p><strong>Precio: </strong><span>$<?=$producto["precio"]?> MXN</span></p>
             <div class="compra">
               <input class="cantidad" name="txtCantidad" type="text" id="txtCantidad" size="7" value="1" />
               <?
@@ -106,7 +104,6 @@
 	<div class="descripcionProducto">
         <h1>Descripción detallada del producto</h1>
         <p><?=nl2br(utf8_encode($producto["descripcion"]))?></p>
-        <p>Nuestros productos son el resultado de análisis estadísticos y modelación numérica de la atmósfera que permiten acceder a información climática y meteorológica de manera actualizada con el fin de proveer condiciones climatológicas futuras, considerando fenómenos y eventos a distintas escalas espaciales y temporales como sistemas convectivos de mesoescala, ciclones tropicales, oscilaciones planetarias y multidecadales, el fenómeno de “El Niño” entre otros.</p>
         <div class="social separadorDescripcion">
         	<input type="image" src="image/btnFace.png" onclick="window.location.href='https://www.facebook.com/Proclimme'" /><input type="image" src="image/btnYouTube.png" onclick="window.location.href='http://www.youtube.com/channel/UCISegxqV_mwSbUSPw0DrGzw?feature=results_main'" />
         </div>    
