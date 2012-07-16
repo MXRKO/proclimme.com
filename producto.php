@@ -10,14 +10,21 @@
 		}
 	}
 	if(isset($_SESSION["iduser"])){
-		$busca_carrito="SELECT pedidos.cantidad, productos.id, pedidos.id_usuario, pedidos.id_producto, productos.precio FROM pedidos, productos WHERE id_usuario='".$_SESSION["iduser"]."' AND productos.id = pedidos.id_producto";
+		$busca_carrito="SELECT productos.id, pedidos.id_usuario, solicitudes.id_producto, solicitudes.descripcion FROM solicitudes, productos, pedidos WHERE pedidos.id_usuario='".$_SESSION["iduser"]."' AND productos.id = solicitudes.id_producto AND pedidos.id = solicitudes.id_pedido AND pedidos.estatus='C'";
 		$ejcarrito=mysql_query($busca_carrito);
 		$items_pedido=0;
 		$total=0;
 		while($carrito=mysql_fetch_array($ejcarrito)){
-			$items_pedido=$carrito["cantidad"]+$items_pedido;
-			$total=$carrito["precio"]+$total;
-		}	
+			$items_pedido++;
+		}
+		
+		$id_solicitud=0;
+		$busca_pedido_solicitud="SELECT solicitudes.id AS id_solicitud FROM solicitudes, pedidos, productos WHERE productos.id = '".$producto["id"]."' AND pedidos.id = solicitudes.id_pedido AND solicitudes.id_producto = productos.id";
+		$ej_pedido_solicitud=mysql_query($busca_pedido_solicitud);
+		if(mysql_num_rows($ej_pedido_solicitud)>0){
+			$dat_pedido_solicitud=mysql_fetch_array($ej_pedido_solicitud);
+			$id_solicitud=$dat_pedido_solicitud["id_solicitud"];
+		}
 	}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -45,7 +52,7 @@
 	<div class="opciones">
     	<ul class="ulUser">
         	<li class="ultimo"><a class="ultimo" href="<?=$menu_sesion["salir"]?>">Salir</a></li>
-            <li><a class="carrito" href="clientes/<?=$menu_sesion["pedido"]?>">Mis cotizaciones (<span id="cant_items"><?=$items_pedido?></span>)</a></li>
+            <li><a href="clientes/<?=$menu_sesion["pedido"]?>">Cotización (<span id="cant_items"><?=$items_pedido?></span>)</a></li>
             <li class="primero"><a class="primero" href="clientes/<?=$menu_sesion["perfil"]?>">Mi perfil</a></li>
         </ul>
     </div>
@@ -82,12 +89,12 @@
             <p><strong>Formato de entrega: </strong><span>PDF, GIF, JPG</span></p>
             <p><strong>Medio de entrega: </strong><span>Email, CD</span></p>
             <div class="compra">
-              <input class="cantidad" name="txtCantidad" type="text" id="txtCantidad" size="7" value="1" />
+              <!-- <input class="cantidad" name="txtCantidad" type="text" id="txtCantidad" size="7" value="1" /> -->
               <?
               if(isset($_SESSION["iduser"])){
 			  	?>
-				<input id="btSolicitar" name="btSolicitar" type="image" src="image/btnAgregar.png" />
-				<input id="btModificar" name="btModificar" type="image" class="novisible" src="image/btnModificar.png" />
+		    	<input id="btSolicitar" name="btSolicitar" type="image" <?=($id_solicitud>0)?"class='novisible'":"";?> src="image/btnInteresa.png" />
+				<input id="btModificar" name="btModificar" type="image" <?=(!$id_solicitud>0)?"class='novisible'":"";?> src="image/btnModificar.png" />
 				<?  
 			  }
 			  else{

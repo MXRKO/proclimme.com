@@ -5,44 +5,55 @@ $(document).ready(function(){
 		pedidos=$(this).attr("xdp")+"|";			  
 	});					   
 	$("#btConfirmar").click(function(){	
-		var pedidos="";
-		$(".pedido table .btActualizar").each(function(){
-			pedidos=pedidos+$(this).attr("data-idp")+"|";			  
-		});	
-		pedidos=pedidos.slice(0, -1);
-		$.ajax({
-			data: "xdu="+$("#xdu").val()+"&pds="+pedidos+"&Accion=CONFIRMAR", 
-			type: "POST", 
-			dataType: "html", 
-			url: "operaciones.php", 
-			beforeSend: function(objeto){
-				$(this).attr("disabled",true);			
-			},
-			error: function(objeto, quepaso, otroobj){
-				$(this).removeAttr("disabled");			
-				TINY.box.show({html:'Ha ocurrido un error, por favor intentelo más tarde',animate:true,close:true,mask:false,boxid:'error',top:12, width:480});
-			},
-			success: function(data){ 
-				switch(data){
-					case 'CONFIRMO':
-						$(".pedido table input[type=image]").each(function(){
-							$(this).remove();			  
-						});	
-						TINY.box.show({html:'Se ha confirmado el pedido, en breve lo contactaremos para mas detalles',animate:true,close:true,mask:false,boxid:'success',top:12, width:480});
-					break;
-					case 'NOCONFIRMO':
-						$(this).removeAttr("disabled");			
-						TINY.box.show({html:'Ha ocurrido un error, por favor contacte al administrador del sistema',animate:true,close:true,mask:false,boxid:'error',top:12, width:480});
-					break;
-				}
-			} 
-		});			   
+		//var pedidos="";
+		var pedidos=new Array();
+		var errors=0;
+		$(".pedido table textarea.descripcion").each(function(){
+			if($.trim($(this).val())==""){
+				errors++;
+			}		
+		});
+		if(errors<1){
+			$.ajax({
+				data: "xdu="+$("#xdu").val()+"&xdpp="+$("#xdpp").val()+"&Accion=CONFIRMAR", 
+				type: "POST", 
+				dataType: "html", 
+				url: "operaciones.php", 
+				beforeSend: function(objeto){
+					$(this).attr("disabled",true);			
+				},
+				error: function(objeto, quepaso, otroobj){
+					$(this).removeAttr("disabled");			
+					TINY.box.show({html:'Ha ocurrido un error, por favor intentelo más tarde',animate:true,close:true,mask:false,boxid:'error',top:12, width:480});
+				},
+				success: function(data){ 
+					switch(data){
+						case 'CONFIRMO':
+							$(".pedido table textarea").each(function(){
+								$(this).attr("readonly",true);										  
+							});
+							$(".pedido table input[type=image]").each(function(){
+								$(this).remove();			  
+							});	
+							TINY.box.show({html:'Se ha confirmado el pedido, en breve lo contactaremos para mas detalles',animate:true,close:true,mask:false,boxid:'success',top:12, width:480});
+						break;
+						case 'NOCONFIRMO':
+							$(this).removeAttr("disabled");			
+							TINY.box.show({html:'Ha ocurrido un error, por favor contacte al administrador del sistema',animate:true,close:true,mask:false,boxid:'error',top:12, width:480});
+						break;
+					}
+				} 
+			});
+		}
+		else{
+			TINY.box.show({html:'¡Debe especificar los requisitos de cada cotización de los productos que le interesen!.',animate:true,close:true,mask:false,boxid:'error',top:12, width:480});	
+		}
 	});
 	
 	$(".btActualizar").each(function(){
 		$(this).click(function(){
 			$.ajax({
-				data: "xdu="+$("#xdu").val()+"&xdp="+$(this).attr("data-idp")+"&cantidad="+$("#txtCant_"+$(this).attr("data-idp")).val()+"&Accion=ACTUALIZA", 
+				data: "xdu="+$("#xdu").val()+"&xdpp="+$(this).attr("data-idpp")+"&xdst="+$(this).attr("data-idst")+"&descripcion="+$("#txtDescripcion_"+$(this).attr("data-idst")).val()+"&Accion=ACTUALIZA", 
 				type: "POST", 
 				dataType: "html", 
 				url: "operaciones.php", 
@@ -58,8 +69,8 @@ $(document).ready(function(){
 						case 'ACTUALIZO':
 							$("#btModificar").removeAttr("disabled");
 							TINY.box.show({html:'Se ha actualizado el pedido',animate:true,close:true,mask:false,boxid:'success',top:12, width:480});
-							actualizaTotal();
-							actualizaItems();
+							//actualizaTotal();
+							//actualizaItems();
 						break;
 						case 'NOACTUALIZO':
 							$("#btModificar").removeAttr("disabled");
@@ -73,10 +84,10 @@ $(document).ready(function(){
 	
 	$(".btEliminar").each(function(){
 		$(this).click(function(){
-			var xdp=$(this).attr("data-idp");				   
+			var xdst=$(this).attr("data-idst");				   
 			if(confirm("Está a punto de eliminar este producto del carrito")){
 				$.ajax({
-					data: "xdp="+$(this).attr("data-idp")+"&Accion=ELIMINA", 
+					data: "xdpp="+$(this).attr("data-idpp")+"&xdst="+$(this).attr("data-idst")+"&Accion=ELIMINA", 
 					type: "POST", 
 					dataType: "html", 
 					url: "operaciones.php", 
@@ -85,15 +96,13 @@ $(document).ready(function(){
 					},
 					error: function(objeto, quepaso, otroobj){
 						$(this).removeAttr("disabled");			
-						//alert("Ha ocurrido un error, por favor intentelo más tarde.");
 						TINY.box.show({html:'Ha ocurrido un error, por favor intentelo más tarde',animate:true,close:true,mask:false,boxid:'error',top:12, width:480});
 					},
 					success: function(data){ 
-						if(data=="ELIMINO"){
+						if(data=="ELIMINO"||data=="ELIMINOTODO"){
 							TINY.box.show({html:'Se ha eliminado sus orden con exito del carrito!',animate:true,close:true,mask:false,boxid:'success',top:12, width:480});
-							actualizaTotal();
 							actualizaItems();
-							$(".idTabla_"+xdp).hide("slow", function(){
+							$(".idTabla_"+xdst).hide("slow", function(){
 								$(this).remove()									 
 							});
 						}
@@ -132,7 +141,7 @@ function actualizaItems(){
 			//alert("Ha ocurrido un error, por favor intentelo más tarde.");
 		},
 		success: function(data){ 
-			$("a.carrito").html("Mi pedido ("+data+")");
+			$("a.totales").html("Cotizaciones ("+data+")");
 		} 
 	});	
 }

@@ -23,12 +23,16 @@ $(document).ready(function(){
 			//TINY.box.show({url:'pedido.php',post:'xdp='+$("#xdp").val()+'&xdc='+$("#xdc").val()+'&cant='+$("#txtCantidad").val(),animate:true,close:false,mask:true,boxid:'frameless', height:390, width:480, fixed:true});	
 		});
 	}
+	
+	$("#btModificar").click(function(){
+		window.location.href="clientes/micarrito.php";								 
+	});
 });
 
 function agregar(){
 	//alert("Funcionalidad en desarrollo..."); 
 	$.ajax({
-		data: "xdu="+$("#xdu").val()+"&xdp="+$("#xdp").val()+"&cant="+$("#txtCantidad").val()+"&Accion=PEDIDO", 
+		data: "xdu="+$("#xdu").val()+"&xdp="+$("#xdp").val()+"&Accion=PEDIDO", 
 		type: "POST", 
 		dataType: "html", 
 		url: "pedido.php", 
@@ -45,7 +49,8 @@ function agregar(){
 				$("#btSolicitar").hide("slow");
 				$("#txtCantidad").hide("slow");
 				$("#btModificar").removeClass("novisible").show("slow");
-				var total=parseInt($("#cant_items").html())+parseInt($("#txtCantidad").val());
+				var total=parseInt($("#cant_items").html());
+				total++;
 				$("#cant_items").html(total);
 				TINY.box.show({html:'Su pedido ha sido agregado al carrito',animate:false,close:true,mask:false,boxid:'success',top:3, width:480});
 				//$(".respuesta").hide().show("slow").addClass("exito").html("Se ha realizado con exito el pedido, pronto uno de nuestro colaboradores se pondra en contacto con usted!.");

@@ -29,3 +29,43 @@ table.tPedidos tr td{
 input[type=button]{
 	padding:5px 15px 5px 15px;
 }
+
+table.solicitud tr td{
+	padding:6px 4px 6px 4px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	line-height:17px;
+	color:#333;
+}
+
+table.solicitud{
+	margin-bottom:20px;
+	background-color:#E1E1FF;
+	border:1px #036 solid;
+}
+
+table.solicitud .texto{
+	background-color:#FFF;
+}
+
+textarea{
+	outline:none;
+	width:95%;
+	height:100px;
+}
+
+.datos_principales tr td{
+	padding:4px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	line-height:17px;
+	border-bottom:1px #999999 solid;
+}
+
+.datos_principales{
+	margin-bottom:20px;
+}
+
+.tItemSolicitud{
+	border-bottom:1px #666 solid;
+}

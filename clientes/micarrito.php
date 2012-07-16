@@ -6,15 +6,18 @@
 	$ejsql=mysql_query($sql);
 	if(mysql_num_rows($ejsql)>0){
 		$cliente=mysql_fetch_array($ejsql);
-		$busca_carrito="SELECT pedidos.cantidad, productos.id, pedidos.id_usuario, pedidos.id_producto, productos.precio FROM pedidos, productos WHERE id_usuario='".$cliente["id_usuario"]."' AND productos.id = pedidos.id_producto";
+		$busca_carrito="SELECT productos.id, pedidos.id_usuario, solicitudes.id_producto, solicitudes.descripcion FROM solicitudes, productos, pedidos WHERE pedidos.id_usuario='".$cliente["id_usuario"]."' AND productos.id = solicitudes.id_producto AND pedidos.id = solicitudes.id_pedido AND pedidos.estatus='C'";
 		$ejcarrito=mysql_query($busca_carrito);
 		$items_pedido=0;
 		$total=0;
 		while($carrito=mysql_fetch_array($ejcarrito)){
-			$items_pedido=$carrito["cantidad"]+$items_pedido;
-			$total=($carrito["precio"]*$carrito["cantidad"])+$total;
+			$items_pedido++;
 		}
 	}
+		
+	$sql_pp="SELECT pedidos.id AS id_pedido FROM pedidos WHERE pedidos.id_usuario='".$_SESSION["iduser"]."' AND pedidos.estatus='C'";
+	$ejpp=@mysql_query($sql_pp);
+	$datos_pp=@mysql_fetch_array($ejpp);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -32,6 +35,7 @@
 </head>
 <body>
 <input type="hidden" name="xdu" id="xdu" value="<?=$_SESSION["iduser"]?>" />
+<input type="hidden" name="xdpp" id="xdpp" value="<?=$datos_pp["id_pedido"]?>" />
 <?
 	if(isset($_SESSION["idclient"])){
 ?>
@@ -39,7 +43,7 @@
 	<div class="opciones">
     	<ul class="ulUser">
         	<li class="ultimo"><a class="ultimo" href="../<?=$menu_sesion["salir"]?>">Salir</a></li>
-            <li><a class="carrito" href="<?=$menu_sesion["pedido"]?>">Mi pedido (<?=$items_pedido?>)</a></li>
+            <li><a class="totales" href="#">Cotización (<?=$items_pedido?>)</a></li>
             <li class="primero"><a class="primero" href="<?=$menu_sesion["perfil"]?>">Mi perfil</a></li>
         </ul>
     </div>
@@ -70,31 +74,31 @@
 		<fieldset>
         	<legend>Mi Carro de Compra</legend>
             <?
-			$busca="SELECT*FROM pedidos WHERE id_usuario='".$_SESSION["iduser"]."' AND estado='C'";
+			$busca="SELECT solicitudes.id AS id_solicitud, solicitudes.id_producto AS id_producto, pedidos.id AS id_pedido, solicitudes.descripcion AS descripcion FROM pedidos, solicitudes WHERE pedidos.id_usuario='".$_SESSION["iduser"]."' AND pedidos.estatus='C' AND pedidos.id = solicitudes.id_pedido";
 			$ejbusca=@mysql_query($busca);
 			while($pedido=@mysql_fetch_array($ejbusca)){
 				$prod="SELECT*FROM productos WHERE id='".$pedido["id_producto"]."'";
 				$ejprod=@mysql_query($prod);
 				$datos=@mysql_fetch_array($ejprod);
 				?>			
-					<table class="confirmacion idTabla_<?=$pedido["id"]?>" width="100%" border="0" cellpadding="0" cellspacing="0">
+					<table class="confirmacion idTabla_<?=$pedido["id_solicitud"]?>" width="100%" border="0" cellpadding="0" cellspacing="0">
 					  <tr>
-						<td width="44%"><p class="listado">Nombre del producto</p></td>
-						<td width="56%"><p><?=utf8_encode($datos["nombre"])?></p></td>
+						<td width="34%"><p class="listado">Nombre del producto</p></td>
+						<td width="66%"><p><?=utf8_encode($datos["nombre"])?></p></td>
 					  </tr>
 					  <tr>
-						<td><p class="listado">Precio</p></td>
-						<td><p>$ <?=$datos["precio"]?> MXN</p></td>
-					  </tr>
+					    <td><p>Descripción</p></td>
+					    <td><p><?=nl2br(utf8_encode($datos["descripcion"]))?></p></td>
+				      </tr>
+                      <tr>
+					    <td colspan="2">
+                        <p>Requisitos de su cotización:</p>
+                        <textarea class="descripcion" cols="59" rows="6" id="txtDescripcion_<?=$pedido["id_solicitud"]?>"><?=nl2br(utf8_encode($pedido["descripcion"]))?></textarea></td>
+				      </tr>
 					  <tr>
-						<td><p class="listado">Cantidad</p></td>
-						<td><input id="txtCant_<?=$pedido["id"]?>" type="text" value="<?=$pedido["cantidad"]?>" size="7" /></td>
-					  </tr>
-					  <tr>
-						<td><p class="listado">Fecha tentativa de entrega</p></td>
-						<td><p>En <?=$datos["entrega_aprox"]?> días (aprox.) a partir de hoy</p>
-                        	<input data-idp="<?=$pedido["id"]?>" class="mTop15 btActualizar" type="image" src="../image/btnActualizar.png" />
-                            <input data-idp="<?=$pedido["id"]?>" type="image" src="../image/btnEliminar.png" class="mTop15 btEliminar" />
+						<td>&nbsp;</td>
+						<td><input data-idpp="<?=$pedido["id_pedido"]?>" data-idst="<?=$pedido["id_solicitud"]?>" class="mTop15 btActualizar" type="image" src="../image/btnActualizar.png" />
+                            <input data-idpp="<?=$pedido["id_pedido"]?>" data-idst="<?=$pedido["id_solicitud"]?>" type="image" src="../image/btnEliminar.png" class="mTop15 btEliminar" />
                         </td>
 					  </tr>
                     </table>
@@ -104,8 +108,14 @@
         </fieldset>
         </div><!-- TEMRINA PEDIDO --->
         <div class="detalle">
-        	<p><span class="item">Total:</span> <span class="item_data">$ <?=$total?> MXN</span></p>
-            <input id="btConfirmar" class="mTop15" type="image" src="../image/btnConfirmar.png" />
+          <?
+          	if($datos_pp["id_pedido"]>0){
+				?>
+				<p>Si usted esta de acuerdo con las solicitudes para cotizaciones, haga clic en confirmar y serán enviadas, unas vez enviadas  nos pondemos en contacto con ustded a la brevedad.</p>
+				<input id="btConfirmar" class="mTop15" type="image" src="../image/btnConfirmar.png" />
+				<?
+			}
+		  ?>
         </div>
         <div class="limpiar"></div>
     </div>
