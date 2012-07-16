@@ -1,4 +1,12 @@
 $(document).ready(function(){
+	if($("#respuesta").val()=="GUARDO"){
+		TINY.box.show({html:'Se han enviado los datos correctamente',animate:false,close:true,mask:false,boxid:'success',top:3, width:480})
+	}else if($("#respuesta").val()=="NOGUARDO"){
+		TINY.box.show({html:'se ha producido un error por favor intentelo nuevamente, '+errors,animate:false,close:true,mask:false,boxid:'error',top:3, width:480})		
+	}
+	else{
+			
+	}
 	var buttons = new Array('formatting', '|', 'bold', '|','italic', '|','justify','fullscreen', '|', 'table', '');	
 	$('.redactor').redactor({
 		focus: true, 
@@ -9,20 +17,31 @@ $(document).ready(function(){
 	});
 	
 	$("#btEnviar").click(function(){
-		/*$(".redactor").each(function(){
-			alert($(this).getCode());						
-		});*/
 		var errors=0;
 		$(".solicitud").each(function(){
-			if($("input:radio[name=radio"+$(this).attr("data-")+"]:nth(0)").attr("checked")==true){
-				
-			}else if($("input:radio[name=estatus]:nth(1)").attr("checked")==true){
-				
+			var id_solicitud=$(this).attr("data-id");
+			if($("input:radio[name=radio"+id_solicitud+"]:nth(0)").attr("checked")=="checked"){
+				if(!$.trim($("#txtDescripcionCotizacion"+id_solicitud).val())!=""){
+					errors++;
+				}
+			}else if($("input:radio[name=radio"+id_solicitud+"]:nth(1)").attr("checked")=="checked"){
+				$(".material"+id_solicitud+" table.tItemSolicitud input[type=file]").each(function(){
+					if($.trim($(this).val())==""){
+						errors++;
+					}
+				});
 			}
 			else{
 				errors++;	
 			}
 		});
+		if(errors<1){
+			$("#Accion").val("GUARDAR");
+			$("#Datos").submit();
+		}
+		else{
+			TINY.box.show({html:'Debe llenar todos los campos marcados con (*) aterisco, '+errors,animate:false,close:true,mask:false,boxid:'error',top:3, width:480})		
+		}
 	});
 });
 
@@ -49,14 +68,14 @@ function listenerFile(id,id_solicitud){
 		}
 	}
 	else{
-		TINY.box.show({html:'Debe ser una extención de archivo valida, word, excell o formatos de imagen como (jpg, png, gif)',animate:false,close:true,mask:false,boxid:'error',top:3, width:480})	
+		TINY.box.show({html:'Debe ser una extención de archivo valida, word, excell, pdf o formatos de imagen como (jpg, png, gif)',animate:false,close:true,mask:false,boxid:'error',top:3, width:480})	
 	}
 }
 
 function get_tabla_solicitud_material(id,id_solicitud){
 	var msj="<table width='100%' id='tSolicitudMaterial"+id_solicitud+"_"+id+"' border='0' cellspacing='0' cellpadding='0' class='tItemSolicitud' >";
 		msj+="<tr>";
-        msj+="<td width='11%'>Archivo</td>";
+        msj+="<td width='11%'>*Archivo</td>";
         msj+="<td width='89%'><input type='file' data-id-solicitud='"+id_solicitud+"' name='txtMaterial"+id_solicitud+"_"+id+"' id='txtMaterial"+id_solicitud+"_"+id+"' onchange='listenerFile(\""+id+"\",\""+id_solicitud+"\");' data-contador='"+id+"'/>"; 
 		msj+="<input type='button' value='- Eliminar' onclick='eliminar(\"#tSolicitudMaterial"+id_solicitud+"_"+id+"\");' /></td>";
         msj+="</tr>";

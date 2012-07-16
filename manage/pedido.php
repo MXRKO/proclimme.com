@@ -2,6 +2,114 @@
 	session_start();
 	include("../lib/php/settings.php");
 	include("../lib/php/conexion.php");
+	if(!isset($_POST["Accion"])){
+		$xdpp=$_GET["xdpp"];	
+	}
+	else{
+		$xdpp=$_POST["xdpp"];	
+	}
+	
+	if($_POST["Accion"]=="GUARDAR"){
+		$error=0;
+		$sql_solicitudes="SELECT*FROM solicitudes WHERE id_pedido='".$xdpp."'";
+		$ej_solicitudes=mysql_query($sql_solicitudes);
+		$solicitud=mysql_fetch_array($ej_solicitudes);
+		if($_POST["radio".$solicitud["id"]]=="Cotizacion"){
+			$inserta="INSERT INTO respuestas(id_solicitud,tipo,nombre_archivo,descripcion,fecha,formato) "; 
+			if(subirArchivo("psolicitud_".$solicitud["id"],"txtArchivo".$solicitud["id"],"cotizaciones")){
+				$inserta=$inserta."VALUES('".$solicitud["id"]."','C','psolicitud_".$solicitud["id"]."','".$_POST["txtDescripcionCotizacion".$solicitud["id"]]."',now(),'".getExtension("txtArchivo".$solicitud["id"])."')";	
+			}
+			else
+				$inserta=$inserta."VALUES('".$solicitud["id"]."','C','','".$_POST["txtDescripcionCotizacion".$solicitud["id"]]."',now(),'')";	
+			$resp=mysql_query($inserta);
+			if($resp!=1){
+				$error++;	
+			}
+		}
+		else{
+			$continua=1;
+			$count=1;
+			while($continua==1){
+				if(isset($_FILES["txtMaterial".$solicitud["id"]."_".$count])){
+					$inserta="INSERT INTO respuestas(id_solicitud,tipo,nombre_archivo,descripcion,fecha,formato) "; 
+					if(subirMaterial("pterminado_".$solicitud["id"],"txtMaterial".$solicitud["id"]."_".$count,"cotizaciones")){
+						$inserta=$inserta."VALUES('".$solicitud["id"]."','A','pterminado".$solicitud["id"]."_".$count."','".$_POST["txtObservaciones".$solicitud["id"]."_".$count]."',now(),'".getExtension("txtMaterial".$solicitud["id"]."_".$count)."')";	
+						$resp=mysql_query($inserta);
+						if($resp!=1){
+							$error++;	
+						}		
+					}else{
+						$error++;	
+					}
+				}
+				else{
+					$continua=0;	
+				}
+				$count++;
+			}
+		}
+		if($error>0){
+			$respuesta="GUARDO";	
+		}
+		else{
+			$respuesta="NOGUARDO";	
+		}
+	}
+	
+	function subirArchivo($nombre,$nombreCampoArchivo,$carpeta){		
+		if($_FILES[$nombreCampoArchivo]['tmp_name']!=""){
+			$extension=getExtension($nombreCampoArchivo);
+			if($extencion!="NO"){
+				try{
+					$task=copy($_FILES[$nombreCampoArchivo]['tmp_name'],"../".$carpeta."/".$nombre.".".$extension) or die($_FILES[$nombreCampoArchivo]['error'].", porfavor notifique al adminstrador acerca de este error.");
+					if(!$task)
+						throw new Exception('Error al subir el archivo, porfavor contacte al administrador.');
+				}catch(Exception $e){
+					return "Descripcion del error:".$e->getMessage();
+				}
+				if(!$task) return false;
+				return true;			
+			}
+			else{
+				return false;	
+			}
+		}else{
+			return false;	
+		}
+	}
+	
+	function subirMaterial($nombre,$nombreCampoArchivo,$carpeta){		
+		$extension=getExtension($nombreCampoArchivo);
+		if($extencion!="NO"){
+			try{
+				$task=copy($_FILES[$nombreCampoArchivo]['tmp_name'],"../".$carpeta."/".$nombre.".".$extension) or die($_FILES[$nombreCampoArchivo]['error'].", porfavor notifique al adminstrador acerca de este error.");
+				if(!$task)
+					throw new Exception('Error al subir el archivo, porfavor contacte al administrador.');
+			}catch(Exception $e){
+				return "Descripcion del error:".$e->getMessage();
+			}
+			if(!$task) return false;
+			return true;			
+		}
+		else{
+			return false;	
+		}
+	}
+	
+	function getExtension($nombreCampoArchivo){
+		if(strpos($_FILES[$nombreCampoArchivo][name],".pdf"))	$extension="pdf";
+		else if(strpos($_FILES[$nombreCampoArchivo][name],".PDF"))	$extension="pdf";
+		else if(strpos($_FILES[$nombreCampoArchivo][name],".doc"))	$extension="doc";
+		else if(strpos($_FILES[$nombreCampoArchivo][name],".DOC"))	$extension="doc";
+		else if(strpos($_FILES[$nombreCampoArchivo][name],".docx"))	$extension="docx";
+		else if(strpos($_FILES[$nombreCampoArchivo][name],".DOCX"))	$extension="docx";
+		else if(strpos($_FILES[$nombreCampoArchivo][name],".xls"))	$extension="xls";
+		else if(strpos($_FILES[$nombreCampoArchivo][name],".XLS"))	$extension="XLS";
+		else if(strpos($_FILES[$nombreCampoArchivo][name],".xlsx"))	$extension="xlsx";
+		else if(strpos($_FILES[$nombreCampoArchivo][name],".XLSX"))	$extension="XLSX";
+		else	$extension="NO";
+		return $extension;
+	}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -20,8 +128,10 @@
 <script language="javascript" type="text/javascript" src="pedido.js"></script>
 </head>
 <body>
-<form id="Datos" method="post">
+<form id="Datos" name="Datos" method="post">
 	<input type="hidden" name="idu" id="idu" />
+    <input type="hidden" name="respuesta" id="respuesta" value="<?=$respuesta?>" />
+    <input type="hidden" name="xdpp" id="xdpp" value="<?=$xdpp?>" />
     <input type="hidden" name="Accion" id="Accion" />
 <div class="cabeza">
 <div class="menu">
@@ -40,7 +150,7 @@
   <fieldset>
   <legend>Datos del Pedido</legend>
   <?
-  	$sql="SELECT*FROM pedidos WHERE id='".$_GET["xdpp"]."'";
+  	$sql="SELECT*FROM pedidos WHERE id='".$xdpp."'";
 	$ejsql=@mysql_query($sql);
 	$pedido=@mysql_fetch_array($ejsql);
   ?>
@@ -105,7 +215,7 @@
   </tr>
   <tr>
     <td>Responder con :</td>
-    <td><input type="radio" id="radio<?=$solicitud["id"]?>" name="radio<?=$solicitud["id"]?>" value="Cotización" data-id="<?=$solicitud["id"]?>" onclick="mostrar('cotizacion','<?=$solicitud["id"]?>')"  checked="checked"/>
+    <td><input type="radio" id="radio<?=$solicitud["id"]?>" name="radio<?=$solicitud["id"]?>" value="Cotizacion" data-id="<?=$solicitud["id"]?>" onclick="mostrar('cotizacion','<?=$solicitud["id"]?>')"  checked="checked"/>
       <label >Cotización</label>
       <input type="radio" id="radio<?=$solicitud["id"]?>" name="radio<?=$solicitud["id"]?>" value="Material" data-id="<?=$solicitud["id"]?>" onclick="mostrar('material','<?=$solicitud["id"]?>')" />
       <label >Material Terminado</label></td>
@@ -116,21 +226,21 @@
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td colspan="2">
-        	<p>Describa a continuación la cotización:</p>
-        	<textarea class="txtCot"></textarea>
+        	<p>*Describa a continuación la cotización:</p>
+        	<textarea id="txtDescripcionCotizacion<?=$solicitud["id"]?>" class="txtCot"></textarea>
         </td>
         </tr>
       <tr>
         <td width="17%">y/o Adjunte archivo:</td>
         <td width="83%">
-          <input type="file" name="txtArchivo<?=$solicitud["id"]?>" id="fileField<?=$solicitud["id"]?>" /></td>
+          <input type="file" name="txtArchivo<?=$solicitud["id"]?>" id="txtArchivo<?=$solicitud["id"]?>" /></td>
       </tr>
     </table>
     </div>
     <div class="material<?=$solicitud["id"]?> item_solicitud" data-id-solicitud="<?=$solicitud["id"]?>" style="display:none;">
       <table width="100%" id="tSolicitudMaterial<?=$solicitud["id"]?>_1" class="tItemSolicitud" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td width="11%">Archivo</td>
+          <td width="11%">*Archivo</td>
           <td width="89%"><input type="file" data-id-solicitud="<?=$solicitud["id"]?>" name="txtMaterial<?=$solicitud["id"]?>_1" id="txtMaterial<?=$solicitud["id"]?>_1" onchange="listenerFile('1','<?=$solicitud["id"]?>');" data-contador='1' />
             </td>
         </tr>

@@ -35,6 +35,7 @@ $(document).ready(function(){
 							$(".pedido table input[type=image]").each(function(){
 								$(this).remove();			  
 							});	
+							$("#btConfirmar").hide();
 							TINY.box.show({html:'Se ha confirmado el pedido, en breve lo contactaremos para mas detalles',animate:true,close:true,mask:false,boxid:'success',top:12, width:480});
 						break;
 						case 'NOCONFIRMO':
