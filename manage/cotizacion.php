@@ -15,8 +15,8 @@ if(!isset($_POST["Accion"])){
 }
 if($_POST["Accion"]=="GUARDAR" && !isset($respuesta)){
 	if($_FILES["txtArchivo"]['size']>0){
+		$extension=getExtension("txtArchivo");
 		if(subirArchivo("cotizacion_".$xds.".".$extension,"txtArchivo","cotizaciones")){
-			$extension=getExtension("txtArchivo");
 			$inserta="INSERT INTO respuestas(id_solicitud,tipo,nombre_archivo,descripcion,fecha,formato) "; 
 			$inserta=$inserta."VALUES('".$xds."','C','cotizacion_".$xds.".".$extension."','".$_POST["txtDescripcion"]."',now(),'".$extension."')";		
 			$res=mysql_query($inserta);
@@ -44,21 +44,16 @@ if($_POST["Accion"]=="GUARDAR" && !isset($respuesta)){
 
 function subirArchivo($nombre,$nombreCampoArchivo,$carpeta){		
 	if($_FILES[$nombreCampoArchivo]['tmp_name']!=""){
-		$extension=getExtension($nombreCampoArchivo);
-		if($extension!="NO"){
-			try{
-				$task=copy($_FILES[$nombreCampoArchivo]['tmp_name'],"../".$carpeta."/".$nombre.".".$extension) or die("[".$_FILES[$nombreCampoArchivo]['tmp_name']."] , porfavor notifique al adminstrador acerca de este error.");
-				if(!$task)
-					throw new Exception('Error al subir el archivo, porfavor contacte al administrador.');
-			}catch(Exception $e){
-				return "Descripcion del error:".$e->getMessage();
-			}
-			if(!$task) return false;
-			return true;			
+		try{
+			$task=copy($_FILES[$nombreCampoArchivo]['tmp_name'],"../".$carpeta."/".$nombre) or die("[".$_FILES[$nombreCampoArchivo]['tmp_name']."] , porfavor notifique al adminstrador acerca de este error.");
+			if(!$task)
+				throw new Exception('Error al subir el archivo, porfavor contacte al administrador.');
+		}catch(Exception $e){
+			return "Descripcion del error:".$e->getMessage();
 		}
-		else{
-			return false;	
-		}
+		if(!$task) return false;
+		return true;			
+		
 	}else{
 		return false;	
 	}
@@ -127,23 +122,23 @@ function getExtension($nombreCampoArchivo){
   ?>
   <table class="datos_cotizacion" width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
-      <td width="9%">Producto</td>
-      <td width="91%"><?=$datos_solicitud["nombre"]?></td>
+      <td width="9%"><span class="caracteristica">Producto</td>
+      <td width="91%"><?=nl2br(utf8_encode($datos_solicitud["nombre"]))?></td>
     </tr>
     <tr>
-      <td colspan="2">Datos de la cotización
-        <textarea name="textarea" readonly="readonly" id="textarea" cols="45" rows="5"><?=$datos_solicitud["descripcion"]?></textarea></td>
+      <td colspan="2"><span class="caracteristica">Datos de la cotización</span>
+        <textarea name="textarea" readonly="readonly" id="textarea" cols="45" rows="5"><?=nl2br(utf8_encode($datos_solicitud["descripcion"]))?></textarea></td>
       </tr>
   </table>
   </fieldset>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td colspan="2">*Describa la cotización
+    <td colspan="2"><span class="caracteristica">*Describa la cotización</span>
       <textarea name="txtDescripcion" id="txtDescripcion" cols="45" rows="5" <?=(isset($respuesta))?"readonly='readonly'":"";?>><?=$txtDescripcion?></textarea></td>
   </tr>
   <tr>
-    <td width="15%">agregar documento</td>
-    <td width="85%">
+    <td width="17%"><span class="caracteristica">agregar documento</span></td>
+    <td width="83%">
       <?
     	if(trim($txtArchivo)!=""){
 			?>

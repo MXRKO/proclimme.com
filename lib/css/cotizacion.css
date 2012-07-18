@@ -34,8 +34,16 @@ fieldset{
 	 background-color:#E1E1FF;
 }
 
+fieldset legend{
+	padding-top:14px;
+}
+
 p.nota{
 	font-size:13px;
 	line-height:16px;
 	font-style:italic;
+}
+
+span.caracteristica{
+	font-weight:bold;
 }
