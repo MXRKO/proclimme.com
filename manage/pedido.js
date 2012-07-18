@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	if($("#respuesta").val()=="GUARDO"){
+	/*if($("#respuesta").val()=="GUARDO"){
 		TINY.box.show({html:'Se han enviado los datos correctamente',animate:false,close:true,mask:false,boxid:'success',top:3, width:480})
 	}else if($("#respuesta").val()=="NOGUARDO"){
 		TINY.box.show({html:'se ha producido un error por favor intentelo nuevamente, '+errors,animate:false,close:true,mask:false,boxid:'error',top:3, width:480})		
@@ -42,6 +42,13 @@ $(document).ready(function(){
 		else{
 			TINY.box.show({html:'Debe llenar todos los campos marcados con (*) aterisco, '+errors,animate:false,close:true,mask:false,boxid:'error',top:3, width:480})		
 		}
+	});*/
+	$(".btCotizacion").each(function(){
+		$(this).click(function(){
+			$("#xds").val($(this).attr("data-id-solicitud"));
+			$("#Datos").attr("action","cotizacion.php");
+			$("#Datos").submit();
+		});
 	});
 });
 

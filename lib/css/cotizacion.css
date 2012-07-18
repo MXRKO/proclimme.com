@@ -1,0 +1,41 @@
+@charset "utf-8";
+/* CSS Document */
+textarea{
+	width:845px;
+	height:150px;
+	margin:10px 5px 0 5px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	line-height:18px;
+	padding:5px;
+}
+
+textarea:focus{
+	outline-color:#FFF;
+	outline:none;
+}
+
+input[type=button]{
+	padding:5px 15px 5px 15px;
+}
+
+table.datos_cotizacion{
+	background-color:#E1E1FF;
+}
+
+table tr td{
+	padding:7px 4px 7px 4px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	line-height:17px;
+}
+
+fieldset{
+	 background-color:#E1E1FF;
+}
+
+p.nota{
+	font-size:13px;
+	line-height:16px;
+	font-style:italic;
+}

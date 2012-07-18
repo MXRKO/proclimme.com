@@ -87,7 +87,7 @@
 					}
 				?>
                 </td>
-            	<td><input data-pp="<?=$pedido["id"]?>" type="button" class="btModificar" value="Atender"  /></td>
+            	<td><input data-pp="<?=$pedido["id"]?>" type="button" class="btModificar" value="Detalles"  /></td>
 			</tr>
 			<?
 		}
