@@ -9,7 +9,7 @@
 		$xdpp=$_POST["xdpp"];	
 	}
 	
-	if($_POST["Accion"]=="GUARDAR"){
+	/*if($_POST["Accion"]=="GUARDAR"){
 		$error=0;
 		$sql_solicitudes="SELECT*FROM solicitudes WHERE id_pedido='".$xdpp."'";
 		$ej_solicitudes=mysql_query($sql_solicitudes);
@@ -113,7 +113,7 @@
 		else if(strpos($_FILES[$nombreCampoArchivo][name],".XLSX"))	$extension="XLSX";
 		else	$extension="NO";
 		return $extension;
-	}
+	}*/
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -133,10 +133,8 @@
 </head>
 <body>
 <form id="Datos" name="Datos" method="post">
-	<input type="hidden" name="idu" id="idu" />
-    <input type="hidden" name="respuesta" id="respuesta" value="<?=$respuesta?>" />
+	<input type="hidden" name="xds" id="xds" />
     <input type="hidden" name="xdpp" id="xdpp" value="<?=$xdpp?>" />
-    <input type="hidden" name="Accion" id="Accion" />
 <div class="cabeza">
 <div class="menu">
     <ul class="menu_cliente">
@@ -218,53 +216,16 @@
     </td>
   </tr>
   <tr>
-    <td>Responder con :</td>
-    <td><input type="radio" id="radio<?=$solicitud["id"]?>" name="radio<?=$solicitud["id"]?>" value="Cotizacion" data-id="<?=$solicitud["id"]?>" onclick="mostrar('cotizacion','<?=$solicitud["id"]?>')"  checked="checked"/>
-      <label >Cotización</label>
-      <input type="radio" id="radio<?=$solicitud["id"]?>" name="radio<?=$solicitud["id"]?>" value="Material" data-id="<?=$solicitud["id"]?>" onclick="mostrar('material','<?=$solicitud["id"]?>')" />
-      <label >Material Terminado</label></td>
-  </tr>
-  <tr>
-    <td colspan="2" class="texto">
-    <div class="cotizacion<?=$solicitud["id"]?>">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td colspan="2">
-        	<p>*Describa a continuación la cotización:</p>
-        	<textarea id="txtDescripcionCotizacion<?=$solicitud["id"]?>" class="txtCot"></textarea>
-        </td>
-        </tr>
-      <tr>
-        <td width="17%">y/o Adjunte archivo:</td>
-        <td width="83%">
-          <input type="file" name="txtArchivo<?=$solicitud["id"]?>" id="txtArchivo<?=$solicitud["id"]?>" /></td>
-      </tr>
-    </table>
-    </div>
-    <div class="material<?=$solicitud["id"]?> item_solicitud" data-id-solicitud="<?=$solicitud["id"]?>" style="display:none;">
-      <table width="100%" id="tSolicitudMaterial<?=$solicitud["id"]?>_1" class="tItemSolicitud" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td width="11%">*Archivo</td>
-          <td width="89%"><input type="file" data-id-solicitud="<?=$solicitud["id"]?>" name="txtMaterial<?=$solicitud["id"]?>_1" id="txtMaterial<?=$solicitud["id"]?>_1" onchange="listenerFile('1','<?=$solicitud["id"]?>');" data-contador='1' />
-            </td>
-        </tr>
-        <tr>
-          <td colspan="2"><p>Observaciones:</p>
-          <textarea id="txtObervaciones<?=$solicitud["id"]?>_1"></textarea></td>
-        </tr>
-        <tr>
-          <td colspan="2"><p>*Una vez que haya seleccionado un archivo o escrito en el campo observaciones aparecerá automaticamente los campos para subir otro archivo </p></td>	
-        </tr>
-      </table>
-    </div>
-    
+    <td>Enviar :</td>
+    <td>
+    	<input class="btCotizacion" type="button" value="Cotización" data-id-solicitud="<?=$solicitud["id"]?>"/>
+        <input class="btTrabajo" type="button" value="Trabajo Final" data-id-solicitud="<?=$solicitud["id"]?>"/>
     </td>
     </tr>
   </table>
    <?
 	}
    ?>
-   <input type="button" id="btEnviar" value="Enviar" />
 </div>
 <div class="fondo"></div>
 </form>

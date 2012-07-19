@@ -50,6 +50,14 @@ $(document).ready(function(){
 			$("#Datos").submit();
 		});
 	});
+	
+	$(".btTrabajo").each(function(){
+		$(this).click(function(){
+			$("#xds").val($(this).attr("data-id-solicitud"));
+			$("#Datos").attr("action","trabajo.php");
+			$("#Datos").submit();
+		});
+	});
 });
 
 function mostrar(opcion,id){

@@ -5,40 +5,46 @@ include("../lib/php/conexion.php");
 $xdpp=$_POST["xdpp"];	
 $xds=$_POST["xds"];	
 if(!isset($_POST["Accion"])){
-	$sql_respuestas="SELECT*FROM respuestas WHERE id_solicitud='".$xds."' AND tipo='C'";
-	$ej_respuestas=mysql_query($sql_respuestas);
-	if(mysql_num_rows($ej_respuestas)>0){
-		$respuesta=mysql_fetch_array($ej_respuestas);
-		$txtDescripcion=$respuesta["descripcion"];
-		$txtArchivo=$respuesta["nombre_archivo"];
-	}
+	$sql="SELECT*FROM respuestas WHERE id_solicitud='".$xds."' AND tipo='A'";
+	$resql=mysql_query($sql);
+	if(mysql_num_rows($resql)>0){
+		$archivos=mysql_num_rows($resql);
+	}	
 }
 if($_POST["Accion"]=="GUARDAR" && !isset($respuesta)){
-	if($_FILES["txtArchivo"]['size']>0){
-		$extension=getExtension("txtArchivo");
-		if(subirArchivo("cotizacion_".$xds.".".$extension,"txtArchivo","cotizaciones")){
-			$inserta="INSERT INTO respuestas(id_solicitud,tipo,nombre_archivo,descripcion,fecha,formato) "; 
-			$inserta=$inserta."VALUES('".$xds."','C','cotizacion_".$xds.".".$extension."','".$_POST["txtDescripcion"]."',now(),'".$extension."')";		
-			$res=mysql_query($inserta);
+	$cont=1;
+	$ordena=1;
+	$limite=false;
+	$errors=0;
+	while($limite==false){
+		if($_FILES["txtArchivo".$xds."_".$cont]){
+			$extension=getExtension("txtArchivo".$xds."_".$ordena);
+			if(subirArchivo("publicado".$xds."_".$ordena.".".$extension,"txtArchivo".$xds."_".$ordena,"publicados")){
+				$inserta="INSERT INTO respuestas(id_solicitud,tipo,nombre_archivo,descripcion,fecha,formato) "; 
+				$inserta=$inserta."VALUES('".$xds."','A','publicado".$xds."_".$ordena.".".$extension."','".utf8_decode($_POST["txtDescripcion".$xds."_".$ordena])."',now(),'".$extension."')";		
+				$res=mysql_query($inserta);
+				if($res!=1){
+					$errors++;	
+				}
+			}
+			else{
+				$errors++;	
+			}
+			if($cont==$_POST["ultimo"]){
+				$limite=true;	
+			}
+			$ordena++;
 		}
-		else{
-			$res=0;	
-		}
-	}else{
-		$inserta="INSERT INTO respuestas(id_solicitud,tipo,nombre_archivo,descripcion,fecha,formato) "; 
-		$inserta=$inserta."VALUES('".$xds."','C','','".$_POST["txtDescripcion"]."',now(),'')";		
-		$res=mysql_query($inserta);
+		$cont++;
 	}
-	if($res==1){
+	if($errors<1){
 		$respuesta="GUARDO";	
-		$sql="SELECT*FROM respuestas WHERE id_solicitud='".$xds."' AND tipo='C'";
+		$sql="SELECT*FROM respuestas WHERE id_solicitud='".$xds."' AND tipo='A'";
 		$resql=mysql_query($sql);
-		$datos=mysql_fetch_array($resql);
-		$txtDescripcion=$datos["descripcion"];
-		$txtArchivo=$datos["nombre_archivo"];
+		$archivos=mysql_num_rows($resql);	
 	}
 	else{
-		$respuesta="NOGUARDO";
+		$respuesta="NOGUARDO";	
 	}
 }
 
@@ -81,14 +87,14 @@ function getExtension($nombreCampoArchivo){
 <title>Datos de la cotización</title>
 <link rel="stylesheet" type="text/css" media="all" href="../lib/css/reset.css"/>
 <link rel="stylesheet" type="text/css" media="all" href="../lib/css/manage.css"/>
-<link rel="stylesheet" type="text/css" media="all" href="../lib/css/cotizacion.css"/>
+<link rel="stylesheet" type="text/css" media="all" href="../lib/css/trabajo.css"/>
 <link rel="stylesheet" type="text/css" media="all" href="../lib/css/redactor.css"/>
 <link rel="stylesheet" type="text/css" media="all" href="../lib/css/tinybox2.css" rel="stylesheet" type="text/css" media="all" />
 <script language="javascript" type="text/javascript" src="../lib/js/jquery-1.7.min.js"></script>
 <script language="javascript" type="text/javascript" src="../lib/js/redactor.min.js"></script>
 <script language="javascript" type="text/javascript" src="../lib/redactor/langs/es.js"></script>
 <script language="javascript" type="text/javascript" src="../lib/js/tinybox2.js"></script>
-<script language="javascript" type="text/javascript" src="cotizacion.js"></script>
+<script language="javascript" type="text/javascript" src="trabajo.js"></script>
 </head>
 <body>
 <form id="Pedido" name="Pedido" method="get">
@@ -98,6 +104,7 @@ function getExtension($nombreCampoArchivo){
 <input type="hidden" name="Accion" id="Accion" />
 <input type="hidden" name="xdpp" id="xdpp" value="<?=$xdpp?>"/>
 <input type="hidden" name="xds" id="xds" value="<?=$xds?>"/>
+<input type="hidden" name="ultimo" id="ultimo" />
 <input type="hidden" name="respuesta" id="respuesta" value="<?=$respuesta?>"/>
 <div class="cabeza">
 <div class="menu">
@@ -132,36 +139,59 @@ function getExtension($nombreCampoArchivo){
   </div>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td colspan="2"><span class="caracteristica">*Describa la cotización</span>
-      <textarea name="txtDescripcion" id="txtDescripcion" cols="45" rows="5" <?=(isset($respuesta))?"readonly='readonly'":"";?>><?=$txtDescripcion?></textarea></td>
-  </tr>
-  <tr>
-    <td width="17%"><span class="caracteristica">agregar documento</span></td>
-    <td width="83%">
-      <?
-    	if(trim($txtArchivo)!=""){
+    <td width="100%">
+    <div id="divArchivos">
+	<?
+        if($archivos>0){
+			$j=1;
+			while($datos=mysql_fetch_array($resql)){
 			?>
-      <a href="../cotizaciones/<?=$txtArchivo?>" >Archivo de Cotizacion</a>
-      <?
-		}else if(isset($respuesta)){
-			?>
-      <a href="#" >No se adjunto documento</a>
-      <?
-		}else{
-	?>
-      <input type="file" name="txtArchivo" id="txtArchivo" />
-      <?
+            <div class="item" data-id-solicitud="<?=$xds."_".$j?>" >
+              <table width="100%" border="0">
+                    <tr>
+                      <td width="17%"><span class="caracteristica">*Archivo de trabajo</span></td>
+                      <td width="83%">
+                        <a href="../publicados/<?=$datos["nombre_archivo"]?>">Archivo de trabajo</a>
+                     </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span class="caracteristica">Descripcion del archivo</span>
+                          <textarea name="txtDescripcion<?=$xds?>_1" id="txtDescripcion<?=$xds?>_1" cols="45" readonly="readonly" rows="5"><?=nl2br(utf8_encode($datos["descripcion"]))?></textarea>
+                      </td>
+                    </tr>
+                  </table>
+            </div>
+            <?
+			}
+        }
+		else{
+    ?>
+    	<div class="item" data-id-solicitud="<?=$xds?>_1">
+    	  <table width="100%" border="0">
+                <tr>
+                  <td width="17%"><span class="caracteristica">*Archivo de trabajo</span></td>
+                  <td width="83%">
+                    <input data-contador="1" data-id-solicitud="<?=$xds?>" type="file" name="txtArchivo<?=$xds?>_1" id="txtArchivo<?=$xds?>_1" />
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2"><span class="caracteristica">Descripcion del archivo</span>
+                      <textarea name="txtDescripcion<?=$xds?>_1" id="txtDescripcion<?=$xds?>_1" cols="45" rows="5"></textarea>
+                  </td>
+                </tr>
+              </table>
+    	</div>
+        <?
 		}
-	?></td>
+		?>
+    </div>
+    </td>
   </tr>
   <tr>
-    <td colspan="2"><p class="nota">Todos los campos marcados con (*) asterisco son obligatorios</p></td>
-    </tr>
-  <tr>
-    <td colspan="2">&nbsp;</td>
+    <td><p class="nota">Todos los campos marcados con (*) asterisco son obligatorios</p></td>
   </tr>
   <tr>
-    <td colspan="2"><input type="button" name="btEnviar" id="btEnviar" value="Enviar" <?=(isset($respuesta))?"disabled='disabled'":"";?> />
+    <td><input type="button" name="btEnviar" id="btEnviar" value="Enviar" <?=(isset($archivos))?"disabled='disabled'":"";?> />
       <input type="button" name="btPedido" id="btPedido" value="Pedido" /></td>
     </tr>
 </table>

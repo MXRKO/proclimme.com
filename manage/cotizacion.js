@@ -8,13 +8,14 @@ $(document).ready(function(){
 	}
 	$("#btEnviar").click(function(){
 		if($.trim($("#txtDescripcion").val())!=""){
+			$("#Datos").attr("action","cotizacion.php");
 			$("#Accion").val("GUARDAR");
 			$("#Datos").submit();
 		}
 	});						   
 	
 	$("#btPedido").click(function(){
-		$("#Pedido").attr("action","pedido2.php");
+		$("#Pedido").attr("action","pedido.php");
 		$("#Pedido").submit();		
 	});
 });
