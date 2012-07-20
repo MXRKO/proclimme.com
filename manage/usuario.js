@@ -28,7 +28,7 @@ $(document).ready(function(){
 			TINY.box.show({html:'Se han actualizado los datos correctamente',animate:false,close:true,mask:false,boxid:'success',top:3, width:480})
 		break;
 		case 'NOMODIFICO':
-			TINY.box.show({html:'No se ha podido actualizar los datos, intenlo mas tarde',animate:false,close:true,mask:false,boxid:'success',top:3, width:480})
+			TINY.box.show({html:'No se ha podido actualizar los datos, intenlo mas tarde',animate:false,close:true,mask:false,boxid:'error',top:3, width:480})
 		break;
 	}	
 	if($("#idu").val()===""){

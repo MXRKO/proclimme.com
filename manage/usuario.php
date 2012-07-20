@@ -5,7 +5,7 @@
 	
 	switch($_POST["Accion"]){
 		case 'GUARDAR':
-			$insertarPass="INSERT INTO usuarios(user, pass, tipo, estatus) VALUES('".$_POST["txtUsuario"]."',md5('".$_POST["txtContrasena"]."'),'A','".$_POST["estatus"]."')";
+			echo $insertarPass="INSERT INTO usuarios(user, pass, tipo, estatus) VALUES('".$_POST["txtUsuario"]."',md5('".$_POST["txtContrasena"]."'),'A','".$_POST["estatus"]."')";
 			$res_insert=mysql_query($insertarPass);
 			$_POST["idu"]=mysql_insert_id();
 			$_POST["Accion"]="BUSCAR";

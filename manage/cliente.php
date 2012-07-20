@@ -7,7 +7,7 @@
 			$sql="INSERT INTO usuarios(user,pass,tipo) VALUES('".$_POST['txtUsuario']."',md5('".$_POST['txtContrasena']."'),'C')";
 			$r1=mysql_query($sql);
 			$idu=mysql_insert_id();
-			$sql2="INSERT INTO clientes(id_usuario, nombre, apellidos, direccion, cp, ciudad, empresa, rfc, telefono_casa, telefono_celular, telefono_trabajo, email, fax, no_cuenta)";
+			echo $sql2="INSERT INTO clientes(id_usuario, nombre, apellidos, direccion, cp, ciudad, empresa, rfc, telefono_casa, telefono_celular, telefono_trabajo, email, fax, no_cuenta)";
 			$sql2=$sql2."VALUES('".$idu."','".$_POST["txtNombre"]."', '".$_POST["txtApellidos"]."','".$_POST["txtDireccion"]."','".$_POST["txtCP"]."','".$_POST["txtCiudad"]."','".$_POST["txtEmpresa"]."','".$_POST["txtRFC"]."','".$_POST["txtCasa"]."','".$_POST["txtCelular"]."','".$_POST["txtTrabajo"]."','".$_POST["txtEmail"]."','".$_POST["txtFax"]."','".$_POST["txtNoCuenta"]."')";
 			$r2=mysql_query($sql2);
 			$idc=mysql_insert_id();
@@ -16,6 +16,9 @@
 				$_POST["idc"]=$idc;
 				$_POST["idu"]=$idu;
 				$_POST["Accion"]="BUSCAR";
+			}
+			else{
+				$resultado="NOGUARDO";		
 			}
 		break;
 		case 'MODIFICAR':

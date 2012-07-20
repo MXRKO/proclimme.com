@@ -55,7 +55,7 @@
   $ej_clientes=mysql_query($clientes);
   if(mysql_num_rows($ej_clientes)>0){
   		while($clientes=mysql_fetch_array($ej_clientes)){
-			  $usuario="SELECT*FROM usuarios WHERE id='".$clientes["id"]."'";
+			  $usuario="SELECT*FROM usuarios WHERE id='".$clientes["id_usuario"]."'";
 			  $ejusuario=mysql_query($usuario);
 			  $data_usuario=mysql_fetch_array($ejusuario);
 			  if($data_usuario["estatus"]==1)
