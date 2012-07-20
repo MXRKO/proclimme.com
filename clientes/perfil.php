@@ -6,14 +6,17 @@
 	$ejsql=mysql_query($sql);
 	if(mysql_num_rows($ejsql)>0){
 		$cliente=mysql_fetch_array($ejsql);
-		$busca_carrito="SELECT pedidos.cantidad, productos.id, pedidos.id_usuario, pedidos.id_producto, productos.precio FROM pedidos, productos WHERE id_usuario='".$cliente["id_usuario"]."' AND productos.id = pedidos.id_producto";
+		$busca_carrito="SELECT productos.id, pedidos.id_usuario, solicitudes.id_producto, solicitudes.descripcion FROM solicitudes, productos, pedidos WHERE pedidos.id_usuario='".$_SESSION["iduser"]."' AND productos.id = solicitudes.id_producto AND pedidos.id = solicitudes.id_pedido AND pedidos.estatus='C'";
 		$ejcarrito=mysql_query($busca_carrito);
 		$items_pedido=0;
 		$total=0;
 		while($carrito=mysql_fetch_array($ejcarrito)){
-			$items_pedido=$carrito["cantidad"]+$items_pedido;
-			$total=$carrito["precio"]+$total;
+			$items_pedido++;
 		}
+		if($items_pedido>0)
+			$items_pedido="(".$items_pedido.")";
+		else
+			$items_pedido="";	
 	}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -34,7 +37,8 @@
 	<div class="opciones">
     	<ul class="ulUser">
         	<li class="ultimo"><a class="ultimo" href="../<?=$menu_sesion["salir"]?>">Salir</a></li>
-            <li><a class="carrito" href="<?=$menu_sesion["pedido"]?>">Mi pedido (<?=$items_pedido?>)</a></li>
+            <li><a href="<?=$menu_sesion["pedidos"]?>">Mis Pedidos</a></li>
+            <li><a href="<?=$menu_sesion["meinteresa"]?>">Me interesa <?=$items_pedido?></a></li>
             <li class="primero"><a class="primero" href="<?=$menu_sesion["perfil"]?>">Mi perfil</a></li>
         </ul>
     </div>

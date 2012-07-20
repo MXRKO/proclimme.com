@@ -12,6 +12,7 @@ $(document).ready(function(){
 	$("#btPedido").click(function(){
 		alert("En desarrollo");
 	});
+	
 	if($.trim($("#xdc").val())==""){
 		$("#btSolicitar").click(function(){
 			TINY.box.show({html:'Los administradores no pueden solicitar productos desde el portal',animate:false,close:true,mask:false,boxid:'error',top:3, width:480});
@@ -23,6 +24,10 @@ $(document).ready(function(){
 			//TINY.box.show({url:'pedido.php',post:'xdp='+$("#xdp").val()+'&xdc='+$("#xdc").val()+'&cant='+$("#txtCantidad").val(),animate:true,close:false,mask:true,boxid:'frameless', height:390, width:480, fixed:true});	
 		});
 	}
+	
+	$("#btSolicitar_ss").click(function(){
+		TINY.box.show({url:'pedido.php',post:'xdp='+$("#xdp").val(),animate:true,close:false,mask:true,boxid:'frameless', height:390, width:480, fixed:true});	
+	});
 	
 	$("#btModificar").click(function(){
 		window.location.href="clientes/micarrito.php";								 

@@ -43,8 +43,9 @@
 	<div class="opciones">
     	<ul class="ulUser">
         	<li class="ultimo"><a class="ultimo" href="../<?=$menu_sesion["salir"]?>">Salir</a></li>
-            <li><a class="totales" href="#">Cotización (<?=$items_pedido?>)</a></li>
-            <li class="primero"><a class="primero" href="<?=$menu_sesion["perfil"]?>">Mi perfil</a></li>
+            <li><a href="<?=$menu_sesion["pedidos"]?>">Mis Pedidos</a></li>
+            <li><a class="totales" href="<?=$menu_sesion["meinteresa"]?>">Me interesa <?=$items_pedido?></a></li>
+            <li class="primero"><a class="primero" href="<?=$menu_sesion["perfil"]?>">Mi perfil</a></li>    
         </ul>
     </div>
 </div>

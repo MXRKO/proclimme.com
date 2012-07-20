@@ -99,7 +99,7 @@
 			  }
 			  else{
 				?>
-				<input id="btSesion" type="image" src="image/btnSesion2.png" />
+				<input id="btSolicitar_ss" name="btSolicitar_ss" type="image" src="image/btnInteresa.png" />
 				<?  
 		      }
 			  ?>

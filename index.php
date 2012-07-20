@@ -30,6 +30,7 @@
     	<ul class="ulUser">
         	<li class="ultimo"><a class="ultimo" href="<?=$menu_sesion["salir"]?>">Salir</a></li>
             <li><a href="clientes/<?=$menu_sesion["pedido"]?>">Cotización (<?=$items_pedido?>)</a></li>
+            <li><a href="clientes/<?=$menu_sesion["productos"]?>">Productos</a></li>
             <li class="primero"><a class="primero" href="clientes/<?=$menu_sesion["perfil"]?>">Mi perfil</a></li>
         </ul>
     </div>
@@ -58,8 +59,14 @@
         	<div class="bannerItem uno">
             <p class="subtitulo">Productos climatologicos y meteorologicos de México</p>
             <p class="slogan">&quot;El clima y el tiempo de tu lado&quot;</p>
-        	<input id="sesion" type="image" src="image/btnSesion.png" />
-        	</div>
+        	<?
+            if(!isset($_SESSION["iduser"])){
+				?>
+				<input id="sesion" type="image" src="image/btnSesion2.png" />
+                <?
+			}
+			?>
+            </div>
         </div>
     </div>
 <div class="centro">
