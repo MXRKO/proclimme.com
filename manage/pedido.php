@@ -218,8 +218,8 @@
   <tr>
     <td>Enviar :</td>
     <td>
-    	<input class="btCotizacion" type="button" value="Cotización" data-id-solicitud="<?=$solicitud["id"]?>"/>
-        <input class="btTrabajo" type="button" value="Trabajo Final" data-id-solicitud="<?=$solicitud["id"]?>"/>
+    	<input <?=$pedido["email"]!=""?"disabled='disabled'":"";?> class="btCotizacion" type="button" value="Cotización" data-id-solicitud="<?=$solicitud["id"]?>"/>
+        <input <?=$pedido["email"]!=""?"disabled='disabled'":"";?> class="btTrabajo" type="button" value="Trabajo Final" data-id-solicitud="<?=$solicitud["id"]?>"/>
     </td>
     </tr>
   </table>

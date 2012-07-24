@@ -1,6 +1,6 @@
 <?
-	/*mysql_connect("localhost","root");
-	mysql_select_db("proclimme_db");*/
-	mysql_connect("proclimmesql.db.9243612.hostedresource.com","proclimmesql","pRCLMMSQL_2012");
-	mysql_select_db("proclimmesql");
+	mysql_connect("localhost","root");
+	mysql_select_db("proclimme_db");
+	/*mysql_connect("proclimmesql.db.9243612.hostedresource.com","proclimmesql","pRCLMMSQL_2012");
+	mysql_select_db("proclimmesql");*/
 ?>

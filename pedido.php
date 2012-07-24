@@ -1,6 +1,5 @@
 <?
 	include("lib/php/conexion.php");
-	//xdc variable que contiene el id del cliente
 	//xdp variable que contiene el id de producto 
 	$busca="SELECT*FROM productos WHERE id='".$_POST["xdp"]."' AND estatus='1'";
 	$datos=@mysql_fetch_array(mysql_query($busca));
@@ -17,21 +16,23 @@
     <td><p><?=utf8_encode($datos["descripcion_corta"])?></p></td>
   </tr>
   <tr>
+    <td><p class="listado">Correo electrónico</p></td>
+    <td><label>
+      <input type="text" id="txtCorreo" name="txtCorreo" size="29" />
+    </label></td>
+  </tr>
+  <tr>
     <td colspan="2">
-    	<p>Requisitos de su cotización:</p>
-        <textarea cols="40" rows="6" id="txtDescripcion"></textarea>
+    	<p class="listado">Requisitos de su cotización:</p>
+        <textarea cols="51" rows="6" id="txtDescripcion" name="txtDescripcion"></textarea>
     </td>
     </tr>
-  <tr>
-    <td><p class="listado">&nbsp;</p></td>
-    <td><p>&nbsp;</p></td>
-  </tr>
 </table>
 <div class="respuesta"></div>
 	<div class="opciones">
-    	<input id="btConfirmar" type="image" src="image/btnConfirmar.png" onClick='confirmar();'>
-        <input id="btCancelar" type="image" src="image/btnCancelar.png" onClick='cancelar();'>
-    	<input class="novisible" id="btAceptar" type="image" src="image/btnAceptar.png" onClick='cancelar();'>
+    <input id="btEnviar" type="image" src="image/btnEnviar.png" onclick='enviar();' />
+    <input id="btCancelar" type="image" src="image/btnCancelar.png" onClick='cancelar();'>
+    <input class="novisible" id="btAceptar" type="image" src="image/btnAceptar.png" onClick='cancelar();'>
     </div>
 </div>
 <?
@@ -54,6 +55,20 @@
 		else{
 			echo "ERRORPEDIDO";
 		}
+	}else if($_POST["Accion"]=="PEDIDOSINUSUARIO"){
+		$inserta_pedido="INSERT INTO pedidos(id_usuario, estatus, email, fecha) VALUES('0','S','".$_POST["correo"]."',now())";
+		mysql_query($inserta_pedido);
+		$id_pedido=mysql_insert_id();				
+		
+		$inserta="INSERT INTO solicitudes(id_pedido, id_producto, fecha_carrito, descripcion) VALUES('".$id_pedido."','".$_POST["xdp"]."',now(),'".$_POST["descripcion"]."')";	
+		$res=@mysql_query($inserta);
+		mail("pepito@desarrolloweb.com,maria@guiartemultimedia.com","asuntillo","Este es el cuerpo del mensaje")
+		if($res=='1'){
+			echo "REALIZOPEDIDOSINUSUARIO";	
+		}
+		else{
+			echo "ERRORPEDIDOSINUSUARIO";
+		}
 	}
 	
 function tieneIdPedido($xdu){
@@ -66,5 +81,9 @@ function tieneIdPedido($xdu){
 	else{
 		return 0;	
 	}
+}
+
+function enviarCorreo(){
+	mail();	
 }
 ?>

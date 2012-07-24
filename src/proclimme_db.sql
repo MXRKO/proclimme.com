@@ -36,11 +36,11 @@ CREATE TABLE `clientes` (
   `fax` varchar(25) collate utf8_spanish_ci default NULL,
   `no_cuenta` varchar(25) collate utf8_spanish_ci default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 /*Data for the table `clientes` */
 
-insert  into `clientes`(`id`,`id_usuario`,`nombre`,`apellidos`,`direccion`,`cp`,`ciudad`,`empresa`,`rfc`,`telefono_casa`,`telefono_celular`,`telefono_trabajo`,`email`,`fax`,`no_cuenta`) values (2,5,'Pepe','Pecas','','','','','12345ABCD','','','','pepe@pepe.com','','');
+insert  into `clientes`(`id`,`id_usuario`,`nombre`,`apellidos`,`direccion`,`cp`,`ciudad`,`empresa`,`rfc`,`telefono_casa`,`telefono_celular`,`telefono_trabajo`,`email`,`fax`,`no_cuenta`) values (1,1,'Marco Antonio','Lozada LÃ³pez','Conocida','91000','Xico','Nerv','LOM841107','333333','222222','','zero.marko@gmail.com','',''),(4,11,'Cliente','Prueba','','','','','CLIENTEDEPRUEBA','','','','cliente@prueba.com','',''),(3,3,'Juan','Gonzales','','','','','123456','','','','juan@juan.com','','');
 
 /*Table structure for table `imagenes` */
 
@@ -66,15 +66,15 @@ DROP TABLE IF EXISTS `pedidos`;
 CREATE TABLE `pedidos` (
   `id` int(12) NOT NULL auto_increment,
   `id_usuario` int(12) default NULL,
-  `estatus` char(1) collate utf8_spanish_ci default 'C' COMMENT 'C - Carrito, E - Enviada, R - Respondida, T - Terminada',
+  `estatus` char(1) collate utf8_spanish_ci default 'C' COMMENT 'C - Carrito, E - Enviada, R - Respondida, T - Terminada, S - Pedido de cotizacion sin usuario',
   `email` varchar(255) collate utf8_spanish_ci default NULL,
   `fecha` date default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 /*Data for the table `pedidos` */
 
-insert  into `pedidos`(`id`,`id_usuario`,`estatus`,`email`,`fecha`) values (3,5,'E',NULL,'2012-07-13'),(4,5,'C',NULL,'2012-07-14');
+insert  into `pedidos`(`id`,`id_usuario`,`estatus`,`email`,`fecha`) values (1,0,'S','zero.marko@gmail.com','2012-07-24'),(2,0,'S','hkjh','2012-07-24'),(3,0,'S','lÃ±jlkj','2012-07-24');
 
 /*Table structure for table `productos` */
 
@@ -104,7 +104,7 @@ CREATE TABLE `respuestas` (
   `id_solicitud` int(12) default NULL,
   `tipo` char(1) collate utf8_spanish_ci default NULL COMMENT 'C - Cotizacion, A - Archivo Trabajo',
   `nombre_archivo` varchar(300) collate utf8_spanish_ci default NULL,
-  `descripción` text collate utf8_spanish_ci,
+  `descripcion` text collate utf8_spanish_ci,
   `fecha` date default NULL,
   `formato` varchar(25) collate utf8_spanish_ci default NULL COMMENT 'xls, doc, docx, pdf, jpg, png, gif',
   PRIMARY KEY  (`id`)
@@ -124,11 +124,11 @@ CREATE TABLE `solicitudes` (
   `fecha_envio` date default NULL,
   `descripcion` text collate utf8_spanish_ci,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 /*Data for the table `solicitudes` */
 
-insert  into `solicitudes`(`id`,`id_pedido`,`id_producto`,`fecha_carrito`,`fecha_envio`,`descripcion`) values (8,3,2,'2012-07-13','2012-07-14','Prueba'),(6,3,1,'2012-07-13','2012-07-14','Requiero este producto pronosticando los siguientes 15 días a a partir del 20 de julio para la zona de campeche'),(9,4,3,'2012-07-14',NULL,'prueba nueva de este pedido/solicitud');
+insert  into `solicitudes`(`id`,`id_pedido`,`id_producto`,`fecha_carrito`,`fecha_envio`,`descripcion`) values (1,1,3,'2012-07-24',NULL,'jejejkljdhh lkdsfldskfhkl kjh kjh kj'),(2,2,3,'2012-07-24',NULL,'kjhkjhkjh'),(3,3,3,'2012-07-24',NULL,'jlkjklj');
 
 /*Table structure for table `usuarios` */
 
@@ -141,11 +141,11 @@ CREATE TABLE `usuarios` (
   `tipo` char(1) collate utf8_spanish_ci default 'C',
   `estatus` tinyint(1) default '1',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 /*Data for the table `usuarios` */
 
-insert  into `usuarios`(`id`,`user`,`pass`,`tipo`,`estatus`) values (5,'PEPE','86266ee937d97f812a8e57d22b62ee29','C',1),(2,'ROBERTO','827ccb0eea8a706c4c34a16891f84e7b','A',1),(3,'ILDEFONSO','aretes2012','A',1),(4,'marco','86266ee937d97f812a8e57d22b62ee29','C',1);
+insert  into `usuarios`(`id`,`user`,`pass`,`tipo`,`estatus`) values (1,'MXRKO','86266ee937d97f812a8e57d22b62ee29','C',1),(4,'CHENCHO','827ccb0eea8a706c4c34a16891f84e7b','A',1),(3,'Juan','827ccb0eea8a706c4c34a16891f84e7b','C',1),(6,'PEPE','827ccb0eea8a706c4c34a16891f84e7b','A',1),(7,'NEON','86266ee937d97f812a8e57d22b62ee29','A',1),(10,'administrador','bbfc8cd4785d5532b26d82a934ed8fd1','A',1),(9,'alquimista','12345','A',1),(11,'cliente','6fad3d82bf09dfc87666af9131c7dc61','C',1);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

@@ -47,7 +47,7 @@
   </thead>
   <tbody>
   <?
-  $sqlpedidos="SELECT*FROM pedidos WHERE estatus='E' ORDER BY fecha DESC";
+  $sqlpedidos="SELECT*FROM pedidos WHERE estatus='E' OR estatus='S' ORDER BY fecha DESC";
   $ej_pedidos=mysql_query($sqlpedidos);
   if(mysql_num_rows($ej_pedidos)>0){
   		while($pedido=mysql_fetch_array($ej_pedidos)){
@@ -55,14 +55,18 @@
         	<tr>	
 				<td><?=$pedido["fecha"]?></td>
                 <td><?
-                	$user="SELECT*FROM clientes WHERE id_usuario='".$pedido["id_usuario"]."'";
-					$ejuser=mysql_query($user);
-					$datos_usuario=mysql_fetch_array($ejuser);
-					if(empty($datos_usuario["nombre"])){
-						echo $datos_usuario["email"];	
-					}
-					else{
-						echo $datos_usuario["nombre"]." ".$datos_usuario["apellidos"];	
+                	if($pedido["estatus"]!="S"){
+						$user="SELECT*FROM clientes WHERE id_usuario='".$pedido["id_usuario"]."'";
+						$ejuser=mysql_query($user);
+						$datos_usuario=mysql_fetch_array($ejuser);
+						if(empty($datos_usuario["nombre"])){
+							echo $datos_usuario["email"];	
+						}
+						else{
+							echo $datos_usuario["nombre"]." ".$datos_usuario["apellidos"];	
+						}
+					}else{
+						echo $pedido["email"];	
 					}
 				?></td>
                 <td>
