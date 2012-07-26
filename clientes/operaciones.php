@@ -53,7 +53,7 @@
 		break;
 		case 'CONFIRMAR':
 			$sqlSolicitudes="UPDATE solicitudes SET fecha_envio=now() WHERE id_pedido='".$_POST["xdpp"]."'";
-			$sqlPedidos="UPDATE pedidos SET estatus='E'";
+			$sqlPedidos="UPDATE pedidos SET estatus='E' AND id='".$_POST["xdpp"]."'";
 			$resS=mysql_query($sqlSolicitudes);
 			$resP=mysql_query($sqlPedidos);
 			if($resS==1 && $resP==1)

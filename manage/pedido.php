@@ -9,111 +9,17 @@
 		$xdpp=$_POST["xdpp"];	
 	}
 	
-	/*if($_POST["Accion"]=="GUARDAR"){
-		$error=0;
-		$sql_solicitudes="SELECT*FROM solicitudes WHERE id_pedido='".$xdpp."'";
-		$ej_solicitudes=mysql_query($sql_solicitudes);
-		$solicitud=mysql_fetch_array($ej_solicitudes);
-		if($_POST["radio".$solicitud["id"]]=="Cotizacion"){
-			echo "<script>alert('Entro Cotizacion')</script>";
-			$inserta="INSERT INTO respuestas(id_solicitud,tipo,nombre_archivo,descripcion,fecha,formato) "; 
-			if(subirArchivo("psolicitud_".$solicitud["id"],"txtArchivo".$solicitud["id"],"cotizaciones")){
-				echo $inserta=$inserta."VALUES('".$solicitud["id"]."','C','psolicitud_".$solicitud["id"]."','".$_POST["txtDescripcionCotizacion".$solicitud["id"]]."',now(),'".getExtension("txtArchivo".$solicitud["id"])."')";	
-			}
-			else
-				echo $inserta=$inserta."VALUES('".$solicitud["id"]."','C','','".$_POST["txtDescripcionCotizacion".$solicitud["id"]]."',now(),'')";	
-			$resp=mysql_query($inserta);
-			if($resp!=1){
-				$error++;	
-			}
+	if($_POST["Accion"]=="ASIGNAR"){
+		$update="UPDATE pedidos SET id_usuario='".$_POST["slUsuario"]."', estatus='E' WHERE id='".$_POST["xdpp"]."'";
+		$exeupdate=mysql_query($update);
+		if($exeupdate==1){
+			$respuesta="ASIGNO";	
 		}
 		else{
-			echo "<script>alert('Entro Material')</script>";
-			$continua=1;
-			$count=1;
-			while($continua==1){
-				echo "<script>alert('Entro While Material')</script>";
-				if(!isset($_FILES["txtMaterial".$solicitud["id"]."_".$count])){
-					$inserta="INSERT INTO respuestas(id_solicitud,tipo,nombre_archivo,descripcion,fecha,formato) "; 
-					if(subirMaterial("pterminado_".$solicitud["id"],"txtMaterial".$solicitud["id"]."_".$count,"cotizaciones")){
-						echo $inserta=$inserta."VALUES('".$solicitud["id"]."','A','pterminado".$solicitud["id"]."_".$count."','".$_POST["txtObservaciones".$solicitud["id"]."_".$count]."',now(),'".getExtension("txtMaterial".$solicitud["id"]."_".$count)."')";	
-						$resp=mysql_query($inserta);
-						if($resp!=1){
-							$error++;	
-						}		
-					}else{
-						$error++;	
-					}
-				}
-				else{
-					$continua=0;	
-				}
-				$count++;
-			}
-		}
-		if($error>0){
-			$respuesta="GUARDO";	
-		}
-		else{
-			$respuesta="NOGUARDO";	
+			$respuesta="NOASIGNO";	
 		}
 	}
 	
-	function subirArchivo($nombre,$nombreCampoArchivo,$carpeta){		
-		if($_FILES[$nombreCampoArchivo]['tmp_name']!=""){
-			$extension=getExtension($nombreCampoArchivo);
-			if($extencion!="NO"){
-				try{
-					$task=copy($_FILES[$nombreCampoArchivo]['tmp_name'],"../".$carpeta."/".$nombre.".".$extension) or die("[".$_FILES[$nombreCampoArchivo]['tmp_name']."] , porfavor notifique al adminstrador acerca de este error.");
-					if(!$task)
-						throw new Exception('Error al subir el archivo, porfavor contacte al administrador.');
-				}catch(Exception $e){
-					return "Descripcion del error:".$e->getMessage();
-				}
-				if(!$task) return false;
-				return true;			
-			}
-			else{
-				return false;	
-			}
-		}else{
-			return false;	
-		}
-	}
-	
-	function subirMaterial($nombre,$nombreCampoArchivo,$carpeta){		
-		$extension=getExtension($nombreCampoArchivo);
-		if($extencion!="NO"){
-			try{
-				echo "[".$nombreCampoArchivo."] - ";
-				$task=copy($_FILES[$nombreCampoArchivo]['tmp_name'],"../".$carpeta."/".$nombre.".".$extension) or die("[".$_FILES[$nombreCampoArchivo]['tmp_name']."], porfavor notifique al adminstrador acerca de este error.");
-				if(!$task)
-					throw new Exception('Error al subir el archivo, porfavor contacte al administrador.');
-			}catch(Exception $e){
-				return "Descripcion del error:".$e->getMessage();
-			}
-			if(!$task) return false;
-			return true;			
-		}
-		else{
-			return false;	
-		}
-	}
-	
-	function getExtension($nombreCampoArchivo){
-		if(strpos($_FILES[$nombreCampoArchivo][name],".pdf"))	$extension="pdf";
-		else if(strpos($_FILES[$nombreCampoArchivo][name],".PDF"))	$extension="pdf";
-		else if(strpos($_FILES[$nombreCampoArchivo][name],".doc"))	$extension="doc";
-		else if(strpos($_FILES[$nombreCampoArchivo][name],".DOC"))	$extension="doc";
-		else if(strpos($_FILES[$nombreCampoArchivo][name],".docx"))	$extension="docx";
-		else if(strpos($_FILES[$nombreCampoArchivo][name],".DOCX"))	$extension="docx";
-		else if(strpos($_FILES[$nombreCampoArchivo][name],".xls"))	$extension="xls";
-		else if(strpos($_FILES[$nombreCampoArchivo][name],".XLS"))	$extension="XLS";
-		else if(strpos($_FILES[$nombreCampoArchivo][name],".xlsx"))	$extension="xlsx";
-		else if(strpos($_FILES[$nombreCampoArchivo][name],".XLSX"))	$extension="XLSX";
-		else	$extension="NO";
-		return $extension;
-	}*/
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -135,6 +41,8 @@
 <form id="Datos" name="Datos" method="post">
 	<input type="hidden" name="xds" id="xds" />
     <input type="hidden" name="xdpp" id="xdpp" value="<?=$xdpp?>" />
+    <input type="hidden" name="Accion" id="Accion"  />
+    <input type="hidden" name="respuesta" id="respuesta" value="<?=$respuesta?>" />
 <div class="cabeza">
 <div class="menu">
     <ul class="menu_cliente">
@@ -163,12 +71,27 @@
       <?
       	$usuario="SELECT*FROM clientes WHERE id_usuario='".$pedido["id_usuario"]."'";
 		$ejusuario=mysql_query($usuario);
-		$user=mysql_fetch_array($ejusuario);
-		if(empty($user["nombre"])){
-			echo $user["email"];	
+		if(mysql_num_rows($ejusuario)<1){
+			echo $pedido["email"]." ";	
+			$clients="SELECT usuarios.id AS id, clientes.nombre AS nombre, clientes.apellidos AS apellidos FROM clientes, usuarios WHERE clientes.id_usuario=usuarios.id AND usuarios.estatus=1";
+			$execlients=@mysql_query($clients);
+			?>
+			<select id="slUsuario" name="slUsuario">
+            	<option value="0">--</option>
+                <?
+                while($clts=@mysql_fetch_array($execlients)){
+					?>
+					<option value="<?=$clts["id"]?>"><?=$clts["nombre"]." ".$clts["apellidos"]?></option>
+					<?	
+				}
+				?>
+            </select>
+            <input type="button" id="btAsignar" name="btAsignar" value="Asignar Usuario" />
+			<?
 		}
 		else{
-			echo $user["nombre"]." ".$user["apellidos"];	
+			$user=mysql_fetch_array($ejusuario);
+			echo $user["nombre"]." ".$user["apellidos"];
 		}
 	  ?>
       </td>
@@ -218,8 +141,8 @@
   <tr>
     <td>Enviar :</td>
     <td>
-    	<input <?=$pedido["email"]!=""?"disabled='disabled'":"";?> class="btCotizacion" type="button" value="Cotización" data-id-solicitud="<?=$solicitud["id"]?>"/>
-        <input <?=$pedido["email"]!=""?"disabled='disabled'":"";?> class="btTrabajo" type="button" value="Trabajo Final" data-id-solicitud="<?=$solicitud["id"]?>"/>
+    	<input <?=$pedido["id_usuario"]==""?"disabled='disabled'":"";?> class="btCotizacion" type="button" value="Cotización" data-id-solicitud="<?=$solicitud["id"]?>"/>
+        <input <?=$pedido["id_usuario"]==""?"disabled='disabled'":"";?> class="btTrabajo" type="button" value="Trabajo Final" data-id-solicitud="<?=$solicitud["id"]?>"/>
     </td>
     </tr>
   </table>

@@ -1,6 +1,31 @@
 <?
 	session_start();
 	include("lib/php/settings.php");
+	include("lib/php/conexion.php");
+	if(isset($_GET["id"])){
+		$sqlproducto="SELECT*FROM productos WHERE id='".$_GET["id"]."'";
+		$ej_sqlproducto=mysql_query($sqlproducto);
+		if(mysql_num_rows($ej_sqlproducto)>0){
+			$producto=mysql_fetch_array($ej_sqlproducto);
+		}
+	}
+	if(isset($_SESSION["iduser"])){
+		$busca_carrito="SELECT productos.id, pedidos.id_usuario, solicitudes.id_producto, solicitudes.descripcion FROM solicitudes, productos, pedidos WHERE pedidos.id_usuario='".$_SESSION["iduser"]."' AND productos.id = solicitudes.id_producto AND pedidos.id = solicitudes.id_pedido AND pedidos.estatus='C'";
+		$ejcarrito=mysql_query($busca_carrito);
+		$items_pedido=0;
+		$total=0;
+		while($carrito=mysql_fetch_array($ejcarrito)){
+			$items_pedido++;
+		}
+		
+		$id_solicitud=0;
+		$busca_pedido_solicitud="SELECT solicitudes.id AS id_solicitud FROM solicitudes, pedidos, productos WHERE productos.id = '".$producto["id"]."' AND pedidos.id = solicitudes.id_pedido AND solicitudes.id_producto = productos.id";
+		$ej_pedido_solicitud=mysql_query($busca_pedido_solicitud);
+		if(mysql_num_rows($ej_pedido_solicitud)>0){
+			$dat_pedido_solicitud=mysql_fetch_array($ej_pedido_solicitud);
+			$id_solicitud=$dat_pedido_solicitud["id_solicitud"];
+		}
+	}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -19,9 +44,22 @@
 <div class="misesion">
 	<div class="opciones">
     	<ul class="ulUser">
+        	<?
+        if(isset($_SESSION["idclient"])){
+			?>
+            <li class="ultimo"><a class="ultimo" href="<?=$menu_sesion["salir"]?>">Salir</a></li>
+            <li><a href="clientes/<?=$menu_sesion["pedido"]?>">Cotización (<?=$items_pedido?>)</a></li>
+            <li><a href="clientes/<?=$menu_sesion["productos"]?>">Productos</a></li>
+            <li class="primero"><a class="primero" href="clientes/<?=$menu_sesion["perfil"]?>">Mi perfil</a></li>
+        <?
+		}
+		else{
+		?>
         	<li class="ultimo"><a class="ultimo" href="<?=$menu_sesion["salir"]?>">Salir</a></li>
-            <li><a class="carrito" href="<?=$menu_sesion["pedido"]?>">Mi pedido (0)</a></li>
-            <li class="primero"><a class="primero" href="<?=$menu_sesion["perfil"]?>">Mi perfil</a></li>
+            <li class="primero"><a href="manage/<?=$menu_sesion_admin["control"]?>">Control</a></li>
+		<?
+		}
+		?>
         </ul>
     </div>
 </div>

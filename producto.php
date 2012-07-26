@@ -51,9 +51,22 @@
 <div class="misesion">
 	<div class="opciones">
     	<ul class="ulUser">
-        	<li class="ultimo"><a class="ultimo" href="<?=$menu_sesion["salir"]?>">Salir</a></li>
-            <li><a href="clientes/<?=$menu_sesion["pedido"]?>">Cotización (<span id="cant_items"><?=$items_pedido?></span>)</a></li>
+        	<?
+        if(isset($_SESSION["idclient"])){
+			?>
+            <li class="ultimo"><a class="ultimo" href="<?=$menu_sesion["salir"]?>">Salir</a></li>
+            <li><a href="clientes/<?=$menu_sesion["pedido"]?>">Cotización (<?=$items_pedido?>)</a></li>
+            <li><a href="clientes/<?=$menu_sesion["productos"]?>">Productos</a></li>
             <li class="primero"><a class="primero" href="clientes/<?=$menu_sesion["perfil"]?>">Mi perfil</a></li>
+        <?
+		}
+		else{
+		?>
+        	<li class="ultimo"><a class="ultimo" href="<?=$menu_sesion["salir"]?>">Salir</a></li>
+            <li class="primero"><a href="manage/<?=$menu_sesion_admin["control"]?>">Control</a></li>
+		<?
+		}
+		?>
         </ul>
     </div>
 </div>

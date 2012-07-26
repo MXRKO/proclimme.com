@@ -79,8 +79,11 @@
                 <td>
 				<?
                 	switch($pedido["estatus"]){
-						case "E";
+						case "E":
 							echo "Pendiente";
+						break;
+						case "S":
+							echo "Usuario no registrado";
 						break;
 						case "R":
 							echo "Respondida";

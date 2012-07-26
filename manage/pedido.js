@@ -43,6 +43,29 @@ $(document).ready(function(){
 			TINY.box.show({html:'Debe llenar todos los campos marcados con (*) aterisco, '+errors,animate:false,close:true,mask:false,boxid:'error',top:3, width:480})		
 		}
 	});*/
+	switch($("#respuesta").val()){
+		case "ASIGNO":
+			TINY.box.show({html:'La petición de cotización se ha asignado satisfactoriamente al usuario seleccionado',animate:false,close:true,mask:false,boxid:'success',top:3, width:480});
+		break;
+		case "NOASIGNO":
+			TINY.box.show({html:'Debido a un error desconocido no se ha podido actualizar la información, '+errors,animate:false,close:true,mask:false,boxid:'error',top:3, width:480});		
+		break;
+	}
+	
+	$("#btAsignar").click(function(){
+		if($("#slUsuario").val()>0){
+			if(confirm("¿Esta seguro del usuario que ha seleccionado?")){
+				$("#btAsignar").attr("disabled",true);
+				$("#Accion").val("ASIGNAR");
+				$("#Datos").attr("action","pedido.php");
+				$("#Datos").submit();
+			}
+		}else{
+			TINY.box.show({html:'Debe seleccionar un usuario para realizar la asignación, '+errors,animate:false,close:true,mask:false,boxid:'error',top:3, width:480});			
+		}
+		
+	});
+	
 	$(".btCotizacion").each(function(){
 		$(this).click(function(){
 			$("#xds").val($(this).attr("data-id-solicitud"));

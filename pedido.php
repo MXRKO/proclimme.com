@@ -12,14 +12,10 @@
     <td width="56%"><p><?=utf8_encode($datos["nombre"])?></p></td>
   </tr>
   <tr>
-    <td><p class="listado">Descripción breve</p></td>
-    <td><p><?=utf8_encode($datos["descripcion_corta"])?></p></td>
-  </tr>
-  <tr>
     <td><p class="listado">Correo electrónico</p></td>
     <td><label>
       <input type="text" id="txtCorreo" name="txtCorreo" size="29" />
-    </label></td>
+      </label></td>
   </tr>
   <tr>
     <td colspan="2">
@@ -62,7 +58,11 @@
 		
 		$inserta="INSERT INTO solicitudes(id_pedido, id_producto, fecha_carrito, descripcion) VALUES('".$id_pedido."','".$_POST["xdp"]."',now(),'".$_POST["descripcion"]."')";	
 		$res=@mysql_query($inserta);
-		mail("pepito@desarrolloweb.com,maria@guiartemultimedia.com","asuntillo","Este es el cuerpo del mensaje")
+		
+		$sql_producto="SELECT*FROM productos WHERE id='".$_POST["xdp"]."'";
+		$exesql_producto=mysql_query($sql_producto);
+		$dats_prod=mysql_fetch_array($exesql_producto);
+		correo("visitante de proclimme.com",$_POST["correo"],"Roberto Villa","zero.marko@gmail.com","Solicitud de cotización","<h1>Mensaje enviado automaticamente desde la página de <a href='http://proclimme.com'>Proclimme</a></h1><p>Este es un mensaje enviado desde la página a solicitud del <strong>posible cliente ".$_POST["correo"]."</strong>, para solicitar el producto: <strong>".$dats_prod["nombre"]."</strong> con las siguientes caracteristicas:</p><h3>Caracteristicas de la cotización</h3><p>\"".$_POST["descripcion"]."\"</p><p>*Este correo ha sido generado de manera automatica</p>");
 		if($res=='1'){
 			echo "REALIZOPEDIDOSINUSUARIO";	
 		}
@@ -83,7 +83,14 @@ function tieneIdPedido($xdu){
 	}
 }
 
-function enviarCorreo(){
-	mail();	
+function correo($de_nombre,$de,$para_nombre,$para,$asunto, $contenido){
+	$headers   = array();
+	$headers[] = "MIME-Version: 1.0";
+	$headers[] = "Content-type: text/html; charset=utf-8";
+	$headers[] = "From: ".$de_nombre." <".$de.">";
+	$headers[] = "Reply-To: ".$para_nombre." <".$para_nombre.">";
+	$headers[] = "Subject: {".$asunto."}";
+	$headers[] = "X-Mailer: PHP/".phpversion();
+	@mail($para, $asunto, $contenido, implode("\r\n", $headers));	
 }
 ?>
