@@ -139,10 +139,10 @@
     </td>
   </tr>
   <tr>
-    <td>Enviar :</td>
+    <td>Enviar : </td>
     <td>
-    	<input <?=$pedido["id_usuario"]==""?"disabled='disabled'":"";?> class="btCotizacion" type="button" value="Cotización" data-id-solicitud="<?=$solicitud["id"]?>"/>
-        <input <?=$pedido["id_usuario"]==""?"disabled='disabled'":"";?> class="btTrabajo" type="button" value="Trabajo Final" data-id-solicitud="<?=$solicitud["id"]?>"/>
+    	<input <?=$pedido["id_usuario"]<1?"disabled='disabled'":"";?> class="btCotizacion" type="button" value="Cotización" data-id-solicitud="<?=$solicitud["id"]?>"/>
+        <input <?=$pedido["id_usuario"]<1?"disabled='disabled'":"";?> class="btTrabajo" type="button" value="Trabajo Final" data-id-solicitud="<?=$solicitud["id"]?>"/>
     </td>
     </tr>
   </table>
