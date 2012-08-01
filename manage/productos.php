@@ -19,8 +19,7 @@
 </head>
 <body>
 <form id="Datos" method="post">
-	<input type="hidden" name="idu" id="idu" />
-    <input type="hidden" name="idc" id="idc" />
+	<input type="hidden" name="xdp" id="xdp" />
     <input type="hidden" name="Accion" id="Accion" />
 </form>
 <div class="cabeza">
@@ -58,9 +57,9 @@
 			  	$tipo_celda="gradeX"; //ROJA
 			  ?>
 			  <tr class="<?=$tipo_celda?>">
-				<td><?=utf8_encode($productos["nombre"])?></td>
-                <td><?=utf8_encode($productos["descripcion_corta"])?></td>
-				<td><?=utf8_encode($productos["precio"])?></td>
+				<td><?=$productos["nombre"]?></td>
+                <td><?=$productos["descripcion_corta"]?></td>
+				<td><?=$productos["precio"]?></td>
 				<td><input data-id-producto="<?=$productos["id"]?>" type="button" class="btModificar" value="Modificar"  /></td>
 			  </tr>
 			  <?

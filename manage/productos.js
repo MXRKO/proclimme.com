@@ -1,6 +1,6 @@
 // JavaScript Document
 $(document).ready(function(){
-	$("#tProductos").dataTable({
+	/*$("#tProductos").dataTable({
 		"bJQueryUI": true,
 		"sPaginationType": "full_numbers",
 		"oLanguage": {
@@ -21,11 +21,13 @@ $(document).ready(function(){
 		"aoColumnDefs": [
             { "bSortable": false, "aTargets": [ 3 ] }
         ],
-	});	
+	});	*/
 	
 	$("input.btModificar").each(function(){
 		$(this).click(function(){
-			alert($(this).attr('data-id-producto'));
+			$("#xdp").val($(this).attr('data-id-producto'));
+			$("#Datos").attr("action","producto.php");
+			$("#Datos").submit();
 		});			  
 	});
 });
