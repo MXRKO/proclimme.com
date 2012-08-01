@@ -61,7 +61,7 @@
 				<td><?=utf8_encode($productos["nombre"])?></td>
                 <td><?=utf8_encode($productos["descripcion_corta"])?></td>
 				<td><?=utf8_encode($productos["precio"])?></td>
-				<td><input data-productos="<?=$productos["id"]?>" type="button" class="btModificar" value="Modificar"  /></td>
+				<td><input data-id-producto="<?=$productos["id"]?>" type="button" class="btModificar" value="Modificar"  /></td>
 			  </tr>
 			  <?
 		}

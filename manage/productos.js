@@ -21,5 +21,11 @@ $(document).ready(function(){
 		"aoColumnDefs": [
             { "bSortable": false, "aTargets": [ 3 ] }
         ],
-	});						   
+	});	
+	
+	$("input.btModificar").each(function(){
+		$(this).click(function(){
+			alert($(this).attr('data-id-producto'));
+		});			  
+	});
 });
