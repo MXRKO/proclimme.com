@@ -2,6 +2,7 @@
 	session_start();
 	include("../lib/php/conexion.php");
 	include("../lib/php/settings.php");
+	include("../lib/php/resize-class.php");
 	if(isset($_POST["Accion"]) && $_POST["Accion"]=="GUARDAR"){
 		if(trim($_POST["xdp"])==""){
 			$inserta="insert into productos "; 
@@ -26,6 +27,9 @@
 			$inserta.="now(),"; 
 			$inserta.="'".$_POST["mostrar"]."'";
 			$inserta.=")";
+			$exito=mysql_query($inserta);
+			$xdp=mysql_insert_id();
+		
 		}
 		else{
 			$inserta="update productos ";
@@ -39,10 +43,32 @@
 			$inserta.="ultima_modificacion = now(), "; 
 			$inserta.="mostrar_principal = '".$_POST["mostrar"]."' ";
 			$inserta.="where id = '".$_POST["xdp"]."'";	
+			$exito=mysql_query($inserta);
+			$xdp=$_POST["xdp"];
 		}
-		$exito=mysql_query($inserta);
+		
+		if($_FILES["txtArchivo"]["size"]>0){
+			$nombre="item".$xdp;
+			$extension=getExtension("txtArchivo");
+			$imgBusca="SELECT*FROM imagenes WHERE id_producto='".$xdp."'";
+			$reImg=mysql_query($imgBusca);
+			$subio=subirArchivo($nombre,"txtArchivo",$extension);	
+			if($subio){
+				if(mysql_num_rows($reImg)>0){
+					$datsImg=mysql_fetch_array($reImg);
+					$updtImg="update imagenes set ";
+					$updtImg.="nombre_archivo = '".$nombre.".".$extension."' , extencion = '".$extension."' where id = '".$datsImg["id"]."'";
+					mysql_query($updtImg);
+				}
+				else{
+					$inserImg="insert into imagenes (id_producto, nombre_archivo, descripcion, extencion) ";
+					$inserImg.="values('".$xdp."','".$nombre.".".$extension."','','".$extension."')";	
+					mysql_query($inserImg);
+				}
+			}
+		}
 		if($exito==1){
-			$respuesta="GUARDO";	
+			$respuesta="GUARDO";
 		}	
 		else{
 			$respuesta="NOGUARDO";	
@@ -71,16 +97,27 @@
 		$txtDescripcionDetallada=$datos["descripcion"];
 	}
 	
-	function subirArchivo($nombre,$nombreCampoArchivo,$carpeta){		
+	function subirArchivo($nombre,$nombreCampoArchivo, $extension){		
 		if($_FILES[$nombreCampoArchivo]['tmp_name']!=""){
 			try{
-				$task=copy($_FILES[$nombreCampoArchivo]['tmp_name'],"../".$carpeta."/".$nombre) or die("[".$_FILES[$nombreCampoArchivo]['tmp_name']."] , porfavor notifique al adminstrador acerca de este error.");
-				if(!$task)
+				$taskMin=copy($_FILES[$nombreCampoArchivo]['tmp_name'],"../media/productos/".$nombre."_min.".$extension) or die("[".$_FILES[$nombreCampoArchivo]['tmp_name']."] , porfavor notifique al adminstrador acerca de este error.");
+				$taskThumb=copy($_FILES[$nombreCampoArchivo]['tmp_name'],"../media/productos/".$nombre."_thumb.".$extension) or die("[".$_FILES[$nombreCampoArchivo]['tmp_name']."] , porfavor notifique al adminstrador acerca de este error.");
+				$task=copy($_FILES[$nombreCampoArchivo]['tmp_name'],"../media/productos/".$nombre.".".$extension) or die("[".$_FILES[$nombreCampoArchivo]['tmp_name']."] , porfavor notifique al adminstrador acerca de este error.");
+				if(!$task && !$taskMin && !$taskThumb)
 					throw new Exception('Error al subir el archivo, porfavor contacte al administrador.');
+				else{
+					$resizeObj = new resize("../media/productos/".$nombre."_thumb.".$extension);
+					$resizeObj -> resizeImage(109, 74, 'exact');// Resize image (options: exact, portrait, landscape, auto, crop)
+					$resizeObj -> saveImage("../media/productos/".$nombre."_thumb.".$extension, 50);					
+					
+					$resizeObj = new resize("../media/productos/".$nombre."_min.".$extension);
+					$resizeObj -> resizeImage(606, 300, 'exact');// Resize image (options: exact, portrait, landscape, auto, crop)
+					$resizeObj -> saveImage("../media/productos/".$nombre."_min.".$extension, 50);					
+				}
 			}catch(Exception $e){
 				return "Descripcion del error:".$e->getMessage();
 			}
-			if(!$task) return false;
+			if(!$task && !task1) return false;
 			return true;			
 			
 		}else{
@@ -90,17 +127,23 @@
 
 	function getExtension($nombreCampoArchivo){
 		if(strpos($_FILES[$nombreCampoArchivo]['name'],".pdf"))	$extension="pdf";
-		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".PDF"))	$extension="pdf";
-		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".doc"))	$extension="doc";
-		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".DOC"))	$extension="doc";
-		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".docx"))	$extension="docx";
-		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".DOCX"))	$extension="docx";
-		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".xls"))	$extension="xls";
-		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".XLS"))	$extension="XLS";
-		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".xlsx"))	$extension="xlsx";
-		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".XLSX"))	$extension="XLSX";
+		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".JPG"))	$extension="JPG";
+		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".jpg"))	$extension="jpg";
+		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".JPEG"))	$extension="JPEG";
+		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".jpeg"))	$extension="jpeg";
+		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".PNG"))	$extension="PNG";
+		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".png"))	$extension="png";
+		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".GIF"))	$extension="GIF";
+		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".gif"))	$extension="gif";
 		else	$extension="NO";
 		return $extension;
+	}
+	
+	function eliminarArchivo($id, $sub_id){
+		if(!@file_exists("../media/productos/publicacion_".$id."_".$sub_id.".jpg")) return true;
+		if(!@unlink("../media/productos/publicacion_".$id."_".$sub_id.".jpg")) return false;
+		if(!@unlink("../media/productos/publicacion_".$id."_".$sub_id."_thumb.jpg")) return false;
+		return true;
 	}
 
 ?>
@@ -119,7 +162,7 @@
 <script language="javascript" type="text/javascript" src="producto.js"></script>
 </head>
 <body>
-<form name="Datos" id="Datos" method="post" action="<?=$_SERVER['PHP_SELF']?>">
+<form name="Datos" id="Datos" method="post" enctype="multipart/form-data" action="<?=$_SERVER['PHP_SELF']?>">
 <input type="hidden" id="Accion" name="Accion" />
 <input type="hidden" id="xdp" name="xdp" value="<?=$xdp?>" />
 <input type="hidden" id="respuesta" name="respuesta" value="<?=$respuesta?>" />
@@ -188,9 +231,24 @@
       </tr>
     <tr>
       <td>Imágen del producto</td>
-      <td colspan="2"><label>
-        <input type="file" name="txtArchivo" id="txtArchivo" />
-      </label></td>
+      <td colspan="2">
+        <?
+        	$sqlImg="SELECT*FROM imagenes WHERE id_producto='".$xdp."'";
+			$reImg=mysql_query($sqlImg);
+			if(mysql_num_rows($reImg)>0){
+				$img=mysql_fetch_array($reImg);
+				?>
+				<img src="../media/productos/<?=$img["nombre_archivo"]?>"  />
+                <p class="nota">Si desea cambiar esta imagen solo seleccione otra y ser&aacute; reemplazada</p>
+                <input type="file" name="txtArchivo" id="txtArchivo" />
+				<?	
+			}else{
+				?>
+				<input type="file" name="txtArchivo" id="txtArchivo" />
+				<?
+			}
+			?>
+      </td>
     </tr>
     <tr>
       <td>&nbsp;</td>

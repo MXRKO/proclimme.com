@@ -2,6 +2,46 @@
 	session_start();
 	include("../lib/php/settings.php");
 	include("../lib/php/conexion.php");
+		
+	function mover($tipo,$id){
+		if($tipo=="arriba"){
+			$actual=mysql_fetch_array(mysql_query("SELECT id, orden FROM productos WHERE id='".$id."'"));
+			$anterior=datosAnterior($actual["orden"]);
+			
+			$update="UPDATE productos SET orden='".$anterior["orden"]."' WHERE id='".$actual["id"]."'";
+			$update2="UPDATE productos SET orden='".$actual["orden"]."' WHERE id='".$anterior["id"]."'";
+			mysql_query($update);
+			mysql_query($update2);
+		}else{
+			$actual=mysql_fetch_array(mysql_query("SELECT id, orden FROM productos WHERE id='".$id."'"));
+			$posterior=datosPosterior($actual["orden"]);
+			
+			$update="UPDATE productos SET orden='".$posterior["orden"]."' WHERE id='".$actual["id"]."'";
+			$update2="UPDATE productos SET orden='".$actual["orden"]."' WHERE id='".$posterior["id"]."'";
+			mysql_query($update);
+			mysql_query($update2);	
+		}
+	}
+	
+	function datosAnterior($orden){
+		$resul=mysql_query("SELECT*FROM productos WHERE orden='".($orden-1)."'");
+		if(mysql_num_rows($resul)<1 && ($orden-1)>1){
+			datosAnterior($orden-1);	
+		}else{
+			$anterior=mysql_fetch_array($resul);	
+		}
+		return $anterior;
+	}
+	
+	function datosPosterior($orden){
+		$resul=mysql_query("SELECT*FROM productos WHERE orden='".($orden+1)."'");
+		if(mysql_num_rows($resul)<1){
+			datosPosterior($orden+1);	
+		}else{
+			$anterior=mysql_fetch_array($resul);	
+		}
+		return $anterior;
+	}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -41,13 +81,13 @@
   <tr>
     <th class="cabeza">Nombre</td>
     <th class="cabeza">Descripción corta</td>
-    <th class="cabeza">Precio</td>
+    <th class="cabeza">Orden</td>
     <th class="cabeza">&nbsp;</td>
   </tr>
   </thead>
   <tbody>
   <?
-  $productos="SELECT*FROM productos";
+  $productos="SELECT*FROM productos ORDER BY orden ASC";
   $ej_productos=mysql_query($productos);
   if(mysql_num_rows($ej_productos)>0){
   		while($productos=mysql_fetch_array($ej_productos)){
@@ -59,7 +99,7 @@
 			  <tr class="<?=$tipo_celda?>">
 				<td><?=$productos["nombre"]?></td>
                 <td><?=$productos["descripcion_corta"]?></td>
-				<td><?=$productos["precio"]?></td>
+				<td><input type="button" value="/\" /> <input type="button" value="\/" /></td>
 				<td><input data-id-producto="<?=$productos["id"]?>" type="button" class="btModificar" value="Modificar"  /></td>
 			  </tr>
 			  <?

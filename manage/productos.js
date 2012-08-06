@@ -30,4 +30,9 @@ $(document).ready(function(){
 			$("#Datos").submit();
 		});			  
 	});
+	
+	$("#btNuevo").click(function(){
+		window.location.href="producto.php";
+	});
+	
 });
