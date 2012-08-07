@@ -12,6 +12,7 @@ $(document).ready(function(){
 	
 	$("#btEliminar").click(function(){
 		if(confirm("¿Está seguro de eliminar este producto?")){
+			$("#xdp").val();
 			$("#Accion").val("ELIMINAR");
 			$("#Datos").submit();
 		}			   

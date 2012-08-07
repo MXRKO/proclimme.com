@@ -75,13 +75,28 @@
 		}
 	}
 	if($_POST['Accion']=="ELIMINAR"){
-		$eliminar="delete from proclimme_db.productos where id = '".$_POST["xdp"]."'";	
-		$exito=mysql_query($eliminar);
-		if($exito==1){
-			$respuesta="ELIMINO";
+		$sqlOp="SELECT id FROM solicitudes WHERE id_producto='".$_POST["xdp"]."'";
+		$ejOp=mysql_query($sqlOp);
+		if(mysql_num_rows($ejOp)>0){
+			$sqlUp="UPDATE productos SET eliminado='1' WHERE id='".$_POST["xdp"]."'";
+			$exito=mysql_query($sqlUp);
+			if($exito==1){
+				$respuesta="ELIMINO";
+			}
+			else{
+				$respuesta="NOELIMINO";	
+			}
 		}
 		else{
-			$respuesta="NOELIMINO";	
+			$eliminar="delete from productos where id = '".$_POST["xdp"]."'";	
+			$exito=mysql_query($eliminar);
+			if($exito==1){
+				eliminarArchivo($_POST["xdp"]);
+				$respuesta="ELIMINO";
+			}
+			else{
+				$respuesta="NOELIMINO";	
+			}	
 		}
 	}
 	if(isset($_POST["xdp"])){
@@ -139,10 +154,16 @@
 		return $extension;
 	}
 	
-	function eliminarArchivo($id, $sub_id){
-		if(!@file_exists("../media/productos/publicacion_".$id."_".$sub_id.".jpg")) return true;
-		if(!@unlink("../media/productos/publicacion_".$id."_".$sub_id.".jpg")) return false;
-		if(!@unlink("../media/productos/publicacion_".$id."_".$sub_id."_thumb.jpg")) return false;
+	function eliminarArchivo($xdp){
+		$sql="SELECT*FROM imagenes WHERE id_producto='".$xdp."'";
+		$resql=mysql_query($sql);
+		if(mysql_num_rows($resql)>0){
+			$ex=mysql_fetch_array($resql);
+			if(!@file_exists("../media/productos/".$xdp.".".$ex["extencion"])) return true;
+			if(!@unlink("../media/productos/item".$xdp.".".$ex["extencion"])) return false;
+			if(!@unlink("../media/productos/item".$xdp."_thumb.".$ex["extencion"])) return false;
+			if(!@unlink("../media/productos/item".$xdp."_min.".$ex["extencion"])) return false;
+		}
 		return true;
 	}
 

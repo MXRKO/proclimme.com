@@ -15,6 +15,7 @@
 						"productos"=>"productos.php",
 						"clientes"=>"clientes.php",
 						"usuarios"=>"usuarios.php",
+						"noticias"=>"noticias.php",
 						"sitio"=>"../index.php",
 						"salir"=>"../salir.php");
 ?>

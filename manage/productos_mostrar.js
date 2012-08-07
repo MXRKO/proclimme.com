@@ -12,6 +12,10 @@ $(document).ready(function(){
 		window.location.href="producto.php";
 	});
 	
+	$("#btTodos").click(function(){
+		window.location.href="productos.php";
+	});
+	
 	$(".btMover").each(function(){
 		$(this).click(function(){
 			$("#tipo").val($(this).attr("data-tipo"));

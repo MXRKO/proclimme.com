@@ -76,6 +76,7 @@
         <li><a class="seleccionado" href="<?=$menu_cliente["productos"]?>">Productos</a></li>
         <li><a href="<?=$menu_cliente["clientes"]?>">Clientes</a></li>
         <li><a href="<?=$menu_cliente["usuarios"]?>">Usuarios</a></li>
+        <li><a href="<?=$menu_cliente["noticias"]?>">Noticias</a></li>
         <li><a href="<?=$menu_cliente["sitio"]?>">Ir al sitio</a></li>
         <li><a href="<?=$menu_cliente["salir"]?>">Salir</a></li>
     </ul>
@@ -122,7 +123,7 @@
   </tbody>
 </table>
 <div class="opciones">
-	<input type="button" name="btNuevo" id="btNuevo" value="Nuevo" />
+	<input type="button" name="btNuevo" id="btNuevo" value="Nuevo" /> <input type="button" name="btTodos" id="btTodos" value="Ver Todos" />
 </div>
 </div>
 <div class="fondo"></div>
