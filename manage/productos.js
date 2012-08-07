@@ -1,6 +1,6 @@
 // JavaScript Document
 $(document).ready(function(){
-	/*$("#tProductos").dataTable({
+	$("#tProductos").dataTable({
 		"bJQueryUI": true,
 		"sPaginationType": "full_numbers",
 		"oLanguage": {
@@ -19,9 +19,9 @@ $(document).ready(function(){
 			}
         },
 		"aoColumnDefs": [
-            { "bSortable": false, "aTargets": [ 3 ] }
+            { "bSortable": false, "aTargets": [ 2 ] }
         ],
-	});	*/
+	});
 	
 	$("input.btModificar").each(function(){
 		$(this).click(function(){
@@ -33,6 +33,10 @@ $(document).ready(function(){
 	
 	$("#btNuevo").click(function(){
 		window.location.href="producto.php";
+	});
+	
+	$("#btMostrar").click(function(){
+		window.location.href="productos_mostrar.php";
 	});
 	
 });

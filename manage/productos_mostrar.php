@@ -2,7 +2,13 @@
 	session_start();
 	include("../lib/php/settings.php");
 	include("../lib/php/conexion.php");
-		
+	
+	$max=mysql_fetch_array(mysql_query("SELECT MAX(orden) AS orden FROM productos WHERE mostrar_principal='1'"));
+	
+	if(isset($_POST["tipo"])){
+		mover($_POST["tipo"],$_POST["xdp"]);	
+	}
+	
 	function mover($tipo,$id){
 		if($tipo=="arriba"){
 			$actual=mysql_fetch_array(mysql_query("SELECT id, orden FROM productos WHERE id='".$id."'"));
@@ -50,7 +56,7 @@
 <title>Productos</title>
 <script language="javascript" type="text/javascript" src="../lib/js/jquery-1.7.min.js"></script>
 <script language="javascript" type="text/javascript" src="../lib/js/jquery.dataTables.js"></script>
-<script language="javascript" type="text/javascript" src="productos.js"></script>
+<script language="javascript" type="text/javascript" src="productos_mostrar.js"></script>
 <link rel="stylesheet" type="text/css" media="all" href="../lib/css/reset.css"/>
 <link rel="stylesheet" type="text/css" media="all" href="../lib/css/manage.css"/>
 <link rel="stylesheet" type="text/css" media="all" href="../lib/css/productos.css"/>
@@ -60,6 +66,7 @@
 <body>
 <form id="Datos" method="post">
 	<input type="hidden" name="xdp" id="xdp" />
+    <input type="hidden" name="tipo" id="tipo" />
     <input type="hidden" name="Accion" id="Accion" />
 </form>
 <div class="cabeza">
@@ -81,6 +88,7 @@
   <tr>
     <th class="cabeza">Nombre</td>
     <th class="cabeza">Descripción corta</td>
+    <th class="cabeza">Orden</td>
     <th class="cabeza">&nbsp;</td>
   </tr>
   </thead>
@@ -88,9 +96,9 @@
   <?
   $productos="SELECT*FROM productos ORDER BY orden ASC";
   $ej_productos=mysql_query($productos);
-  $i=0;
   if(mysql_num_rows($ej_productos)>0){
-  		while($productos=mysql_fetch_array($ej_productos)){
+  		$i=1;
+		while($productos=mysql_fetch_array($ej_productos)){
 			  if($productos["estatus"]==1)
 			  	$tipo_celda="gradeA"; //VERDE
 			  else
@@ -99,16 +107,22 @@
 			  <tr class="<?=$tipo_celda?>">
 				<td><?=$productos["nombre"]?></td>
                 <td><?=$productos["descripcion_corta"]?></td>
+				<td><?
+                if($i>1){
+				?><input type="button" class="btMover" value="/\" data-id="<?=$productos["id"]?>" data-tipo="arriba" /> <? }
+				if($i<$max["orden"]){
+				?><input type="button" class="btMover" value="\/" data-id="<?=$productos["id"]?>" data-tipo="abajo" /> <? } ?></td>
 				<td><input data-id-producto="<?=$productos["id"]?>" type="button" class="btModificar" value="Modificar"  /></td>
 			  </tr>
 			  <?
+			 $i++;
 		}
   }
   ?>
   </tbody>
 </table>
 <div class="opciones">
-	<input type="button" name="btNuevo" id="btNuevo" value="Nuevo" /> <input type="button" name="btMostrar" id="btMostrar" value="Productos a Mostrar" />
+	<input type="button" name="btNuevo" id="btNuevo" value="Nuevo" />
 </div>
 </div>
 <div class="fondo"></div>
