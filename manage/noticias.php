@@ -1,5 +1,10 @@
 <?
 	session_start();
+	header ("Expires: Thu, 27 Mar 1980 23:59:00 GMT"); //la pagina expira en una fecha pasada
+	header ("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT"); //ultima actualizacion ahora cuando la cargamos
+	header ("Cache-Control: no-cache, must-revalidate"); //no guardar en CACHE
+	header ("Pragma: no-cache"); 
+
 	include("../lib/php/settings.php");
 	include("../lib/php/conexion.php");
 ?>
@@ -10,7 +15,7 @@
 <title>Clientes</title>
 <script language="javascript" type="text/javascript" src="../lib/js/jquery-1.7.min.js"></script>
 <script language="javascript" type="text/javascript" src="../lib/js/jquery.dataTables.js"></script>
-<script language="javascript" type="text/javascript" src="clientes.js"></script>
+<script language="javascript" type="text/javascript" src="noticias.js"></script>
 <link rel="stylesheet" type="text/css" media="all" href="../lib/css/reset.css"/>
 <link rel="stylesheet" type="text/css" media="all" href="../lib/css/manage.css"/>
 <link rel="stylesheet" type="text/css" media="all" href="../lib/css/clientes.css"/>
@@ -37,10 +42,11 @@
 </div>
 </div>
 <div class="contenido">
-<table id="tClientes" class="tClientes display" width="100%" border="0" cellpadding="0" cellspacing="0">
+<table id="tNoticias" class="tClientes display" width="100%" border="0" cellpadding="0" cellspacing="0">
  <thead>
   <tr>
     <th class="cabeza">Fecha</td>
+    <th class="cabeza">Imagen</td>
     <th class="cabeza">Titulo</td>
     <th class="cabeza">Descripci&oacute;n breve</td>
     <th class="cabeza">&nbsp;</td>
@@ -55,7 +61,15 @@
 			  ?>
 			  <tr>
 				<td><?=$noticias["fecha"]?></td>
-				<td><?=$noticias["titulo"]?></td>
+				<td><?
+                	if(trim($noticias["imagen"])!=""){
+						?><img src="../media/noticias/<?=$noticias["imagen"]?>" width="50" height="40" /><?
+					}
+					else{
+						?><div style="height:40px; width:50px; background-color:#666;" >&nbsp;</div><?	
+					}
+				?></td>
+                <td><?=$noticias["titulo"]?></td>
 				<td><?=$noticias["breve"]?></td>
 				<td><input data-idn="<?=$noticias["id"]?>" type="button" class="btModificar" value="Modificar"  /></td>
 			  </tr>

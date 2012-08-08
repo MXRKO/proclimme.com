@@ -3,8 +3,14 @@
 	include("../lib/php/conexion.php");
 	include("../lib/php/settings.php");
 	include("../lib/php/resize-class.php");
-	if(isset($_POST["Accion"]) && $_POST["Accion"]=="GUARDAR"){
+	if($_POST["Accion"]=="GUARDAR"){
 		if(trim($_POST["xdp"])==""){
+			if($_POST["mostrar"]=="1"){
+				$next=siguienteOrden();	
+			}
+			else{
+				$next=0;	
+			}
 			$inserta="insert into productos "; 
 			$inserta.="(nombre,"; 
 			$inserta.="descripcion_corta,"; 
@@ -14,7 +20,7 @@
 			$inserta.="estatus,"; 
 			$inserta.="fecha_creacion,"; 
 			$inserta.="ultima_modificacion,"; 
-			$inserta.="mostrar_principal";
+			$inserta.="mostrar_principal,orden";
 			$inserta.=")";
 			$inserta.="values";
 			$inserta.="('".$_POST["txtNombreProducto"]."',"; 
@@ -22,13 +28,13 @@
 			$inserta.="'".$_POST["txtDescripcionDetallada"]."',"; 
 			$inserta.="'".$_POST["txtFormatosEntrega"]."',"; 
 			$inserta.="'".$_POST["txtMedioEntrega"]."',"; 
-			$inserta.="'".$_POST["estatus"]."',"; 
+			$inserta.="'".$_POST["estatus"]."','".$next."'"; 
 			$inserta.="now(),"; 
 			$inserta.="now(),"; 
-			$inserta.="'".$_POST["mostrar"]."'";
+			$inserta.="'".$_POST["mostrar"]."',".$next;
 			$inserta.=")";
 			$exito=mysql_query($inserta);
-			$xdp=mysql_insert_id();
+			$_POST["xdp"]=mysql_insert_id();
 		
 		}
 		else{
@@ -40,8 +46,8 @@
 			$inserta.="formatos_entrega = '".$_POST["txtFormatosEntrega"]."', "; 
 			$inserta.="medio_entrega = '".$_POST["txtMedioEntrega"]."', "; 
 			$inserta.="estatus = '".$_POST["estatus"]."', "; 
-			$inserta.="ultima_modificacion = now(), "; 
-			$inserta.="mostrar_principal = '".$_POST["mostrar"]."' ";
+			$inserta.="ultima_modificacion = now(), ";
+			$inserta.="orden = '".$next."' ";
 			$inserta.="where id = '".$_POST["xdp"]."'";	
 			$exito=mysql_query($inserta);
 			$xdp=$_POST["xdp"];
@@ -77,8 +83,14 @@
 	if($_POST['Accion']=="ELIMINAR"){
 		$sqlOp="SELECT id FROM solicitudes WHERE id_producto='".$_POST["xdp"]."'";
 		$ejOp=mysql_query($sqlOp);
+		$or="SELECT orden FROM productos WHERE id='".$_POST["xdp"]."'";
+		$ejor=mysql_query($or);
+		$prod=mysql_fetch_array($ejor);
+		$upOr="UPDATE productos SET orden=(orden-1) WHERE orden > ".$prod["orden"]." AND mostrar_principal='1'";
+		mysql_query($upOr);
+			
 		if(mysql_num_rows($ejOp)>0){
-			$sqlUp="UPDATE productos SET eliminado='1' WHERE id='".$_POST["xdp"]."'";
+			$sqlUp="UPDATE productos SET eliminado='1', mostrar_principal='0', orden='0' WHERE id='".$_POST["xdp"]."'";
 			$exito=mysql_query($sqlUp);
 			if($exito==1){
 				$respuesta="ELIMINO";
@@ -98,6 +110,8 @@
 				$respuesta="NOELIMINO";	
 			}	
 		}
+		$_POST["xdp"]="";
+		$xdp="";
 	}
 	if(isset($_POST["xdp"])){
 		$xdp=$_POST["xdp"];
@@ -110,6 +124,16 @@
 		$txtFormatosEntrega=$datos["formatos_entrega"];
 		$txtMedioEntrega=$datos["medio_entrega"];
 		$txtDescripcionDetallada=$datos["descripcion"];
+	}
+	
+	function siguienteOrden(){
+		$sql="SELECT MAX(orden)+1 AS orden FROM productos";
+		mysql_query(sql);
+		$re=mysql_fetch_array($sql);
+		if($re["orden"]>=1)
+			return $re["orden"];
+		else
+			return "1";	
 	}
 	
 	function subirArchivo($nombre,$nombreCampoArchivo, $extension){		
@@ -159,7 +183,9 @@
 		$resql=mysql_query($sql);
 		if(mysql_num_rows($resql)>0){
 			$ex=mysql_fetch_array($resql);
-			if(!@file_exists("../media/productos/".$xdp.".".$ex["extencion"])) return true;
+			$del="DELETE FROM imagenes WHERE id='".$ex["id"]."'";
+			mysql_query($del);
+			if(!@file_exists("../media/productos/item".$xdp.".".$ex["extencion"])) return true;
 			if(!@unlink("../media/productos/item".$xdp.".".$ex["extencion"])) return false;
 			if(!@unlink("../media/productos/item".$xdp."_thumb.".$ex["extencion"])) return false;
 			if(!@unlink("../media/productos/item".$xdp."_min.".$ex["extencion"])) return false;
@@ -259,7 +285,7 @@
 			if(mysql_num_rows($reImg)>0){
 				$img=mysql_fetch_array($reImg);
 				?>
-				<img src="../media/productos/<?=$img["nombre_archivo"]?>"  />
+				<img src="../media/productos/item<?=$img["id_producto"]."_thumb.".$img["extencion"]?>"  />
                 <p class="nota">Si desea cambiar esta imagen solo seleccione otra y ser&aacute; reemplazada</p>
                 <input type="file" name="txtArchivo" id="txtArchivo" />
 				<?	
