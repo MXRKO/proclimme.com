@@ -223,28 +223,28 @@ body{
 		float:left;
 		width:20px;
 		height:107px;
-		background-color:#666;
+		background-image:url(../../image/btnLeft.png);
 		cursor:pointer;
 	}
 	.btnRight{
 		float:left;
 		width:20px;
 		height:107px;
-		background-color:#666;
+		background-image:url(../../image/btnRight.png);
 		cursor:pointer;
 	}
 	.miniaturas{
-		width:860px;
+		width:850px;
 		margin:0 auto 0 auto;
-		padding-top:20px;
-		padding-bottom:0;
+		padding:20px 5px 0 5px;
 		float:left;
 		overflow:hidden;
 	}
 	ul.min{
 		list-style:none;
 		height:104px;
-		width:1000px;
+		width:850px;
+		/*background-color:#369;*/
 	}
 	
 	ul.min li{

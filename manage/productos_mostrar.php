@@ -3,7 +3,7 @@
 	include("../lib/php/settings.php");
 	include("../lib/php/conexion.php");
 	
-	$max=mysql_fetch_array(mysql_query("SELECT MAX(orden) AS orden FROM productos WHERE mostrar_principal='1'"));
+	$max=mysql_fetch_array(mysql_query("SELECT MAX(orden) AS orden FROM productos WHERE mostrar_principal='1' AND orden>0"));
 	
 	if(isset($_POST["tipo"])){
 		mover($_POST["tipo"],$_POST["xdp"]);	
@@ -95,7 +95,7 @@
   </thead>
   <tbody>
   <?
-  $productos="SELECT*FROM productos ORDER BY orden ASC";
+  $productos="SELECT*FROM productos WHERE mostrar_principal='1' AND orden>0 ORDER BY orden ASC";
   $ej_productos=mysql_query($productos);
   if(mysql_num_rows($ej_productos)>0){
   		$i=1;

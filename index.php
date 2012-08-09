@@ -2,6 +2,8 @@
 	session_start();
 	include("lib/php/settings.php");
 	include("lib/php/conexion.php");
+	$items_mostrar=0;
+	$items_definidos=7;
 	if(isset($_SESSION["iduser"])){
 		$busca_carrito="SELECT productos.id, pedidos.id_usuario, solicitudes.id_producto, solicitudes.descripcion FROM solicitudes, productos, pedidos WHERE pedidos.id_usuario='".$_SESSION["iduser"]."' AND productos.id = solicitudes.id_producto AND pedidos.id = solicitudes.id_pedido AND pedidos.estatus='C'";
 		$ejcarrito=mysql_query($busca_carrito);
@@ -71,6 +73,7 @@
         	<div class="bannerItem uno">
             <p class="subtitulo">Productos climatologicos y meteorologicos de México</p>
             <p class="slogan">&quot;El clima y el tiempo de tu lado&quot;</p>
+            <p class="slogan"><span id="dLeft">left: 0</span></p>
         	<?
             if(!isset($_SESSION["iduser"])){
 				?>
@@ -80,7 +83,7 @@
 			?>
             </div>
         </div>
-    </div>
+</div>
 <div class="centro">
 	<div class="centrar">
         <div class="btnLeft"></div>
@@ -92,9 +95,10 @@
                 if(mysql_num_rows($ej_producto)>0){
                     while($min=mysql_fetch_array($ej_producto)){
                     ?>
-                    <li><a href="#"><img src="media/productos/miniatura<?=$min["id"]?>.png" width="89" height="64" /></a></li>
+                    <li><a href="#"><img src="media/productos/miniatura<?=$min["id"]?>.png" width="90" height="64" /></a></li>
                     <?	
-                    }
+                    $items_mostrar++;
+					}
                 }
                 ?>
                 <!--<li><a href="#"><img src="media/productos/miniatura2.png" width="89" height="64" /></a></li>
@@ -275,6 +279,8 @@
         <div class="limpiar"></div>
     </div>
 </div>
+<input type="hidden" id="items_mostrar" name="items_mostrar" value="<?=$items_mostrar?>" />
+<input type="hidden" id="items_definidos" name="items_definidos" value="<?=$items_definidos?>" />
 </body>
 <script type="text/javascript" language="javascript" src="lib/js/jquery-1.5.2.min.js"></script>
 <script type="text/javascript" language="javascript" src="lib/js/jquery.cycle.all.js"></script>
@@ -296,6 +302,15 @@
 	});
 	
 	$(document).ready(function(){
+		var mg=$("ul.min").css("margin-left").split("px");
+		$("#dLeft").text("margin-left:"+mg[0]);
+		
+		var ancho=886;
+		ancho+=127*(parseInt($("#items_mostrar").val()) - parseInt($("#items_definidos").val()));
+		var limiteDer=(127*(parseInt($("#items_mostrar").val()) - parseInt($("#items_definidos").val())))*(-1);
+		
+		$("ul.min").animate({width:ancho+"px"},100);
+		
 		$("#sesion").click(function(){
 			window.location.href="login.php";
 		});			
@@ -310,15 +325,23 @@
 		$(".btnLeft").click(function(){
 			var mg=$("ul.min").css("margin-left").split("px");
 			if(parseInt(mg[0])<0){						 
-				$("ul.min").stop().animate({marginLeft:(parseInt($("ul.min").css("margin-left"))+123)+'px'},{queue:false,duration:300});
+				$("ul.min").stop().animate({marginLeft:(parseInt($("ul.min").css("margin-left"))+127)+'px'},{queue:false,duration:300});
+				$("#dLeft").text("margin-left:"+(parseInt($("ul.min").css("margin-left"))+127)+'px');
+			}
+			else{
+				//$("ul.min").stop().animate({marginLeft:limiteDer+'px'},{queue:false,duration:300});	
+				$("#dLeft").text("margin-left:"+limiteDer+'px'+", no");
 			}
 		});
 		
 		$(".btnRight").click(function(){
 			var mg=$("ul.min").css("margin-left").split("px");
-			mg[0]=mg[0]*(-1);
-			if(parseInt(mg[0])<300){						 
-				$("ul.min").stop().animate({marginLeft:(parseInt($("ul.min").css("margin-left"))-123)+'px'},{queue:false,duration:300});
+			if(parseInt(mg[0])>limiteDer){						 
+				$("ul.min").stop().animate({marginLeft:(parseInt($("ul.min").css("margin-left"))-127)+'px'},{queue:false,duration:300});
+				$("#dLeft").text("margin-left:"+(parseInt($("ul.min").css("margin-left"))-127)+'px');
+			}
+			else{
+				$("#dLeft").text("margin-left:"+(parseInt($("ul.min").css("margin-left"))-127)+'px');	
 			}
 		});
 	});

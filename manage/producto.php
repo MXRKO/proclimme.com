@@ -5,11 +5,8 @@
 	include("../lib/php/resize-class.php");
 	if($_POST["Accion"]=="GUARDAR"){
 		if(trim($_POST["xdp"])==""){
-			if($_POST["mostrar"]=="1"){
+			if($_POST["mostrar"]==1){
 				$next=siguienteOrden();	
-			}
-			else{
-				$next=0;	
 			}
 			$inserta="insert into productos "; 
 			$inserta.="(nombre,"; 
@@ -28,7 +25,7 @@
 			$inserta.="'".$_POST["txtDescripcionDetallada"]."',"; 
 			$inserta.="'".$_POST["txtFormatosEntrega"]."',"; 
 			$inserta.="'".$_POST["txtMedioEntrega"]."',"; 
-			$inserta.="'".$_POST["estatus"]."','".$next."'"; 
+			$inserta.="'".$_POST["estatus"]."',"; 
 			$inserta.="now(),"; 
 			$inserta.="now(),"; 
 			$inserta.="'".$_POST["mostrar"]."',".$next;
@@ -38,6 +35,24 @@
 		
 		}
 		else{
+			$orden_anterior="SELECT orden FROM productos WHERE id='".$_POST["xdp"]."'";
+			$ejorden=mysql_query($orden_anterior);
+			$ordenAnt=mysql_fetch_array($ejorden);
+			$ordenOriginal=$ordenAnt["orden"];
+			
+			if($_POST["mostrar"]==1){
+				if($ordenOriginal<1){
+					$next=siguienteOrden();
+					$extra=", orden='".$next."' ";	
+				}
+				else{
+					$extra="";	
+				}
+			}
+			else{
+				$extra=", orden='0' ";		
+			}
+
 			$inserta="update productos ";
 			$inserta.="set ";
 			$inserta.="nombre = '".$_POST["txtNombreProducto"]."', "; 
@@ -47,10 +62,14 @@
 			$inserta.="medio_entrega = '".$_POST["txtMedioEntrega"]."', "; 
 			$inserta.="estatus = '".$_POST["estatus"]."', "; 
 			$inserta.="ultima_modificacion = now(), ";
-			$inserta.="orden = '".$next."' ";
+			$inserta.="mostrar_principal = '".$_POST["mostrar"]."'".$extra;
 			$inserta.="where id = '".$_POST["xdp"]."'";	
 			$exito=mysql_query($inserta);
 			$xdp=$_POST["xdp"];
+			if($ordenOriginal>0 && $_POST["mostrar"]==0 ){
+				$upOr1="UPDATE productos SET orden=(orden-1) WHERE orden > ".$ordenOriginal." AND mostrar_principal='1'";
+				mysql_query($upOr1);	
+			}
 		}
 		
 		if($_FILES["txtArchivo"]["size"]>0){
@@ -121,6 +140,8 @@
 		
 		$txtNombreProducto=$datos["nombre"];
 		$txtDescripcionBreve=$datos["descripcion_corta"];
+		$estatus=$datos["estatus"];
+		$mostrar=$datos["mostrar_principal"];
 		$txtFormatosEntrega=$datos["formatos_entrega"];
 		$txtMedioEntrega=$datos["medio_entrega"];
 		$txtDescripcionDetallada=$datos["descripcion"];
@@ -128,8 +149,8 @@
 	
 	function siguienteOrden(){
 		$sql="SELECT MAX(orden)+1 AS orden FROM productos";
-		mysql_query(sql);
-		$re=mysql_fetch_array($sql);
+		$resql=mysql_query($sql);
+		$re=mysql_fetch_array($resql);
 		if($re["orden"]>=1)
 			return $re["orden"];
 		else
@@ -236,20 +257,20 @@
     <tr>
       <td>*Estatus</td>
       <td width="11%"><label>
-    <input type="radio" name="estatus" id="estatus" value="1" checked="checked" />
+    <input type="radio" name="estatus" id="estatus" value="1" <? if($estatus==1){?>checked="checked"<? } ?> />
       Habilitado</label></td>
     <td width="68%">
     <label>
-    <input type="radio" name="estatus" id="estatus" value="0" />
+    <input type="radio" name="estatus" id="estatus" value="0" <? if($estatus==0){?>checked="checked"<? } ?> />
       Deshabilitado</label></td>
     </tr>
     <tr>
       <td>*Mostrar en página principal</td>
       <td><label>
-        <input type="radio" name="mostrar" id="mostrar" value="1" checked="checked" />
+        <input type="radio" name="mostrar" id="mostrar" value="1" <? if($mostrar==1){?>checked="checked"<? } ?> />
         Si</label></td>
       <td><label>
-        <input type="radio" name="mostrar" id="mostrar" value="0" />
+        <input type="radio" name="mostrar" id="mostrar" value="0" <? if($mostrar==0){?>checked="checked"<? } ?>/>
         No</label></td>
       </tr>
     <tr>
