@@ -82,29 +82,34 @@
         </div>
     </div>
 <div class="centro">
-	<div class="miniaturas">
-    	<ul class="min">
-        	<?
-            $min_producto="SELECT*FROM productos WHERE estatus='1' ORDER BY id ASC";
-			$ej_producto=mysql_query($min_producto);
-			if(mysql_num_rows($ej_producto)>0){
-				while($min=mysql_fetch_array($ej_producto)){
-				?>
-				<li><a href="#"><img src="media/productos/miniatura<?=$min["id"]?>.png" width="89" height="64" /></a></li>
-				<?	
-				}
-			}
-			?>
-            <!--<li><a href="#"><img src="media/productos/miniatura2.png" width="89" height="64" /></a></li>
-            <li><a href="#"><img src="media/productos/miniatura3.png" width="89" height="64" /></a></li>
-            <li><a href="#"><img src="media/productos/miniatura4.png" width="89" height="64" /></a></li>
-            <li><a href="#"><img src="media/productos/miniatura5.png" width="89" height="64" /></a></li>
-            <li><a href="#"><img src="media/productos/miniatura6.png" width="89" height="64" /></a></li>
-            <li><a href="#"><img src="media/productos/miniatura7.png" width="89" height="64" /></a></li> -->
-        </ul>
+	<div class="centrar">
+        <div class="btnLeft"></div>
+        <div class="miniaturas">
+            <ul class="min">
+                <?
+                $min_producto="SELECT*FROM productos WHERE estatus='1' AND orden>0 ORDER BY orden ASC";
+                $ej_producto=mysql_query($min_producto);
+                if(mysql_num_rows($ej_producto)>0){
+                    while($min=mysql_fetch_array($ej_producto)){
+                    ?>
+                    <li><a href="#"><img src="media/productos/miniatura<?=$min["id"]?>.png" width="89" height="64" /></a></li>
+                    <?	
+                    }
+                }
+                ?>
+                <!--<li><a href="#"><img src="media/productos/miniatura2.png" width="89" height="64" /></a></li>
+                <li><a href="#"><img src="media/productos/miniatura3.png" width="89" height="64" /></a></li>
+                <li><a href="#"><img src="media/productos/miniatura4.png" width="89" height="64" /></a></li>
+                <li><a href="#"><img src="media/productos/miniatura5.png" width="89" height="64" /></a></li>
+                <li><a href="#"><img src="media/productos/miniatura6.png" width="89" height="64" /></a></li>
+                <li><a href="#"><img src="media/productos/miniatura7.png" width="89" height="64" /></a></li> -->
+            </ul>
+            <div class="limpiar"></div>
+        </div>
+        <div class="btnRight"></div>
         <div class="limpiar"></div>
-    </div>
-	<div class="bannerPrincipal">	
+	</div>
+    <div class="bannerPrincipal">	
         <div class="productos">
             <?
             	$sq_productos="SELECT*FROM productos WHERE estatus='1' ORDER BY id ASC";
@@ -302,6 +307,20 @@
 			});				  
 		});
 		
+		$(".btnLeft").click(function(){
+			var mg=$("ul.min").css("margin-left").split("px");
+			if(parseInt(mg[0])<0){						 
+				$("ul.min").stop().animate({marginLeft:(parseInt($("ul.min").css("margin-left"))+123)+'px'},{queue:false,duration:300});
+			}
+		});
+		
+		$(".btnRight").click(function(){
+			var mg=$("ul.min").css("margin-left").split("px");
+			mg[0]=mg[0]*(-1);
+			if(parseInt(mg[0])<300){						 
+				$("ul.min").stop().animate({marginLeft:(parseInt($("ul.min").css("margin-left"))-123)+'px'},{queue:false,duration:300});
+			}
+		});
 	});
 </script>
 </html>

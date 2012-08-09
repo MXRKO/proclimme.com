@@ -216,18 +216,35 @@ body{
 
 .bannerPrincipal{
 	width:900px;
-	margin:20px auto 0 auto;
+	margin:4px auto 0 auto;
 	padding-bottom:20px;
 }
-	
+	.btnLeft{
+		float:left;
+		width:20px;
+		height:107px;
+		background-color:#666;
+		cursor:pointer;
+	}
+	.btnRight{
+		float:left;
+		width:20px;
+		height:107px;
+		background-color:#666;
+		cursor:pointer;
+	}
 	.miniaturas{
-		width:900px;
+		width:860px;
 		margin:0 auto 0 auto;
 		padding-top:20px;
-		padding-bottom:20px;
+		padding-bottom:0;
+		float:left;
+		overflow:hidden;
 	}
 	ul.min{
 		list-style:none;
+		height:104px;
+		width:1000px;
 	}
 	
 	ul.min li{
