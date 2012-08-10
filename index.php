@@ -90,23 +90,17 @@
         <div class="miniaturas">
             <ul class="min">
                 <?
-                $min_producto="SELECT*FROM productos WHERE estatus='1' AND orden>0 ORDER BY orden ASC";
+                $min_producto="SELECT productos.id AS id, imagenes.extencion AS extencion FROM productos, imagenes WHERE productos.estatus='1' AND productos.id=imagenes.id_producto AND productos.orden>0 ORDER BY productos.orden ASC";
                 $ej_producto=mysql_query($min_producto);
                 if(mysql_num_rows($ej_producto)>0){
                     while($min=mysql_fetch_array($ej_producto)){
                     ?>
-                    <li><a href="#"><img src="media/productos/miniatura<?=$min["id"]?>.png" width="90" height="64" /></a></li>
+                    <li><a href="#"><img src="media/productos/item<?=$min["id"]."_thumb.".$min["extencion"]?>" width="90" height="64" /></a></li>
                     <?	
                     $items_mostrar++;
 					}
                 }
                 ?>
-                <!--<li><a href="#"><img src="media/productos/miniatura2.png" width="89" height="64" /></a></li>
-                <li><a href="#"><img src="media/productos/miniatura3.png" width="89" height="64" /></a></li>
-                <li><a href="#"><img src="media/productos/miniatura4.png" width="89" height="64" /></a></li>
-                <li><a href="#"><img src="media/productos/miniatura5.png" width="89" height="64" /></a></li>
-                <li><a href="#"><img src="media/productos/miniatura6.png" width="89" height="64" /></a></li>
-                <li><a href="#"><img src="media/productos/miniatura7.png" width="89" height="64" /></a></li> -->
             </ul>
             <div class="limpiar"></div>
         </div>
@@ -116,18 +110,19 @@
     <div class="bannerPrincipal">	
         <div class="productos">
             <?
-            	$sq_productos="SELECT*FROM productos WHERE estatus='1' ORDER BY id ASC";
+            	$sq_productos="SELECT productos.id AS id, productos.nombre AS nombre, productos.descripcion_corta AS descripcion_corta, imagenes.extencion AS extencion FROM productos, imagenes WHERE productos.estatus='1' AND productos.id=imagenes.id_producto AND productos.orden>0 ORDER BY productos.orden ASC";
 				$ej_productos=mysql_query($sq_productos);
 				if(mysql_num_rows($ej_productos)>0){
 					while($producto=mysql_fetch_array($ej_productos)){
+						
 					?>	
                     <div class="item">
                         <div class="imgItem">
-                            <img src="media/productos/item<?=$producto["id"]?>.png" height="300" width="606" />
+                            <img src="media/productos/item<?=$producto["id"].".".$producto["extencion"]?>" height="300" width="606" />
                         </div>
                         <div class="datosItem">
-                            <h1><?=utf8_encode($producto["nombre"])?></h1><!-- 1 -->
-                            <p><?=utf8_encode($producto["descripcion_corta"])?></p>
+                            <h1><?=$producto["nombre"]?></h1><!-- 1 -->
+                            <p><?=$producto["descripcion_corta"]?></p>
                             <input class="imgVer" type="image" data-valor="<?=$producto["id"]?>" src="image/btnVerMas.png" width="129" height="33" /> 
                         </div>	
                         <div class="limpiar"></div>
@@ -210,13 +205,29 @@
 	<div class="marco">
     	<div class="noticias">
         	<div class="encabezado"><h2>Noticias</h2></div>
-            <div class="marco">
-                <p class="titulo">Imágenes de la Tierra en HD</p>
-                <div class="imgNoticia"></div>
-                <p class="fecha">27-05-2012</p>
-                <p class="descripcion">Imágenes de la Tierra en alta resolución tomadas por el satélite Ruso Electro-L en distintas longitudes de onda</p>
-            </div>
-            <div class="marco">
+            <?
+            	$sqlN="SELECT*FROM noticias ORDER BY id DESC LIMIT 3";
+				$exsqlN=mysql_query($sqlN);
+				if(mysql_num_rows($exsqlN)>0){
+					while($noticias=mysql_fetch_array($exsqlN)){
+						?>
+						<div class="marco">
+							<p class="titulo"><?=$noticias["titulo"]?></p>
+							<div class="imgNoticia">
+                            	<img src="media/noticias/n_<?=$noticias["id"]."_thumb.".$noticias["extencion"]?>" width="100" height="80" />
+                            </div>
+							<p class="fecha"><?=$noticias["fecha"]?></p>
+							<p class="descripcion"><?=$noticias["breve"]?></p>
+						</div>
+						<?
+					}
+				}else{
+				?>
+					<div class="marco"><p>No hay noticias que mostrar por el momento.</p></div>
+				<?	
+				}
+			?>
+            <!-- <div class="marco">
                 <p class="titulo">Radiación solar intensa y estabilidad atmosférica propician una disminución en la calidad del aire para el D.F</p>
                 <div class="imgNoticia"></div>
                 <p class="fecha">24-05-2012</p>
@@ -228,7 +239,7 @@
                 <p class="fecha">21-05-2012</p>
                 <p class="descripcion">Tres árboles cayeron por los fuertes vientos y la ligera llovizna, dejando dos vehículos dañados y toda una colonia sin luz en la Gustavo A. Madero</p>
                 <div class="limpiar"> </div>
-            </div>
+            </div> -->
         <div class="social">
         	<input type="image" src="image/btnFace.png" onclick="window.location.href='https://www.facebook.com/Proclimme'" /><input type="image" src="image/btnYouTube.png" onclick="window.location.href='http://www.youtube.com/channel/UCISegxqV_mwSbUSPw0DrGzw?feature=results_main'" />
         </div>    
