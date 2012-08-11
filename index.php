@@ -73,8 +73,7 @@
         	<div class="bannerItem uno">
             <p class="subtitulo">Productos climatologicos y meteorologicos de México</p>
             <p class="slogan">&quot;El clima y el tiempo de tu lado&quot;</p>
-            <p class="slogan"><span id="dLeft">left: 0</span></p>
-        	<?
+            <?
             if(!isset($_SESSION["iduser"])){
 				?>
 				<input id="sesion" type="image" src="image/btnSesion2.png" />
@@ -212,7 +211,7 @@
 					while($noticias=mysql_fetch_array($exsqlN)){
 						?>
 						<div class="marco">
-							<p class="titulo"><?=$noticias["titulo"]?></p>
+							<p class="titulo"><a href="noticia.php?nid=<?=$noticias["id"]?>"><?=$noticias["titulo"]?></a></p>
 							<div class="imgNoticia">
                             	<img src="media/noticias/n_<?=$noticias["id"]."_thumb.".$noticias["extencion"]?>" width="100" height="80" />
                             </div>
@@ -314,7 +313,7 @@
 	
 	$(document).ready(function(){
 		var mg=$("ul.min").css("margin-left").split("px");
-		$("#dLeft").text("margin-left:"+mg[0]);
+		//$("#dLeft").text("margin-left:"+mg[0]);
 		
 		var ancho=886;
 		ancho+=127*(parseInt($("#items_mostrar").val()) - parseInt($("#items_definidos").val()));
@@ -337,7 +336,7 @@
 			var mg=$("ul.min").css("margin-left").split("px");
 			if(parseInt(mg[0])<0){						 
 				$("ul.min").stop().animate({marginLeft:(parseInt($("ul.min").css("margin-left"))+127)+'px'},{queue:false,duration:300});
-				$("#dLeft").text("margin-left:"+(parseInt($("ul.min").css("margin-left"))+127)+'px');
+				//$("#dLeft").text("margin-left:"+(parseInt($("ul.min").css("margin-left"))+127)+'px');
 			}
 			else{
 				//$("ul.min").stop().animate({marginLeft:limiteDer+'px'},{queue:false,duration:300});	
@@ -349,7 +348,7 @@
 			var mg=$("ul.min").css("margin-left").split("px");
 			if(parseInt(mg[0])>limiteDer){						 
 				$("ul.min").stop().animate({marginLeft:(parseInt($("ul.min").css("margin-left"))-127)+'px'},{queue:false,duration:300});
-				$("#dLeft").text("margin-left:"+(parseInt($("ul.min").css("margin-left"))-127)+'px');
+				//$("#dLeft").text("margin-left:"+(parseInt($("ul.min").css("margin-left"))-127)+'px');
 			}
 			else{
 				$("#dLeft").text("margin-left:"+(parseInt($("ul.min").css("margin-left"))-127)+'px');	

@@ -90,6 +90,7 @@
 	function subirArchivo($nombre,$nombreCampoArchivo, $extension){		
 		if($_FILES[$nombreCampoArchivo]['tmp_name']!=""){
 			try{
+				$taskMin=copy($_FILES[$nombreCampoArchivo]['tmp_name'],"../media/noticias/".$nombre."_min.".$extension) or die("[".$_FILES[$nombreCampoArchivo]['tmp_name']."] , porfavor notifique al adminstrador acerca de este error.");
 				$taskThumb=copy($_FILES[$nombreCampoArchivo]['tmp_name'],"../media/noticias/".$nombre."_thumb.".$extension) or die("[".$_FILES[$nombreCampoArchivo]['tmp_name']."] , porfavor notifique al adminstrador acerca de este error.");
 				$task=copy($_FILES[$nombreCampoArchivo]['tmp_name'],"../media/noticias/".$nombre.".".$extension) or die("[".$_FILES[$nombreCampoArchivo]['tmp_name']."] , porfavor notifique al adminstrador acerca de este error.");
 				if(!$task && !$taskMin && !$taskThumb)
@@ -98,6 +99,10 @@
 					$resizeObj = new resize("../media/noticias/".$nombre."_thumb.".$extension);
 					$resizeObj -> resizeImage(100, 80, 'exact');// Resize image (options: exact, portrait, landscape, auto, crop)
 					$resizeObj -> saveImage("../media/noticias/".$nombre."_thumb.".$extension, 50);					
+					
+					$resizeObj = new resize("../media/noticias/".$nombre."_min.".$extension);
+					$resizeObj -> resizeImage(240, 240, 'exact');// Resize image (options: exact, portrait, landscape, auto, crop)
+					$resizeObj -> saveImage("../media/noticias/".$nombre."_min.".$extension, 50);					
 				}
 			}catch(Exception $e){
 				return "Descripcion del error:".$e->getMessage();
@@ -126,6 +131,7 @@
 	function eliminarArchivo($nombre, $extension){
 		if(!@file_exists("../media/noticias/".$nombre.".".$extension)) return true;
 		if(!@unlink("../media/noticias/".$nombre."_thumb.".$extension)) return false;
+		if(!@unlink("../media/noticias/".$nombre."_min.".$extension)) return false;
 		if(!@unlink("../media/noticias/".$nombre.".".$extension)) return false;
 		return true;
 	}
@@ -136,10 +142,6 @@
 <link href="../lib/css/manage.css" rel="stylesheet" type="text/css" media="all" />
 <link href="../lib/css/usuarios.css" rel="stylesheet" type="text/css" media="all" />
 <link href="../lib/css/tinybox2.css" rel="stylesheet" type="text/css" media="all" />
-<script language="javascript" type="text/javascript" src="../lib/js/jquery-1.7.min.js"></script>
-<script language="javascript" type="text/javascript" src="../lib/js/jquery.sisyphus.js"></script>
-<script language="javascript" type="text/javascript" src="../lib/js/tinybox2.js"></script>
-<script language="javascript" type="text/javascript" src="noticia.js"></script>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Usuario</title>
@@ -213,4 +215,7 @@
 </div>
 </form>
 </body>
+<script language="javascript" type="text/javascript" src="../lib/js/jquery-1.7.min.js"></script>
+<script language="javascript" type="text/javascript" src="../lib/js/tinybox2.js"></script>
+<script language="javascript" type="text/javascript" src="noticia.js"></script>
 </html>

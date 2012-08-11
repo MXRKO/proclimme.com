@@ -1,0 +1,63 @@
+@charset "utf-8";
+/* CSS Document */
+.marcoTitulo{
+	background-color:#F5F7F8;
+	padding:15px 10px 15px 10px;
+	display:block;
+	margin-bottom:20px;
+}
+
+h1.tituloN{
+	font-size:22px;
+	line-height:30px;
+	color:#4B5C66;
+	font-weight:normal;
+	margin-bottom:10px;
+}
+
+.marcoTitulo>p{
+	font-size:14px;
+	font-style:italic;
+}
+
+.texto > .marco > p{
+	font-size:13px;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#333;
+	line-height:21px;
+}
+
+.imgDer{
+	width:281px;
+	padding:0 0 20px 20px;
+	float:right;
+}
+
+.imgDer > img{
+	border:1px #999 solid;
+}
+
+.imgDer > p.pie{
+	font-style:italic;
+	font-size:12px;
+	color:#666;
+	line-height:20px;
+}
+
+.imgFlotante{
+	float:right;
+	width:240px;
+	background-color:#273138;
+	padding:5px;
+}
+
+.noticia{
+	min-height:400px;
+}
+.separadorParrafo{
+	height:20px;
+}
+
+.marco > p{
+	margin-bottom:13px;
+}
