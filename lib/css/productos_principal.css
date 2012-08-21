@@ -1,0 +1,87 @@
+@charset "utf-8";
+/* CSS Document */
+
+.texto > .marco > p{
+	font-size:13px;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#333;
+	line-height:21px;
+}
+
+.mvision{
+	background-color:#273138;
+	padding:20px;
+	margin-top:40px;
+	margin-bottom:60px;
+}
+
+.mvision > .mision{
+	float:left;
+	width:365px;
+	margin-right:15px;
+}
+
+.mvision > .vision{
+	float:left;
+	width:365px;
+	margin-left:15px;
+}
+
+.mvision > .vision > h1, .mvision > .mision > h1 {
+	color:#21B5FD;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	line-height:24px;
+	font-weight:lighter;
+	margin-bottom:10px;
+}
+
+.mvision > .vision > p, .mvision > .mision > p{
+	color:#AAADAD;
+	font-size:13px;
+	line-height:21px;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+.separadorParrafo{
+	height:20px;
+}
+
+.producto{
+	margin-bottom:15px;
+}
+
+.producto .thumb{
+	float:left;
+	width:111px;
+	margin-right:25px;
+} 
+
+.producto .thumb img{
+	border:1px #333 solid;
+}
+
+.producto .descripcion p.nombre a{
+	text-decoration:none;
+	color:#069;
+}
+
+.producto .descripcion p.nombre a:hover{
+	text-decoration:underline;
+}
+
+.producto .descripcion p.nombre{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#069;
+	font-weight:bold;
+	line-height:17px;
+	margin-bottom:5px;
+}
+
+.producto .descripcion p.breve{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+	color:#333;
+	line-height:15px;
+}
