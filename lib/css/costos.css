@@ -1,0 +1,111 @@
+@charset "utf-8";
+/* CSS Document */
+.marcoClaro{
+	background-color:#F5F7F8;
+	padding:20px;
+	margin-bottom:25px;
+	margin-top:25px;
+}
+
+	.marcoClaro > h1{
+		color:#4B5C66;
+		font-family:Arial, Helvetica, sans-serif;
+		font-size:17px;
+		font-weight:bold;
+		line-height:24px;
+		margin-bottom:10px;
+	}
+	
+	.marcoClaro > p{
+		font-family:Arial, Helvetica, sans-serif;
+		font-size:13px;
+		line-height:21px;
+		margin-bottom:10px;
+	}
+	
+	.marcoClaro > p.precio{
+		font-size:15px;
+	}
+	
+	.marcoClaro > p.nota{
+		font-style:italic;
+		font-size:15px;
+	}
+
+h1.titulo{
+	font-size:22px;
+	line-height:30px;
+	color:#4B5C66;
+	font-weight:bold;
+	margin-bottom:25px;
+}
+
+.texto > .marco > p{
+	font-size:13px;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#333;
+	margin-bottom:10px;
+	line-height:21px;
+}
+
+.imgDer{
+	width:281px;
+	padding:0 0 20px 20px;
+	float:right;
+}
+
+.imgDer > img{
+	border:1px #999 solid;
+}
+
+.imgDer > p.pie{
+	font-style:italic;
+	font-size:12px;
+	color:#666;
+	line-height:20px;
+}
+
+.mvision{
+	background-color:#273138;
+	padding:20px;
+	margin-top:40px;
+	margin-bottom:60px;
+}
+
+.mvision > .mision{
+	float:left;
+	width:365px;
+	margin-right:15px;
+}
+
+.mvision > .vision{
+	float:left;
+	width:365px;
+	margin-left:15px;
+}
+
+.mvision > .vision > h1, .mvision > .mision > h1 {
+	color:#21B5FD;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	line-height:24px;
+	font-weight:lighter;
+	margin-bottom:10px;
+}
+
+.mvision > .vision > p, .mvision > .mision > p{
+	color:#AAADAD;
+	font-size:13px;
+	line-height:21px;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+.separadorParrafo{
+	height:20px;
+}
+
+.costos{
+		background-image:url(../../image/imgCostos.png);
+		background-position:center center;
+		background-repeat:no-repeat;
+	}

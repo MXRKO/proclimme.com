@@ -1,7 +1,7 @@
 <?
 	$menu=array("inicio"=>"index.php",
-				"productos"=>"#",
-				"costos"=>"#",
+				"productos"=>"productos.php",
+				"costos"=>"costos.php",
 				"quienes"=>"quienes.php",
 				"contacto"=>"contacto.php");
 	

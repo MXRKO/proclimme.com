@@ -92,15 +92,15 @@
 <div class="contenido">
 	<div class="top_encabezado"></div>
     <div class="encabezado">
-    <h1><?=utf8_encode($producto["nombre"])?></h1>
+    <h1><?=$producto["nombre"]?></h1>
     	<div class="datosIzq">
         	<div class="zoom"></div>
             <a class="aProducto" href="#"><img src="media/productos/producto<?=$producto["id"]?>.png" data-with="606" data-height="300" data-url="media/productos/item<?=$producto["id"]?>.png" width="369" height="210" /></a>
         </div>
         <div class="datosDer">
-        	<p><strong>Descripción breve: </strong><?=nl2br(utf8_encode($producto["descripcion_corta"]))?></p>
-            <p><strong>Formato de entrega: </strong><span>PDF, GIF, JPG</span></p>
-            <p><strong>Medio de entrega: </strong><span>Email, CD</span></p>
+        	<p><strong>Descripción breve: </strong><?=nl2br($producto["descripcion_corta"])?></p>
+            <p><strong>Formato de entrega: </strong><span><?=$producto["formato_entrega"]?></span></p>
+            <p><strong>Medio de entrega: </strong><span><?=$producto["formato_entrega"]?></span></p>
             <div class="compra">
               <!-- <input class="cantidad" name="txtCantidad" type="text" id="txtCantidad" size="7" value="1" /> -->
               <?
@@ -116,14 +116,13 @@
 				<?  
 		      }
 			  ?>
-			  
-      		</div>
+			</div>
         </div>
         <div class="limpiar"></div>
     </div>
 	<div class="descripcionProducto">
         <h1>Descripción detallada del producto</h1>
-        <p><?=nl2br(utf8_encode($producto["descripcion"]))?></p>
+        <p><?=nl2br($producto["descripcion"])?></p>
         <div class="social separadorDescripcion">
         	<input type="image" src="image/btnFace.png" onclick="window.location.href='https://www.facebook.com/Proclimme'" /><input type="image" src="image/btnYouTube.png" onclick="window.location.href='http://www.youtube.com/channel/UCISegxqV_mwSbUSPw0DrGzw?feature=results_main'" />
         </div>    

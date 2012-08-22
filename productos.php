@@ -74,9 +74,9 @@
         <div class="dMenu">
             <ul class="menu">
                 <li><a href="<?=$menu["inicio"]?>">Inicio</a></li>
-                <li><a href="<?=$menu["productos"]?>">Productos</a></li>
+                <li><a href="#">Productos</a></li>
                 <li><a href="<?=$menu["costos"]?>">Costos</a></li>
-                <li><a href="#">Quienes somos</a></li>
+                <li><a href="<?=$menu["quienes"]?>">Quienes somos</a></li>
                 <li><a href="<?=$menu["contacto"]?>">Contacto</a></li>
             </ul>    
         </div>
@@ -88,9 +88,10 @@
         <?
         $sql="SELECT*FROM productos WHERE estatus='1'";
 		$result=mysql_query($sql);
+		$i=0;
 		while($row=mysql_fetch_array($result)){
 		?>
-        <div class="producto">
+        <div class="producto <?=($i>0)?"lineaComp":"";?>">
         	<div class="thumb">
             	<?
                 $imgsql=@mysql_query("SELECT*FROM imagenes WHERE id_producto='".$row["id"]."'");
@@ -105,12 +106,10 @@
             <div class="limpiar"></div>     
        </div>
        <?
+			$i++;
 		}
 	   ?>
-       <div class="separadorParrafo"></div>
-       <div class="mvision">
-       	  <p>Nuestros productos son el resultado de análisis estadísticos y modelación numérica de la atmósfera que permiten acceder a información climática y meteorológica de manera actualizada con el fin de proveer condiciones climatológicas futuras, considerando fenómenos y eventos a distintas escalas espaciales y temporales como sistemas convectivos de mesoescala, ciclones tropicales, oscilaciones planetarias y multidecadales, el fenómeno de “El Niño” entre otros.</p>	 
-       </div>
+       <div class="separadorParrafo lineaComp"></div>
        <div class="social">
         	<input type="image" src="image/btnFace.png" onclick="window.location.href='https://www.facebook.com/Proclimme'" /><input type="image" src="image/btnYouTube.png" onclick="window.location.href='http://www.youtube.com/channel/UCISegxqV_mwSbUSPw0DrGzw?feature=results_main'" />
         </div>    
