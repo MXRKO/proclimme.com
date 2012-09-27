@@ -109,7 +109,7 @@
         if(trim($noticia["imagen"])!=""){
 			?>
 			<div class="imgFlotante">
-				<img src="media/noticias/n_<?=$noticia["id"]?>_min.<?=$noticia["extencion"]?>" width="240" height="240" />
+				<img id="imgNota" data-url="media/noticias/n_<?=$noticia["id"]?>.<?=$noticia["extencion"]?>" data-with="406" data-height="300" src="media/noticias/n_<?=$noticia["id"]?>_min.<?=$noticia["extencion"]?>" width="240" height="240" />
 			</div>
         <?
 		}
@@ -144,4 +144,5 @@
 <script type="text/javascript" language="javascript" src="lib/js/jquery-1.5.2.min.js"></script>
 <script type="text/javascript" language="javascript" src="lib/js/jquery.cycle.all.js"></script>
 <script type="text/javascript" language="javascript" src="lib/js/tinybox2/tinybox.js"></script>
+<script type="text/javascript" language="javascript" src="noticia.js"></script>
 </html>

@@ -16,6 +16,7 @@
 <link rel="stylesheet" type="text/css" media="all" href="../lib/css/pedidos.css"/>
 <link rel="stylesheet" type="text/css" media="all" href="../lib/css/themes/smoothness/jquery-ui-1.8.4.custom.css"/>
 <link rel="stylesheet" type="text/css" media="all" href="../lib/css/demo_table_jui.css"/>
+<link rel="shortcut icon" href="../image/favicon.ico" />
 </head>
 <body>
 <form id="Datos" method="get">

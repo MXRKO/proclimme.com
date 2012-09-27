@@ -37,6 +37,7 @@
 <link href="lib/css/diseno.css" rel="stylesheet" type="text/css" />
 <link href="lib/css/productos_principal.css" rel="stylesheet" type="text/css" />
 <link href="lib/css/tinybox/style.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="image/favicon.ico" />
 </head>
 <body>
 <?

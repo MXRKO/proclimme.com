@@ -1,0 +1,16 @@
+Fecha: 20 de septiembre de 2012
+
+Pendientes página PROCLIMME
+
+1.- Formato de texto (no reconoce ñ ni acentos)
+2.- No se actualiza el medio de entrega
+3.- Las imagenes de descripción del producto no se actualiza
+4.- El texto de las noticias está muy pegado a las imagenes
+5.- La imagen de la noticias si le das click no sale la imagen grande
+6.- No se puede modificar las fechas de las noticias
+7.- No se pueden crear nuevas noticias
+8.- Como ver noticias anteriores
+9.- Flechas de movimiento del carrusel
+10.-Logo personalizado en la página o pestaña
+
+Próxima reunión - jueves 27 de septiembre de 2012, 21:00 hrs

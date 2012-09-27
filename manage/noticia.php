@@ -16,7 +16,7 @@
 				$idn=$_POST["idn"];
 			}
 			else{
-				$sql="insert into proclimme_db.noticias (titulo,breve, descripcion, fecha)";
+				$sql="insert into noticias (titulo,breve, descripcion, fecha)";
 				$sql.="values('".$_POST["txtTitulo"]."', '".$_POST["txtBreve"]."', '".$_POST["txtDescripcion"]."', now())";
 				$exito=mysql_query($sql);
 				$idn=mysql_insert_id();
@@ -142,6 +142,7 @@
 <link href="../lib/css/manage.css" rel="stylesheet" type="text/css" media="all" />
 <link href="../lib/css/usuarios.css" rel="stylesheet" type="text/css" media="all" />
 <link href="../lib/css/tinybox2.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="shortcut icon" href="../image/favicon.ico" />
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Usuario</title>

@@ -36,6 +36,7 @@
 <link href="lib/css/diseno.css" rel="stylesheet" type="text/css" />
 <link href="lib/css/producto.css" rel="stylesheet" type="text/css" />
 <link href="lib/css/tinybox/style.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="image/favicon.ico" />
 <script type="text/javascript" language="javascript" src="lib/js/jquery-1.5.2.min.js"></script>
 <script type="text/javascript" language="javascript" src="lib/js/jquery.cycle.all.js"></script>
 <script type="text/javascript" language="javascript" src="lib/js/tinybox2/tinybox.js"></script>
@@ -95,7 +96,12 @@
     <h1><?=$producto["nombre"]?></h1>
     	<div class="datosIzq">
         	<div class="zoom"></div>
-            <a class="aProducto" href="#"><img src="media/productos/producto<?=$producto["id"]?>.png" data-with="606" data-height="300" data-url="media/productos/item<?=$producto["id"]?>.png" width="369" height="210" /></a>
+            <?
+            	$bscImgs="SELECT*FROM imagenes WHERE id_producto='".$producto["id"]."'";
+				$exImgs=mysql_query($bscImgs);
+				$tpImg=mysql_fetch_array($exImgs);
+			?>
+            <a class="aProducto" href="#"><img src="media/productos/item<?=$producto["id"]?>.<?=$tpImg["extencion"]?>" data-with="606" data-height="300" data-url="media/productos/item<?=$producto["id"]?>.<?=$tpImg["extencion"]?>" width="369" height="210" /></a>
         </div>
         <div class="datosDer">
         	<p><strong>Descripción breve: </strong><?=nl2br($producto["descripcion_corta"])?></p>

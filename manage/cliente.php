@@ -82,6 +82,7 @@
 <link href="../lib/css/manage.css" rel="stylesheet" type="text/css" media="all" />
 <link href="../lib/css/clientes.css" rel="stylesheet" type="text/css" media="all" />
 <link href="../lib/css/tinybox2.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="shortcut icon" href="../image/favicon.ico" />
 <script language="javascript" type="text/javascript" src="../lib/js/jquery-1.7.min.js"></script>
 <script language="javascript" type="text/javascript" src="../lib/js/jquery.sisyphus.js"></script>
 <script language="javascript" type="text/javascript" src="../lib/js/tinybox2.js"></script>

@@ -187,13 +187,13 @@
 
 	function getExtension($nombreCampoArchivo){
 		if(strpos($_FILES[$nombreCampoArchivo]['name'],".pdf"))	$extension="pdf";
-		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".JPG"))	$extension="JPG";
+		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".JPG"))	$extension="jpg";
 		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".jpg"))	$extension="jpg";
-		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".JPEG"))	$extension="JPEG";
+		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".JPEG"))	$extension="jpeg";
 		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".jpeg"))	$extension="jpeg";
-		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".PNG"))	$extension="PNG";
+		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".PNG"))	$extension="png";
 		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".png"))	$extension="png";
-		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".GIF"))	$extension="GIF";
+		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".GIF"))	$extension="gif";
 		else if(strpos($_FILES[$nombreCampoArchivo]['name'],".gif"))	$extension="gif";
 		else	$extension="NO";
 		return $extension;
@@ -224,6 +224,7 @@
 <link href="../lib/css/manage.css" rel="stylesheet" type="text/css" media="all" />
 <link href="../lib/css/productos.css" rel="stylesheet" type="text/css" media="all" />
 <link href="../lib/css/tinybox2.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="shortcut icon" href="../image/favicon.ico" />
 <script language="javascript" type="text/javascript" src="../lib/js/jquery-1.7.min.js"></script>
 <script language="javascript" type="text/javascript" src="../lib/js/jquery.sisyphus.js"></script>
 <script language="javascript" type="text/javascript" src="../lib/js/tinybox2.js"></script>

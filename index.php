@@ -22,6 +22,7 @@
 <link href="lib/css/reset.css" rel="stylesheet" type="text/css" />
 <link href="lib/css/diseno.css" rel="stylesheet" type="text/css" />
 <link href="lib/css/tinybox/style.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="image/favicon.ico" />
 </head>
 <body>
 <?
@@ -71,7 +72,7 @@
 <div class="imgCentral">
     	<div class="bannerImgs">
         	<div class="bannerItem uno">
-            <p class="subtitulo">Productos climatologicos y meteorologicos de México</p>
+            <p class="subtitulo">Productos climatológicos y meteorológicos de México</p>
             <p class="slogan">&quot;El clima y el tiempo de tu lado&quot;</p>
             <?
             if(!isset($_SESSION["iduser"])){
@@ -226,19 +227,6 @@
 				<?	
 				}
 			?>
-            <!-- <div class="marco">
-                <p class="titulo">Radiación solar intensa y estabilidad atmosférica propician una disminución en la calidad del aire para el D.F</p>
-                <div class="imgNoticia"></div>
-                <p class="fecha">24-05-2012</p>
-                <p class="descripcion">El Sistema de Monitoreo Atmosférico de la Ciudad de México (Simat) informó que la radiación solar es extremadamente alta en el valle de México, de 11 puntos el Índice de Rayos Ultravioleta (UV).</p>
-            </div>
-            <div class="marco">
-                <p class="titulo">Fuertes vientos asociados a tormenta causan diversos daños en el distrito federal</p>
-                <div class="imgNoticia"></div>
-                <p class="fecha">21-05-2012</p>
-                <p class="descripcion">Tres árboles cayeron por los fuertes vientos y la ligera llovizna, dejando dos vehículos dañados y toda una colonia sin luz en la Gustavo A. Madero</p>
-                <div class="limpiar"> </div>
-            </div> -->
         <div class="social">
         	<input type="image" src="image/btnFace.png" onclick="window.location.href='https://www.facebook.com/Proclimme'" /><input type="image" src="image/btnYouTube.png" onclick="window.location.href='http://www.youtube.com/channel/UCISegxqV_mwSbUSPw0DrGzw?feature=results_main'" />
         </div>    
@@ -248,7 +236,7 @@
         	<div class="pantalla" onclick="TINY.box.show({iframe:'video.html',animate:true,close:true,boxid:'frameless',width:505,height:400,fixed:true})"></div>
         </div>
         <div class="iconos">
-        <h3>Link de interes</h3>
+        <h3>Link de interés</h3>
         	<div class="colIzq">
             	<a target="_blank" href="http://www.climate.org"><img src="image/logo_climate_institute.png" height="77" width="160"/></a>
             	<a target="_blank" href="http://galileo.imta.mx/"><img src="image/logo_galileo.png" height="47" width="160"/></a>
