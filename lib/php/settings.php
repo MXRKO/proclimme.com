@@ -3,6 +3,7 @@
 				"productos"=>"productos.php",
 				"costos"=>"costos.php",
 				"quienes"=>"quienes.php",
+				"noticias"=>"noticias.php",
 				"contacto"=>"contacto.php");
 	
 	$menu_sesion=array("perfil"=>"perfil.php",

@@ -75,10 +75,10 @@
         <div class="dMenu">
             <ul class="menu">
                 <li><a href="<?=$menu["inicio"]?>">Inicio</a></li>
-                <li><a href="#">Productos</a></li>
+                <li><a href="<?=$menu["productos"]?>">Productos</a></li>
                 <li><a href="<?=$menu["costos"]?>">Costos</a></li>
                 <li><a href="<?=$menu["quienes"]?>">Quienes somos</a></li>
-                <li><a href="<?=$menu["noticias"]?>">Noticias</a></li>
+                <li><a href="#">Noticias</a></li>
                 <li><a href="<?=$menu["contacto"]?>">Contacto</a></li>
             </ul>    
         </div>
@@ -88,22 +88,18 @@
 <div class="contenido texto">
 	<div class="marco">
         <?
-        $sql="SELECT*FROM productos WHERE estatus='1'";
+        $sql="SELECT*FROM noticias ORDER BY fecha DESC";
 		$result=mysql_query($sql);
 		$i=0;
 		while($row=mysql_fetch_array($result)){
 		?>
         <div class="producto <?=($i>0)?"lineaComp":"";?>">
         	<div class="thumb">
-            	<?
-                $imgsql=@mysql_query("SELECT*FROM imagenes WHERE id_producto='".$row["id"]."'");
-				$img=mysql_fetch_array($imgsql);
-				?>
-				<a href="producto.php?id=<?=$row["id"]?>"><img src="media/productos/<?=$img["nombre_archivo"]?>" height="74" width="109" /></a>
+            	<a href="noticia.php?nid=<?=$row["id"]?>"><img src="media/noticias/n_<?=$row["id"]?>_min.jpg" height="74" width="109" /></a>
 			</div>
        		<div class="descripcion">
-            	<p class="nombre"><a href="producto.php?id=<?=$row["id"]?>"><?=$row["nombre"]?></a></p>
-                <p class="breve"><?=$row["descripcion_corta"]?></p>
+            	<p class="nombre"><a href="noticia.php?nid=<?=$row["id"]?>"><?=$row["titulo"]?></a></p>
+                <p class="breve"><?=$row["breve"]?></p>
             </div>
             <div class="limpiar"></div>     
        </div>

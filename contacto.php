@@ -77,6 +77,7 @@
                 <li><a href="<?=$menu["productos"]?>">Productos</a></li>
                 <li><a href="<?=$menu["costos"]?>">Costos</a></li>
                 <li><a href="<?=$menu["quienes"]?>">Quienes somos</a></li>
+                <li><a href="<?=$menu["noticias"]?>">Noticias</a></li>
                 <li><a href="#">Contacto</a></li>
             </ul>    
         </div>
