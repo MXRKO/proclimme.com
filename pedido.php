@@ -70,6 +70,25 @@
 		else{
 			echo "ERRORPEDIDOSINUSUARIO";
 		}
+	}else if($_POST["Accion"]=="PEDIDOSINUSUARIONIPRODUCTO"){
+		$inserta_pedido="INSERT INTO pedidos(id_usuario, estatus, email, fecha) VALUES('0','S','".$_POST["correo"]."',now())";
+		mysql_query($inserta_pedido);
+		$id_pedido=mysql_insert_id();				
+		
+		$inserta="INSERT INTO solicitudes(id_pedido, id_producto, fecha_carrito, descripcion) VALUES('".$id_pedido."','0',now(),'".$_POST["descripcion"]."')";	
+		$res=@mysql_query($inserta);
+		
+		$sql_producto="SELECT*FROM productos WHERE id='".$_POST["xdp"]."'";
+		$exesql_producto=mysql_query($sql_producto);
+		$dats_prod=mysql_fetch_array($exesql_producto);
+		correo("visitante de proclimme.com",$_POST["correo"],"Roberto Villa","robertovilla@proclimme.com","Solicitud de cotización","<h2>Mensaje enviado automaticamente desde la página: Proclimme.com</h2><p>Este es un mensaje enviado desde la página a solicitud del <strong>posible cliente ".$_POST["correo"]."</strong>, para solicitar el producto: <strong>".$dats_prod["nombre"]."</strong> con las siguientes caracteristicas:</p><h3>Caracteristicas de la cotización</h3><p>\"".$_POST["descripcion"]."\"</p></br></br><p>*Este correo ha sido generado de manera automatica</p>");
+		correo("visitante de proclimme.com",$_POST["correo"],"Visitante",$_POST["correo"],"Solicitud de cotización","<h2>Mensaje enviado automaticamente desde la página: Proclimme.com</h2><p>Este es un mensaje generado automaticamente en respuesta a su solicitud de cotización, eviado desde la página a solicitud del <strong>posible cliente ".$_POST["correo"]."</strong>, para solicitar una cotización</strong> con las siguientes caracteristicas:</p><h3>Caracteristicas de la cotización</h3><p>\"".$_POST["descripcion"]."\"</p><p>Nos pondremos en contacto con usted a la brevedad.</p></br></br><p>*Este correo ha sido generado de manera automatica, para más información escribenos a: robertovilla@proclimme.com</p>");
+		if($res=='1'){
+			echo "REALIZOPEDIDOSINUSUARIONIPRODUCTO";	
+		}
+		else{
+			echo "ERRORPEDIDOSINUSUARIONIPRODUCTO";
+		}
 	}
 	
 function tieneIdPedido($xdu){

@@ -93,8 +93,8 @@
 </div>
 <div class="contenido texto">
 	<div class="marco">
-        <h1 class="titulo">PRODUCTOS QUE OFRECEMOS ACORDE A LAS NECESIDADES DEL CLIENTE</h1>
-        <p>Nuestros productos son el resultado de análisis estadísticos y modelación numérica de la atmósfera que permiten acceder a información climática y meteorológica de manera constante para proveer condiciones climatológicas futuras, considerando fenómenos y eventos a distintas escalas espaciales y temporales como sistemas convectivos de mesoescala, ciclones tropicales, oscilaciones planetarias y multidecadales, el fenómeno de “El Niño” entre otros.</p>
+        <!-- <h1 class="titulo">PRODUCTOS QUE OFRECEMOS ACORDE A LAS NECESIDADES DEL CLIENTE</h1> -->
+        <!-- <p>Nuestros productos son el resultado de análisis estadísticos y modelación numérica de la atmósfera que permiten acceder a información climática y meteorológica de manera constante para proveer condiciones climatológicas futuras, considerando fenómenos y eventos a distintas escalas espaciales y temporales como sistemas convectivos de mesoescala, ciclones tropicales, oscilaciones planetarias y multidecadales, el fenómeno de “El Niño” entre otros.</p>
 		<p>PROCLIMME ofrece una cartera de productos especializados que pueden ajustarse a las necesidades del cliente en función de los requerimientos específicos y el alcance de los resultados finales, proporcionado un apoyo en la toma de decisiones, planeación de actividades y disminución de riesgos involucrados con la afectación e impacto de fenómenos climáticos y meteorológicos.</p>
         <p>El precio base de los productos que PROCLIMME ofrece se mencionan a continuación. Las variables pronosticadas (lluvia, temperatura, etc.) se especificarán por el cliente así como las particularidades específicas a entregar, con ello se reajustan los precios en función del producto final, lo siguiente se refiere por tanto sólo a la guía del costo base del producto.</p>
         <div class="marcoClaro">
@@ -113,6 +113,34 @@
             <p class="precio">5000.00 por producto mensual + IVA (Plazo mínimo de contrato: 2 meses).</p>
             <p class="precio">8000.00 por producto trimestral + IVA (Plazo mínimo de contrato: 2 trimestres).</p>
             <p class="nota">NOTA: Todos los precios se encuentran en Moneda Nacional (MXN).</p>
+        </div>
+        -->
+        <p>PROCLIMME ofrece una amplia cartera de productos especializados, que pueden ajustarse a las necesidades del cliente, tomando en consideración los requerimientos específicos y el alcance de los resultados finales, enfocado al apoyo de toma de decisiones, planeación de actividades y disminución de riesgos involucrados con la afectación e impacto de fenómenos naturales diversos.</p>
+		<p>Los clientes de PROCLIMME tendrán la oportunidad de estructurar, bajo la asistencia de nuestros especialistas, un producto que cumpla con sus espectativas, cubra sus requerimientos y establezca términos de referencia apropiados de manera objetiva. Los costos finales estarán sujetos a la capacidad de cada uno de nuestros clientes y los alcances de los diferentes productos a generarse, con esto PROCLIMME se comprometerá con cada proyecto, a generar productos con los mas altos estándares de calidad para satisfacer las necesidades del usuario final.</p>
+	  <div class="marcoClaro">
+       	<p>Si requiere de una cotización, o tiene alguna duda sobre cualquiera de nuestros productos le invitamos a que se ponga en contacto con nosotros:</p>
+       	  <table width="100%" cellpadding="0" cellspacing="0">
+			  <tr>
+               	  <td width="7%"><p>Correo</p></td>
+                  <td width="93%"><input name="txtCorreo" type="text" id="txtCorreo" size="30" /></td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td colspan="2"><p>Descripción de la cotización</p></td>
+              </tr>
+              <tr>
+               	  <td colspan="2"><p>
+               	    <textarea name="txtDescripcion" cols="55" id="txtDescripcion"></textarea>
+               	  </p></td>
+              </tr>
+              <tr >
+               	  <td><input type="button" id="btEnviar" value="Enviar" /></td>
+                  <td>&nbsp;</td>
+              </tr>            
+          </table>
         </div>
         <div class="social">
         	<input type="image" src="image/btnFace.png" onclick="window.location.href='https://www.facebook.com/Proclimme'" /><input type="image" src="image/btnYouTube.png" onclick="window.location.href='http://www.youtube.com/channel/UCISegxqV_mwSbUSPw0DrGzw?feature=results_main'" />
@@ -140,4 +168,5 @@
 <script type="text/javascript" language="javascript" src="lib/js/jquery-1.5.2.min.js"></script>
 <script type="text/javascript" language="javascript" src="lib/js/jquery.cycle.all.js"></script>
 <script type="text/javascript" language="javascript" src="lib/js/tinybox2/tinybox.js"></script>
+<script type="text/javascript" language="javascript" src="costos.js"></script>
 </html>
