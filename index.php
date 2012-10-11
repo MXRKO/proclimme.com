@@ -242,8 +242,8 @@
             	<a target="_blank" href="http://www.climate.org"><img src="image/logo_climate_institute.png" height="77" width="160"/></a>
             	<a target="_blank" href="http://galileo.imta.mx/"><img src="image/logo_galileo.png" height="47" width="160"/></a>
                 <a target="_blank" href="http://www.conagua.gob.mx"><img src="image/logo_conagua.png" height="52" width="160"/></a>	
-                <a target="_blank" href="http://www.hpc.ncep.noaa.gov"><img src="image/logo_hydrometeorological.png" height="29" width="160"/></a>
-            </div>
+        		<a target="_blank" href="http://www.hpc.ncep.noaa.gov"><img src="image/logo_hydrometeorological.png" height="29" width="160"/></a>
+                <a target="_blank" href="http://www1.pep.pemex.com:8080/v2/meteorologia/web_meteorologia/"><img src="image/logos_paginas/PEP_logo.gif" height="52" width="160"/></a></div>
         	<div class="colDer">
             	<a target="_blank" href="http://www.nhc.noaa.gov"><img src="image/logo_national_hurricane_center.png" width="160" height="65" /></a>
             	<a target="_blank" href="http://www.atmosfera.unam.mx" class="middle"><img src="image/logo_centro_ciencias.png" width="70" height="70" /></a>

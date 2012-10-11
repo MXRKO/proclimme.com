@@ -105,8 +105,8 @@
         </div>
         <div class="datosDer">
         	<p><strong>Descripción breve: </strong><?=nl2br($producto["descripcion_corta"])?></p>
-            <p><strong>Formato de entrega: </strong><span><?=$producto["formato_entrega"]?></span></p>
-            <p><strong>Medio de entrega: </strong><span><?=$producto["formato_entrega"]?></span></p>
+            <p><strong>Formato de entrega: </strong><span><?=$producto["formatos_entrega"]?></span></p>
+            <p><strong>Medio de entrega: </strong><span><?=$producto["medio_entrega"]?></span></p>
             <div class="compra">
               <!-- <input class="cantidad" name="txtCantidad" type="text" id="txtCantidad" size="7" value="1" /> -->
               <?
